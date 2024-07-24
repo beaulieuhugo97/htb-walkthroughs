@@ -27,7 +27,10 @@ dirb http://greenhorn.htb/
 dirb http://10.10.11.25:3000/
 ```
 
-En accédant à la page de login de pluck, on se rend compte qu'il s'agit de la version 4.7.18.
+En accédant à la page de login de pluck, on se rend compte qu'il s'agit de la version 4.7.18:
+```bash
+http://greenhorn.htb/login.php
+```
 On voit aussi qu'il y a champ pour le mot de passe, pas de username.
 
 En utilisant burp, on essaye un mot de passe bidon et on intercepte la requête:
@@ -52,6 +55,11 @@ cont1=test&bogus=&submit=Log+in
 On voit que le champ pour le mot de passe se nomme `cont1` et il semble y avoir un champ bogus qui est envoyé aussi pour prévenir le bruteforce.
 
 Une fois ces informations en mains, on essaye de cracker le login avec hydra:
+```bash
+
+```
+
+Cependant, on se rend vite compte qu'il y a une protection contre le bruteforce
 ```bash
 
 ```
