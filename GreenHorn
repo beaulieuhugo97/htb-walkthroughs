@@ -1,0 +1,57 @@
+Tout d'abord on commence par un scan.
+```bash
+nmap -sV -v 10.10.11.25
+```
+
+On voit qu'ils y a 3 ports d'ouverts:
+```bash
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.10 (Ubuntu Linux; protocol 2.0)
+80/tcp   open  http    nginx 1.18.0 (Ubuntu)
+3000/tcp open  ppp?
+```
+
+Si on accède le site web au port 80, on se rend compte qu'il s'agit du CMS Pluck:
+```bash
+ admin | powered by pluck 
+```
+
+Si on accède au port 3000, on se rend compte qu'il s'agit d'une instance de Gitea:
+```bash
+Powered by Gitea Version: 1.21.11
+```
+
+On scanne les répertoires pour pluck et gitea, mais rien de bien intéressant:
+```bash
+dirb http://greenhorn.htb/
+dirb http://10.10.11.25:3000/
+```
+
+En accédant à la page de login de pluck, on se rend compte qu'il s'agit de la version 4.7.18.
+On voit aussi qu'il y a champ pour le mot de passe, pas de username.
+
+En utilisant burp, on essaye un mot de passe bidon et on intercepte la requête:
+```bash
+POST /login.php HTTP/1.1
+Host: greenhorn.htb
+Content-Length: 31
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: http://greenhorn.htb
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.6367.118 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: http://greenhorn.htb/login.php
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Cookie: PHPSESSID=8pr8gvim4vq20s4mvbgaaknhet
+Connection: close
+
+cont1=test&bogus=&submit=Log+in
+```
+On voit que le champ pour le mot de passe se nomme `cont1` et il semble y avoir un champ bogus qui est envoyé aussi pour prévenir le bruteforce.
+
+Une fois ces informations en mains, on essaye de cracker le login avec hydra:
+```bash
+
+```
