@@ -192,8 +192,10 @@ if ($socket) {
 
 Puis, on lance netcat pour écouter les connexions entrantes:
 ```bash
+
 ```
 
-On exécute finalement le script `reverse-shell.py`:
+On exécute finalement le script `upload-reverse-shell.py`:
 ```bash
+python upload-reverse-shell.py
 ```
