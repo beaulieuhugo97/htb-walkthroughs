@@ -99,3 +99,8 @@ Dictionary cache hit:
 
 d5443aef1b64544f3685bf112f6c405218c573c7279a831b1fe9612e3a4d770486743c5580556c0d838b51749de15530f87fb793afdcc689b6b39024d7790163:iloveyou1
 ```
+
+Avec ce mot de passe, on est capable d'accéder à l'admin panel de pluck
+```bash
+http://greenhorn.htb/admin.php?action=start
+```
