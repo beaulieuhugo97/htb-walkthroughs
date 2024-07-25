@@ -417,3 +417,35 @@ cat user.txt
 0dda172dbf48af3adec9fa5e73b7a090
 ```
 
+```bash
+╔══════════╣ SUID - Check easy privesc, exploits and write perms
+╚
+-rwsr-xr-x 1 root root 19K Feb 26  2022 /usr/libexec/polkit-agent-helper-1                                                                                                                   
+-rwsr-xr-x 1 root root 331K Jun 26 13:11 /usr/lib/openssh/ssh-keysign
+-rwsr-xr-- 1 root messagebus 35K Oct 25  2022 /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+-rwsr-xr-x 1 root root 72K Feb  6 12:54 /usr/bin/chfn  --->  SuSE_9.3/10
+-rwsr-xr-x 1 root root 71K Feb  6 12:54 /usr/bin/gpasswd
+-rwsr-xr-x 1 root root 55K Apr  9 15:32 /usr/bin/su
+-rwsr-xr-x 1 root root 59K Feb  6 12:54 /usr/bin/passwd  --->  Apple_Mac_OSX(03-2006)/Solaris_8/9(12-2004)/SPARC_8/9/Sun_Solaris_2.3_to_2.5.1(02-1997)
+-rwsr-xr-x 1 root root 47K Apr  9 15:32 /usr/bin/mount  --->  Apple_Mac_OSX(Lion)_Kernel_xnu-1699.32.7_except_xnu-1699.24.8
+-rwsr-xr-x 1 root root 44K Feb  6 12:54 /usr/bin/chsh
+-rwsr-xr-x 1 root root 35K Apr  9 15:32 /usr/bin/umount  --->  BSD/Linux(08-1996)
+-rwsr-xr-x 1 root root 35K Mar 23  2022 /usr/bin/fusermount3
+-rwsr-xr-x 1 root root 227K Apr  3  2023 /usr/bin/sudo  --->  check_if_the_sudo_version_is_vulnerable
+-rwsr-xr-x 1 root root 40K Feb  6 12:54 /usr/bin/newgrp  --->  HP-UX_10.20
+
+
+╔══════════╣ Analyzing .service files
+╚
+/etc/systemd/system/gitea.service is calling this writable executable: /usr/local/bin/gitea                                                                                                  
+/etc/systemd/system/multi-user.target.wants/gitea.service is calling this writable executable: /usr/local/bin/gitea
+
+╔══════════╣ Binary processes permissions (non 'root root' and not belonging to current user)
+╚
+132M -rwxrwxrwx 1 junior junior 132M Apr 16 03:44 /usr/local/bin/gitea
+                                                                                                                         
+╔══════════╣ Cleaned processes
+╚ Check weird & unexpected proceses run by root: https://book.hacktricks.xyz/linux-hardening/privilege-escalation#processes                                                                  
+git         1090  0.1  4.2 2063276 168748 ?      Ssl  05:43   0:01 /usr/local/bin/gitea web --config /etc/gitea/app.ini
+```
+
