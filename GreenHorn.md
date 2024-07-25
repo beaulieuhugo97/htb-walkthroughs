@@ -430,3 +430,14 @@ Using OpenVAS.pdf
 cat user.txt
 0dda172dbf48af3adec9fa5e73b7a090
 ```
+
+Une fois le flag utilisateur validé, on reporte notre attention sur les 2 services qui nous intéressent:
+```bash
+cat /etc/systemd/system/gitea.service | grep User=
+User=git
+
+cat /etc/systemd/system/multi-user.target.wants/gitea.service | grep User=
+User=git
+```
+On voit que les 2 services sont exécutés par l'utilisateur git.
+Il faudrait donc modifier `/usr/local/bin/gitea` qui est appelé par ces services.
