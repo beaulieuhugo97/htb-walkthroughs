@@ -1,6 +1,6 @@
 Tout d'abord on commence par un scan.
 ```bash
-nmap -sV -v 10.10.11.11
+nmap -sV -v 10.129.52.52
 ```
 
 On voit qu'il y a deux ports d'ouverts:
@@ -11,7 +11,7 @@ PORT   STATE SERVICE VERSION
 Service Info: Host: board.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
-On scanne également les répertoires:
+Puisqu'il y a un serveur Apache, on scanne également les répertoires:
 ```bash
-dirb http://10.10.11.11/
+dirb http://10.129.52.52/
 ```
