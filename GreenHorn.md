@@ -288,3 +288,10 @@ Puisque pluck est un CMS codé en php, on tente de créer un shell avec php:
 ```php
 php -r 'system("/bin/bash");'
 ```
+Mais sans succès. À ce stade, on décide de regarder quelles commandes sont disponibles:
+```bash
+echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+for dir in $(echo $PATH | tr ":" "\n"); do echo "$dir:"; ls -1 $dir; echo ""; done
+```
