@@ -448,7 +448,8 @@ echo test > /usr/local/bin/gitea
 bash: line 19: /usr/local/bin/gitea: Text file busy
 ```
 
-Après avoir continué de chercher sans succès, on retourne dans le répertoire de junior.
+À ce stade-ci gitea semble être une fausse piste.
+Faute de succès, on retourne donc dans le répertoire de junior.
 N'ayant pas encore exploré le fichier `Using OpenVAS.pdf`, on le télécharge pour y jeter un coup d'oeil:
 ```bash
 nc -lvp 1234 > "/home/junior/Using OpenVAS.pdf"
