@@ -107,7 +107,9 @@ Avec ce mot de passe, on est capable d'accéder à l'admin panel de pluck
 http://greenhorn.htb/admin.php?action=start
 ```
 
-L'accès à l'admin panel est confirmé. 
+L'accès à l'admin panel est confirmé. Encherchant un peu, on se rend compte qu'il est possible d'uploader des fichiers depuis l'admin panel. La façon parfaite d'obtenir un reverse shell !
+Depuis l'admin panel, on essaye donc d'uploader un fichier `reverse-shell.php` mais le serveur ajoute automatiquement un `.txt`.
+Différentes extensions donnent le même résultat `(.php5, .php7, .phtml, phar, etc)`. Il faut donc trouver une méthode alternative d'uploader un fichier.
 En fouillant un peu sur `exploit-db.com` on trouve le RCE suivant:
 [upload-reverse-shell.py](https://www.exploit-db.com/exploits/51592)
 ```python
