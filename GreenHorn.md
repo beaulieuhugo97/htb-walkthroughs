@@ -168,7 +168,7 @@ rce=requests.get(rce_url)
 print(rce.text)
 ```
 
-Il ne reste plus qu'à créer le reverse-shell.zip avec le reverse-shell.php à l'intérieur pour être exécuté par le RCE:
+Il ne reste plus qu'à créer le `reverse-shell.zip` avec le `reverse-shell.php` à l'intérieur pour être exécuté par le RCE:
 reverse-shell.php
 ```php
 <?php
