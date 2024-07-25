@@ -106,7 +106,8 @@ http://greenhorn.htb/admin.php?action=start
 ```
 
 Une fois l'accès à l'admin panel confirmé, on utilise le mot de passe avec le RCE suivant:
-upload-reverse-shell.py
+
+[https://www.exploit-db.com/exploits/51592](upload-reverse-shell.py)
 ```python
 #Exploit Title: Pluck v4.7.18 - Remote Code Execution (RCE)
 #Application: pluck
