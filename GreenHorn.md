@@ -473,3 +473,4 @@ Mr. Green
 ```
 On essaye de dépixeliser l'image avec unredacter:
 https://github.com/BishopFox/unredacter/issues/9
+https://github.com/spipm/Depix
