@@ -405,6 +405,15 @@ dr-xr-xr-x  13 root root     0 Jul 25 02:41 sys
 drwxrwxrwt  12 root root  4096 Jul 25 03:09 tmp
 drwxr-xr-x  14 root root  4096 Jun 20 06:36 usr
 drwxr-xr-x  13 root root  4096 Jun 20 06:36 var
+```
 
+Une fois connecté en tant que `junior`, on va afficher le flag utilisateur:
+```bash
+cd /home/junior
+ls
+user.txt
+Using OpenVAS.pdf
+cat user.txt
+0dda172dbf48af3adec9fa5e73b7a090
 ```
 
