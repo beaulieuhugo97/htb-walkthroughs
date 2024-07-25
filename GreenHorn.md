@@ -233,13 +233,6 @@ robots.txt
 On se rend vite compte que le shell est assez limité, `cd` ne fonctionnant pas.
 On vérifie donc quel est notre shell:
 ```bash
-ps -p $$ -o comm=
-sh
-```
-
-Notre shell est donc `sh`.
-On est aussi capable d'accéder au fichier /etc/passwd:
-```bash
 cat /etc/passwd
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
@@ -280,3 +273,4 @@ mysql:x:115:121:MySQL Server,,,:/nonexistent:/bin/false
 junior:x:1000:1000::/home/junior:/bin/bash
 _laurel:x:997:997::/var/log/laurel:/bin/false
 ```
+Notre shell est donc `/usr/sbin/nologin`.
