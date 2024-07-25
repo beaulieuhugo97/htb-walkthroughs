@@ -11,12 +11,12 @@ PORT     STATE SERVICE VERSION
 3000/tcp open  ppp?
 ```
 
-Si on accède le site web au port 80, on se rend compte qu'il s'agit du CMS Pluck:
+Si on accède le site web au port 80, on se rend compte qu'il s'agit du CMS pluck:
 ```bash
  admin | powered by pluck 
 ```
 
-Si on accède au port 3000, on se rend compte qu'il s'agit d'une instance de Gitea:
+Si on accède au port 3000, on se rend compte qu'il s'agit d'une instance de gitea:
 ```bash
 Powered by Gitea Version: 1.21.11
 ```
@@ -70,7 +70,9 @@ En fouillant un peu, on trouve un répertoire qui semble héberger le code sourc
 http://10.10.11.25:3000/GreenAdmin/GreenHorn
 ```
 
-En poussant la recherche plus loin, on trouve 2 fichiers intéressants, token.php et pass.php:
+On est en mesure de créer un compte, ajouter une clé ssh et cloner le repo. Malheureusement, il n'est pas possible d'uploader un fichier avec `git push`.
+
+En poussant l'exploration du repo plus loin, on trouve 2 fichiers intéressants, token.php et pass.php:
 ```php
 http://10.10.11.25:3000/GreenAdmin/GreenHorn/src/branch/main/data/settings/token.php
 <?php $token = '65c1e5cf86b4d727962672211b91924b828a0c05ece3954c75e3befa6b361fa3eb28c407f7101bc4eae2c604c96c641575c7fe82dbdc6ce0cf7d4a006f53bac7'; ?>
@@ -226,5 +228,4 @@ install.php
 login.php
 requirements.php
 robots.txt
-
 ```
