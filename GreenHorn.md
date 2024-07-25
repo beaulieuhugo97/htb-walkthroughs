@@ -91,5 +91,11 @@ hashcat -m 1700 -a 0 hash.txt /home/kali/rockyou.txt
 
 Une fois décodé, on obtient le mot de passe `iloveyou1`:
 ```bash
+Dictionary cache hit:
+* Filename..: /home/kali/rockyou.txt
+* Passwords.: 14344385
+* Bytes.....: 139921507
+* Keyspace..: 14344385
 
+d5443aef1b64544f3685bf112f6c405218c573c7279a831b1fe9612e3a4d770486743c5580556c0d838b51749de15530f87fb793afdcc689b6b39024d7790163:iloveyou1
 ```
