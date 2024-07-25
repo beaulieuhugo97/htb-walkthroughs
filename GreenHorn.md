@@ -274,3 +274,10 @@ junior:x:1000:1000::/home/junior:/bin/bash
 _laurel:x:997:997::/var/log/laurel:/bin/false
 ```
 Notre shell est donc `/usr/sbin/nologin`.
+
+On essaye de changer notre shell, mais sans succès (on reste toujours pris avec `sh`)
+```bash
+/bin/bash
+ps -p $$ -o comm=
+sh
+```
