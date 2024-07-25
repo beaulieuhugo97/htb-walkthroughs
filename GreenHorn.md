@@ -441,3 +441,9 @@ User=git
 ```
 On voit que les 2 services sont exécutés par l'utilisateur git.
 Il faudrait donc modifier `/usr/local/bin/gitea` qui est appelé par ces services.
+
+Cependant, un test rapide nous informe qu'il est impossible de modifier le fichier:
+```bash
+echo test > /usr/local/bin/gitea
+bash: line 19: /usr/local/bin/gitea: Text file busy
+```
