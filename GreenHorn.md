@@ -283,3 +283,8 @@ On essaye de changer notre shell, mais sans succès (on reste toujours pris avec
 ps -p $$ -o comm=
 sh
 ```
+
+Puisque pluck est un CMS codé en php, on tente de créer un shell avec php:
+```php
+php -r 'system("/bin/bash");'
+```
