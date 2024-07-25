@@ -231,3 +231,10 @@ robots.txt
 ```
 
 On se rend vite compte que le shell est assez limité, `cd` ne fonctionnant pas.
+On vérifie donc quel est notre shell:
+```bash
+ps -p $$ -o comm=
+sh
+```
+
+Notre shell est donc `sh`.
