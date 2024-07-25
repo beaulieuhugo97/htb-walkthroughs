@@ -471,3 +471,5 @@ Feel free to reach out if you have any questions or need further assistance.
 Have a great week,
 Mr. Green
 ```
+On essaye de dépixeliser l'image avec unredacter:
+https://github.com/BishopFox/unredacter/issues/9
