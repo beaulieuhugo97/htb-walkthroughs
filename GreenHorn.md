@@ -229,3 +229,5 @@ login.php
 requirements.php
 robots.txt
 ```
+
+On se rend vite compte que le shell est assez limité, `cd` ne fonctionnant pas.
