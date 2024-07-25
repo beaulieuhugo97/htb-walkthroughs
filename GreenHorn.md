@@ -381,12 +381,8 @@ Puis, on va l'exécuter:
 ╔══════════╣ Cleaned processes                                                                 
 git         1090  0.1  4.2 2063276 168748 ?      Ssl  05:43   0:01 /usr/local/bin/gitea web --config /etc/gitea/app.ini
 ```
-
 En examinant les permissions sur le fichier, on dirait que junior a installé gitea mais a mal configuré les permission.
 On semble pouvoir écrire sur le fichier `/usr/local/bin/gitea`, qui est lui appelé par le service `/etc/systemd/system/gitea.service`.
-```bash
-132M -rwxrwxrwx 1 junior junior 132M Apr 16 03:44 /usr/local/bin/gitea
-```
 
 Puisque c'est lui qui a configuré gitea et que selon le commit c'est lui qui a uploadé le fichier `pass.php` que nous avons cracké plus tôt, on réessaye le même mot de passe, `iloveyou1`:
 ```bash
