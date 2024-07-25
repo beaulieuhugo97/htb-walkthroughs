@@ -372,16 +372,13 @@ Puis, on va l'exécuter:
 ./linpeas.sh
 ....
 ╔══════════╣ Analyzing .service files
-╚
 /etc/systemd/system/gitea.service is calling this writable executable: /usr/local/bin/gitea                                                                                                  
 /etc/systemd/system/multi-user.target.wants/gitea.service is calling this writable executable: /usr/local/bin/gitea
 
 ╔══════════╣ Binary processes permissions (non 'root root' and not belonging to current user)
-╚
 132M -rwxrwxrwx 1 junior junior 132M Apr 16 03:44 /usr/local/bin/gitea
                                                                                                                          
-╔══════════╣ Cleaned processes
-╚ Check weird & unexpected proceses run by root: https://book.hacktricks.xyz/linux-hardening/privilege-escalation#processes                                                                  
+╔══════════╣ Cleaned processes                                                                 
 git         1090  0.1  4.2 2063276 168748 ?      Ssl  05:43   0:01 /usr/local/bin/gitea web --config /etc/gitea/app.ini
 ```
 
