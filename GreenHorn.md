@@ -85,6 +85,11 @@ $ww = 'd5443aef1b64544f3685bf112f6c405218c573c7279a831b1fe9612e3a4d770486743c558
 On réalise vite que pass.php contient un hash sha-512.
 On tente donc de le décoder avec hashcat et rockyou.txt
 ```bash
-echo "65c1e5cf86b4d727962672211b91924b828a0c05ece3954c75e3befa6b361fa3eb28c407f7101bc4eae2c604c96c641575c7fe82dbdc6ce0cf7d4a006f53bac7" > hashes.txt
-hashcat -m 1700 -a 0 hashes.txt /home/kali/rockyou.txt
+echo "65c1e5cf86b4d727962672211b91924b828a0c05ece3954c75e3befa6b361fa3eb28c407f7101bc4eae2c604c96c641575c7fe82dbdc6ce0cf7d4a006f53bac7" > hash.txt
+hashcat -m 1700 -a 0 hash.txt /home/kali/rockyou.txt
+```
+
+Une fois décodé, on obtient le mot de passe `iloveyou1`:
+```bash
+
 ```
