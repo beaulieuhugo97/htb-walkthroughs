@@ -63,3 +63,15 @@ Cependant, on se rend vite compte qu'il y a une protection contre le bruteforce
 ```bash
 You have exceeded the number of login attempts. Please wait 5 minutes before logging in again.
 ```
+
+Ayant épuisé les pistes pour pluck pour le moment, on tourne notre attention vers gitea.
+En fouillant un peu, on trouve un répertoire qui semble héberger le code source pour pluck:
+```bash
+http://10.10.11.25:3000/GreenAdmin/GreenHorn
+```
+
+En poussant la recherche plus loin, on trouve 2 fichiers intéressants, token.php et pass.php:
+```bash
+http://10.10.11.25:3000/GreenAdmin/GreenHorn/src/branch/main/data/settings/token.php
+http://10.10.11.25:3000/GreenAdmin/GreenHorn/src/branch/main/data/settings/pass.php
+```
