@@ -115,6 +115,7 @@ On va aussi scanner les répertoires du nouveau sous-domaine avec dirb:
 dirb http://crm.board.htb/
 ```
 
+On va trouver quelques fichiers intéressants, notamment:
 http://crm.board.htb/conf:
 ```html
 Forbidden
@@ -136,4 +137,4 @@ If an upgrade is in progress, please wait. If not, click on the following link. 
 Click here to go to your application
 ```
 
-Et la page dans le répertoire `public` nous redirige vers une page d'erreur 404.
+Et la page dans le répertoire `public` nous redirige vers une page d'erreur 404 et les autres pages demandent un login.
