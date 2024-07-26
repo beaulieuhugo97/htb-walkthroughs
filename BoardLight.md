@@ -16,6 +16,7 @@ Puisqu'il y a un serveur Apache, on scanne également les répertoires:
 ```bash
 dirb http://10.129.52.52/
 ```
+La page `/server-status` semble intéressant, mais nous n'y avons pas accès.
 En accédant à http://10.129.52.52/, on se rend compte qu'il s'agit d'un site php.
 Plusieurs liens (comme le login) ne semblent pas fonctionner.
 
