@@ -75,7 +75,7 @@ wget -c https://github.com/danielmiessler/SecLists/archive/master.zip -O SecList
   && rm -f SecList.zip
 ```
 
-Puis, on lance l'énumération avec gobuster:
+Puis, on lance l'énumération avec ffuf:
 ```bash
-gobuster dns -d board.htb -w ./SecLists-master/Discovery/DNS/sortedcombined-knock-dnsrecon-fierce-reconng.txt -o gobuster_subdomains.txt
+ffuf -w ./SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt -u http://board.htb -H "Host: FUZZ.board.htb" -mc 200
 ```
