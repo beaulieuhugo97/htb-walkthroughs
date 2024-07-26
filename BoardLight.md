@@ -16,8 +16,8 @@ Puisqu'il y a un serveur Apache, on scanne également les répertoires:
 dirb http://10.129.52.52/
 ```
 En accédant à http://10.129.52.52/, on se rend compte qu'il s'agit d'un site php.
-
 Plusieurs liens (comme le login) ne semblent pas fonctionner.
+
 Aucune requête POST n'apparaît dans sur le réseau lors de l'envoi d'un formulaire.
 En regardant plus loin, voici un example de form:
 ```html
@@ -42,5 +42,9 @@ En regardant plus loin, voici un example de form:
 </form>
 ```
 On constate que le champ `action` est vide.
+
 Si on tente d'accéder à une page qui n'existe pas, par exemple `/login.php`, on obtient `File not found.`
 On tente donc de faire du directory traversal pour afficher `/etc/passwd` mais sans succès, l'url est corrigée et on obtient `The requested URL was not found on this server.`.
+
+Aucun cookie n'est visible.
+La version de jQuery, `3.4.1` ne semble pas avoir de faille connues.
