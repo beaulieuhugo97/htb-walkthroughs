@@ -197,3 +197,5 @@ On obtient le résultat suivant:
   }
 }
 ```
+
+On a donc trouvé l'hôte `crm.board.htb`.
