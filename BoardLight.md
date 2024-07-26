@@ -199,3 +199,4 @@ On obtient le résultat suivant:
 ```
 
 On a donc trouvé l'hôte `crm.board.htb`.
+Lorsqu'on accède à la page, on voit qu'il s'agit du CRM `Dolibarr 17.0.0`
