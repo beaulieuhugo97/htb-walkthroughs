@@ -76,6 +76,6 @@ wget -c https://github.com/danielmiessler/SecLists/archive/master.zip -O SecList
 ```
 
 Puis, on lance l'énumération avec gobuster:
-```
-gobuster dns -d example.com -w /path/to/subdomains-top1million-5000.txt -o gobuster_subdomains.txt
+```bash
+gobuster dns -d board.htb -w ./SecLists-master/Discovery/DNS/sortedcombined-knock-dnsrecon-fierce-reconng.txt -o gobuster_subdomains.txt
 ```
