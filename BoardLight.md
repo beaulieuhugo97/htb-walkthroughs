@@ -42,3 +42,5 @@ En regardant plus loin, voici un example de form:
 </form>
 ```
 On constate que le champ `action` est vide.
+Si on tente d'accéder à une page qui n'existe pas, par exemple `/login.php`, on obtient `File not found.`
+On tente donc de faire du directory traversal pour afficher `/etc/passwd` mais sans succès, l'url est corrigée et on obtient `The requested URL was not found on this server.`.
