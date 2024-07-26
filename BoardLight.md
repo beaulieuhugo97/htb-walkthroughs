@@ -16,3 +16,29 @@ Puisqu'il y a un serveur Apache, on scanne également les répertoires:
 dirb http://10.129.52.52/
 ```
 En accédant à http://10.129.52.52/, on se rend compte qu'il s'agit d'un site php.
+
+Plusieurs liens (comme le login) ne semblent pas fonctionner.
+Aucune requête POST n'apparaît dans sur le réseau lors de l'envoi d'un formulaire.
+En regardant plus loin, voici un example de form:
+```html
+<form action="">
+  <div>
+    <input type="text" placeholder="Full Name ">
+  </div>
+  <div>
+    <input type="text" placeholder="Phone Number">
+  </div>
+  <div>
+    <input type="email" placeholder="Email Address">
+  </div>
+  <div>
+    <input type="text" placeholder="Message" class="input_message">
+  </div>
+  <div class="d-flex justify-content-center">
+    <button type="submit" class="btn_on-hover">
+      Send
+    </button>
+  </div>
+</form>
+```
+On constate que le champ `action` est vide.
