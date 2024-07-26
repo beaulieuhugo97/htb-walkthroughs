@@ -11,6 +11,7 @@ PORT   STATE SERVICE VERSION
 Service Info: Host: board.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
+La version d'Apache ne semble pas avoir de vulnérabilités connues.
 Puisqu'il y a un serveur Apache, on scanne également les répertoires:
 ```bash
 dirb http://10.129.52.52/
@@ -48,3 +49,5 @@ On tente donc de faire du directory traversal pour afficher `/etc/passwd` mais s
 
 Aucun cookie n'est visible.
 La version de jQuery, `3.4.1` ne semble pas avoir de faille connues.
+
+On a pas beaucoup d'informations à ce stade à part que le site est codé en PHP. On va donc tenter d'uploader un fichier malicieux pour obtenir un reverse shell/tenter de faire une injection SQL.
