@@ -228,6 +228,7 @@ Une fois ces informations en main, on lance hydra:
 ```bash
 sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -t 16 -o hydra_results.txt http-post-form://crm.board.htb/index.php?mainmenu=home:"token=f2d2a913edc0137d1066cb9907b3f382&actionlogin=login&loginfunction=loginfunction&backtopage=&tz=-6&tz_string=America%2FChicago&dst_observed=1&dst_first=2024-03-10T01%3A59%3A00Z&dst_second=2024-11-03T01%3A59%3A00Z&screenwidth=2048&screenheight=861&dol_hide_topmenu=&dol_hide_leftmenu=&dol_optimize_smallscreen=&dol_no_mouse_hover=&dol_use_jmobile=&username=^USER^&password=^PASS^:F=Bad"
 ```
+Mais on se rend vite compte qu'un cookie unique est généré comme protection contre le brute-force pour chaque session car on obtient la réponse: `Security token has expired, so action has been canceled. Please try again.`
 
 On va aussi scanner les répertoires du nouveau sous-domaine avec dirb:
 ```bash
