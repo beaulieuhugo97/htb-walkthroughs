@@ -54,7 +54,7 @@ La version de jQuery, `3.4.1` ne semble pas avoir de faille connues.
 En cherchant .php dans le code source de la page un fichier `portfolio.php` qui est commenté.
 Malheureusement accéder au fichier donne un `File not found.`
 
-On continue l'énumération avec nikto.
+On continue l'énumération avec nikto mais rien de bien intéressant.
 ```bash
 nikto -h http://10.129.52.52/
 
@@ -65,4 +65,17 @@ nikto -h http://10.129.52.52/
 + Apache/2.4.41 appears to be outdated (current is at least Apache/2.4.54). Apache 2.2.34 is the EOL for the 2.x branch.
 + /: Web Server returns a valid response with junk HTTP methods which may cause false positives.
 + 8074 requests: 0 error(s) and 4 item(s) reported on remote host
+```
+
+En désespoir de cause, on tente l'énumération des sous-domaines avec gobuster.
+D'abord, il faut télécharger les listes de sous-domaines:
+```bash
+wget -c https://github.com/danielmiessler/SecLists/archive/master.zip -O SecList.zip \
+  && unzip SecList.zip \
+  && rm -f SecList.zip
+```
+
+Puis, on lance l'énumération avec gobuster:
+```
+gobuster dns -d example.com -w /path/to/subdomains-top1million-5000.txt -o gobuster_subdomains.txt
 ```
