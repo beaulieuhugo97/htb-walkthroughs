@@ -77,5 +77,123 @@ wget -c https://github.com/danielmiessler/SecLists/archive/master.zip -O SecList
 
 Puis, on lance l'énumération avec ffuf:
 ```bash
-ffuf -w ./SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt -u http://board.htb -H "Host: FUZZ.board.htb" -mc 200
+ffuf -w ./SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt -u http://board.htb -H "Host: FUZZ.board.htb" -mc 200 -fs 15949 -o ffuf_output.json -of json
+```
+On obtient le résultat suivant:
+
+```json
+{
+  "commandline": "ffuf -w ./SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt -u http://board.htb -H Host: FUZZ.board.htb -mc 200 -fs 15949 -o ffuf_output.txt -of json",
+  "time": "2024-07-26T17:05:30-05:00",
+  "results": [
+    {
+      "input": {
+        "FFUFHASH": "6790a48",
+        "FUZZ": "crm"
+      },
+      "position": 72,
+      "status": 200,
+      "length": 6360,
+      "words": 397,
+      "lines": 150,
+      "content-type": "text/html; charset=UTF-8",
+      "redirectlocation": "",
+      "scraper": {},
+      "duration": 93789337,
+      "resultfile": "",
+      "url": "http://board.htb",
+      "host": "crm.board.htb"
+    }
+  ],
+  "config": {
+    "autocalibration": false,
+    "autocalibration_keyword": "FUZZ",
+    "autocalibration_perhost": false,
+    "autocalibration_strategies": [
+      "basic"
+    ],
+    "autocalibration_strings": [],
+    "colors": false,
+    "cmdline": "ffuf -w ./SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt -u http://board.htb -H Host: FUZZ.board.htb -mc 200 -fs 15949 -o ffuf_output.txt -of json",
+    "configfile": "",
+    "postdata": "",
+    "debuglog": "",
+    "delay": {
+      "value": "0.00"
+    },
+    "dirsearch_compatibility": false,
+    "encoders": [],
+    "extensions": [],
+    "fmode": "or",
+    "follow_redirects": false,
+    "headers": {
+      "Host": "FUZZ.board.htb"
+    },
+    "ignorebody": false,
+    "ignore_wordlist_comments": false,
+    "inputmode": "clusterbomb",
+    "cmd_inputnum": 100,
+    "inputproviders": [
+      {
+        "name": "wordlist",
+        "keyword": "FUZZ",
+        "value": "/home/bhugo97/SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt",
+        "encoders": "",
+        "template": ""
+      }
+    ],
+    "inputshell": "",
+    "json": false,
+    "matchers": {
+      "IsCalibrated": false,
+      "Mutex": {},
+      "Matchers": {
+        "status": {
+          "value": "200"
+        }
+      },
+      "Filters": {
+        "size": {
+          "value": "15949"
+        }
+      },
+      "PerDomainFilters": {}
+    },
+    "mmode": "or",
+    "maxtime": 0,
+    "maxtime_job": 0,
+    "method": "GET",
+    "noninteractive": false,
+    "outputdirectory": "",
+    "outputfile": "ffuf_output.txt",
+    "outputformat": "json",
+    "OutputSkipEmptyFile": false,
+    "proxyurl": "",
+    "quiet": false,
+    "rate": 0,
+    "raw": false,
+    "recursion": false,
+    "recursion_depth": 0,
+    "recursion_strategy": "default",
+    "replayproxyurl": "",
+    "requestfile": "",
+    "requestproto": "https",
+    "scraperfile": "",
+    "scrapers": "all",
+    "sni": "",
+    "stop_403": false,
+    "stop_all": false,
+    "stop_errors": false,
+    "threads": 40,
+    "timeout": 10,
+    "url": "http://board.htb",
+    "verbose": false,
+    "wordlists": [
+      "/home/bhugo97/SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt"
+    ],
+    "http2": false,
+    "client-cert": "",
+    "client-key": ""
+  }
+}
 ```
