@@ -199,4 +199,14 @@ On obtient le résultat suivant:
 ```
 
 On a donc trouvé l'hôte `crm.board.htb`.
-Lorsqu'on accède à la page, on voit qu'il s'agit du CRM `Dolibarr 17.0.0`
+Lorsqu'on accède à la page, on voit qu'il s'agit d'une page de login pour le CRM `Dolibarr 17.0.0`
+En regardant sur `exploit-db.com` on trouve que la version `17.0.1` est vulnérable à une attaque XSS.
+
+Avec ces informations en main, on va tenter une attaque sur le login avec hydra:
+```bash
+```
+
+On va aussi scanner les répertoires du nouveau sous-domaine avec dirb:
+```bash
+```
+
