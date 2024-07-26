@@ -57,4 +57,22 @@ Malheureusement accéder au fichier donne un `File not found.`
 On continue l'énumération avec nikto.
 ```bash
 nikto -h http://10.129.52.52/
+
+- Nikto v2.5.0
+---------------------------------------------------------------------------
++ Target IP:          10.129.52.52
++ Target Hostname:    10.129.52.52
++ Target Port:        80
++ Start Time:         2024-07-26 01:56:02 (GMT-5)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.41 (Ubuntu)
++ /: The anti-clickjacking X-Frame-Options header is not present. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
++ /: The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type. See: https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/missing-content-type-header/
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Apache/2.4.41 appears to be outdated (current is at least Apache/2.4.54). Apache 2.2.34 is the EOL for the 2.x branch.
++ /: Web Server returns a valid response with junk HTTP methods which may cause false positives.
++ 8074 requests: 0 error(s) and 4 item(s) reported on remote host
++ End Time:           2024-07-26 01:59:42 (GMT-5) (220 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
 ```
