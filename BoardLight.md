@@ -51,4 +51,6 @@ On tente donc de faire du directory traversal pour afficher `/etc/passwd` mais s
 Aucun cookie n'est visible.
 La version de jQuery, `3.4.1` ne semble pas avoir de faille connues.
 
-On a pas beaucoup d'informations à ce stade à part que le site est codé en PHP. On va donc tenter d'uploader un fichier malicieux pour obtenir un reverse shell/tenter de faire une injection SQL.
+On a pas beaucoup d'informations à ce stade à part que le site est codé en PHP.
+En fouillant un peu, on trouve dans le code source de la page un fichier `portfolio.php` qui est commenté.
+Malheureusement accéder au fichier donne un `File not found. `
