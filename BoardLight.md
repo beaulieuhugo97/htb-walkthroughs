@@ -52,4 +52,9 @@ Aucun cookie n'est visible.
 La version de jQuery, `3.4.1` ne semble pas avoir de faille connues.
 
 En cherchant .php dans le code source de la page un fichier `portfolio.php` qui est commenté.
-Malheureusement accéder au fichier donne un `File not found. `
+Malheureusement accéder au fichier donne un `File not found.`
+
+On continue l'énumération avec nikto.
+```bash
+nikto -h http://10.129.52.52/
+```
