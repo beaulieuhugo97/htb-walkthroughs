@@ -116,21 +116,22 @@ dirb http://crm.board.htb/
 ```
 
 On va trouver quelques fichiers intéressants, notamment:
-http://crm.board.htb/conf:
+
+http://crm.board.htb/conf
 ```html
 Forbidden
 
 You don't have permission to access this resource.
 ```
 
-http://crm.board.htb/api/index.php:
+http://crm.board.htb/api/index.php
 ```bash
 Module Api must be enabled.
 
 To activate modules, go on setup Area (Home->Setup->Modules).
 ```
 
-http://crm.board.htb/install/phpinfo.php:
+http://crm.board.htb/install/phpinfo.php
 ```bash
 The application tried to self-upgrade, but the install/upgrade pages have been disabled for security (by the existence of a lock file install.lock in the dolibarr documents directory).
 If an upgrade is in progress, please wait. If not, click on the following link. If you always see this same page, you must remove/rename the file install.lock in the documents directory.
