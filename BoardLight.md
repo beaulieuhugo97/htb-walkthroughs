@@ -140,7 +140,7 @@ Click here to go to your application
 
 Et la page dans le répertoire `public` nous redirige vers une page d'erreur 404 et les autres pages demandent un login.
 
-En fouillant un peu, on trouve le CVE suivant:
+En fouillant un peu sur le web, on trouve le CVE suivant:
 ```bash
 https://github.com/nikn0laty/Exploit-for-Dolibarr-17.0.0-CVE-2023-30253
 https://github.com/dollarboysushil/Dolibarr-17.0.0-Exploit-CVE-2023-30253
