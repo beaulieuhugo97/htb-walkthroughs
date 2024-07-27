@@ -145,3 +145,4 @@ En fouillant un peu sur le web, on trouve le CVE suivant pour obtenir un reverse
 https://github.com/nikn0laty/Exploit-for-Dolibarr-17.0.0-CVE-2023-30253
 https://github.com/dollarboysushil/Dolibarr-17.0.0-Exploit-CVE-2023-30253
 ```
+À court d'idée, on tente de se logger avec des credentials par défaut qui sont populaire. On fini par trouver `admin`  `admin` comme login.
