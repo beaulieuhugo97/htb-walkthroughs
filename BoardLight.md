@@ -166,3 +166,18 @@ bash: cannot set terminal process group (875): Inappropriate ioctl for device
 bash: no job control in this shell
 www-data@boardlight:~/html/crm.board.htb/htdocs/public/website$ 
 ```
+
+On fait un peu de reconnaissance:
+```bash
+www-data@boardlight:~/html/crm.board.htb/htdocs/public/website$ whoami
+whoami
+www-data
+www-data@boardlight:~/html/crm.board.htb/htdocs/public/website$ ls
+ls
+index.php
+styles.css.php
+www-data@boardlight:~/html/crm.board.htb/htdocs/public/website$ cd ..
+cd ..
+www-data@boardlight:~/html/crm.board.htb/htdocs/public$ 
+```
+
