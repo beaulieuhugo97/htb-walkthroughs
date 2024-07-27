@@ -347,3 +347,20 @@ larissa
 ```
 On trouve un mot de passe, `$dolibarr_main_db_pass='serverfun2$2023!!';`
 En réutilisant le même mot de passe, nous sommes en mesure de se connecter en tant que larissa.
+
+Une fois connecté en tant que larissa, on peut aller retrouver le flag user:
+```bash
+cd /home/larissa 
+ls
+Desktop
+Documents
+Downloads
+Music
+Pictures
+Public
+Templates
+user.txt
+Videos
+cat user.txt
+bffabf3397c924d7dccaf71cf636393c
+```
