@@ -220,6 +220,62 @@ Found readable /etc/mysql/my.cnf
 ╔══════════╣ Analyzing Github Files (limit 70)
 drwxr-xr-x 4 www-data www-data 4096 Mar  4  2023 /var/www/html/crm.board.htb/.github
 
+══╣ PHP exec extensions
+drwxr-xr-x 2 root root 4096 Mar 19 07:35 /etc/apache2/sites-enabled
+drwxr-xr-x 2 root root 4096 Mar 19 07:35 /etc/apache2/sites-enabled
+lrwxrwxrwx 1 root root 27 Sep 17  2023 /etc/apache2/sites-enabled/php.conf -> ../sites-available/php.conf
+lrwxrwxrwx 1 root root 28 Sep 17  2023 /etc/apache2/sites-enabled/site.conf -> ../sites-available/site.conf
+lrwxrwxrwx 1 root root 32 Mar 19 07:35 /etc/apache2/sites-enabled/dolibarr.conf -> ../sites-available/dolibarr.conf
+lrwxrwxrwx 1 root root 29 Mar 19 00:29 /etc/apache2/sites-enabled/board.conf -> ../sites-available/board.conf
+
+╔══════════╣ SUID - Check easy privesc, exploits and write perms
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid
+-rwsr-xr-x 1 root root 15K Jul  8  2019 /usr/lib/eject/dmcrypt-get-device
+-rwsr-sr-x 1 root root 15K Apr  8 18:36 /usr/lib/xorg/Xorg.wrap
+-rwsr-xr-x 1 root root 27K Jan 29  2020 /usr/lib/x86_64-linux-gnu/enlightenment/utils/enlightenment_sys (Unknown SUID binary!)
+-rwsr-xr-x 1 root root 15K Jan 29  2020 /usr/lib/x86_64-linux-gnu/enlightenment/utils/enlightenment_ckpasswd (Unknown SUID binary!)
+-rwsr-xr-x 1 root root 15K Jan 29  2020 /usr/lib/x86_64-linux-gnu/enlightenment/utils/enlightenment_backlight (Unknown SUID binary!)
+-rwsr-xr-x 1 root root 15K Jan 29  2020 /usr/lib/x86_64-linux-gnu/enlightenment/modules/cpufreq/linux-gnu-x86_64-0.23.1/freqset (Unknown SUID binary!)
+-rwsr-xr-- 1 root messagebus 51K Oct 25  2022 /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+-rwsr-xr-x 1 root root 467K Jan  2  2024 /usr/lib/openssh/ssh-keysign
+-rwsr-xr-- 1 root dip 386K Jul 23  2020 /usr/sbin/pppd  --->  Apple_Mac_OSX_10.4.8(05-2007)
+-rwsr-xr-x 1 root root 44K Feb  6 04:49 /usr/bin/newgrp  --->  HP-UX_10.20
+-rwsr-xr-x 1 root root 55K Apr  9 08:34 /usr/bin/mount  --->  Apple_Mac_OSX(Lion)_Kernel_xnu-1699.32.7_except_xnu-1699.24.8
+-rwsr-xr-x 1 root root 163K Apr  4  2023 /usr/bin/sudo  --->  check_if_the_sudo_version_is_vulnerable
+-rwsr-xr-x 1 root root 67K Apr  9 08:34 /usr/bin/su
+-rwsr-xr-x 1 root root 84K Feb  6 04:49 /usr/bin/chfn  --->  SuSE_9.3/10
+-rwsr-xr-x 1 root root 39K Apr  9 08:34 /usr/bin/umount  --->  BSD/Linux(08-1996)
+-rwsr-xr-x 1 root root 87K Feb  6 04:49 /usr/bin/gpasswd
+-rwsr-xr-x 1 root root 67K Feb  6 04:49 /usr/bin/passwd  --->  Apple_Mac_OSX(03-2006)/Solaris_8/9(12-2004)/SPARC_8/9/Sun_Solaris_2.3_to_2.5.1(02-1997)
+-rwsr-xr-x 1 root root 39K Mar  7  2020 /usr/bin/fusermount
+-rwsr-xr-x 1 root root 52K Feb  6 04:49 /usr/bin/chsh
+-rwsr-xr-x 1 root root 15K Oct 27  2023 /usr/bin/vmware-user-suid-wrapper
+
+╔══════════╣ SGID
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid
+-rwsr-sr-x 1 root root 15K Apr  8 18:36 /usr/lib/xorg/Xorg.wrap
+-rwxr-sr-x 1 root mail 23K Apr  7  2021 /usr/libexec/camel-lock-helper-1.2
+-rwxr-sr-x 1 root shadow 43K Jan 10  2024 /usr/sbin/pam_extrausers_chkpwd
+-rwxr-sr-x 1 root shadow 43K Jan 10  2024 /usr/sbin/unix_chkpwd
+-rwxr-sr-x 1 root mail 15K Aug 26  2019 /usr/bin/mlock
+-rwxr-sr-x 1 root crontab 43K Feb 13  2020 /usr/bin/crontab
+-rwxr-sr-x 1 root shadow 31K Feb  6 04:49 /usr/bin/expiry
+-rwxr-sr-x 1 root shadow 83K Feb  6 04:49 /usr/bin/chage
+-rwxr-sr-x 1 root ssh 343K Jan  2  2024 /usr/bin/ssh-agent
+-rwxr-sr-x 1 root tty 15K Mar 30  2020 /usr/bin/bsd-write
+
+╔══════════╣ Analyzing SSH Files (limit 70)
+-rw-r--r-- 1 root root 177 May  2 05:43 /etc/ssh/ssh_host_ecdsa_key.pub
+-rw-r--r-- 1 root root 97 May  2 05:43 /etc/ssh/ssh_host_ed25519_key.pub
+-rw-r--r-- 1 root root 569 May  2 05:43 /etc/ssh/ssh_host_rsa_key.pub
+
+Port 22
+ListenAddress 0.0.0.0
+PermitRootLogin yes
+PubkeyAuthentication yes
+PasswordAuthentication yes
+ChallengeResponseAuthentication no
+UsePAM yes
 
 ```
 Rien d'intéressant au niveau des cronjobs.
