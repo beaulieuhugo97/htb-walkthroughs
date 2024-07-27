@@ -190,4 +190,6 @@ drwxr-xr-x  3 root    root    4096 May 17 01:04 .
 drwxr-xr-x 19 root    root    4096 May 17 01:04 ..
 drwxr-x--- 15 larissa larissa 4096 May 17 01:04 larissa
 ```
+Il faut donc probablement trouver un moyen de devenir `larissa`.
 
+On va pousser la reconnaissance plus loin avec linPEAS.
