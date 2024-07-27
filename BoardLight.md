@@ -345,4 +345,5 @@ Password: serverfun2$2023!!
 whoami
 larissa
 ```
+On trouve un mot de passe, `$dolibarr_main_db_pass='serverfun2$2023!!';`
 En réutilisant le même mot de passe, nous sommes en mesure de se connecter en tant que larissa.
