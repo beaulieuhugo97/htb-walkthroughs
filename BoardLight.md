@@ -178,6 +178,16 @@ index.php
 styles.css.php
 www-data@boardlight:~/html/crm.board.htb/htdocs/public/website$ cd ..
 cd ..
-www-data@boardlight:~/html/crm.board.htb/htdocs/public$ 
+www-data@boardlight:~/html/crm.board.htb/htdocs/public$ cd /home
+cd /home
+www-data@boardlight:/home$ ls
+ls
+larissa
+www-data@boardlight:/home$ ls -la
+ls -la
+total 12
+drwxr-xr-x  3 root    root    4096 May 17 01:04 .
+drwxr-xr-x 19 root    root    4096 May 17 01:04 ..
+drwxr-x--- 15 larissa larissa 4096 May 17 01:04 larissa
 ```
 
