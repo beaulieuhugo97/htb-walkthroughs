@@ -20,7 +20,7 @@ sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-D
 
 ## Web app scan with `nikto`:
 ```bash
-nikto -h http://example.com -p 8080 -o nikto_output.txt
+nikto -h example.com -p 80 -o nikto_output.txt
 ```
 
 ## Send directory with `netcat`
