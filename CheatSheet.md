@@ -5,7 +5,7 @@ nmap -v -sV -O -A --top-ports 5000 -oN nmap_output.txt example.com
 
 ## Directory enumeration with `dirb`:
 ```bash
-dirb http://<host>/
+dirb http://example.com/
 ```
 
 ## Subdomains enumeration with `ffuf`:
