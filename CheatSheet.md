@@ -5,7 +5,7 @@ nmap -v -sV -O -A --top-ports 5000 -oN nmap_output.txt example.com
 
 ## Directory enumeration with `dirb`:
 ```bash
-dirb http://example.com/
+dirb http://example.com /usr/share/wordlists/dirb/common.txt -o results.txt
 ```
 
 ## Subdomains enumeration with `ffuf`:
