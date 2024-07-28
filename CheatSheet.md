@@ -18,6 +18,11 @@ ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-11000
 sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt http-post-form://example.com/login"&username=^USER^&password=^PASS^:F=Bad"
 ```
 
+## Web app scan with `nikto`:
+```bash
+nikto -h http://example.com -p 8080 -o nikto_output.txt
+```
+
 ## Send directory with `netcat`
 ### Sender:
 ```bash
