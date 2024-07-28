@@ -714,4 +714,4 @@ En rescannant avec linpeas, on trouve les SUID suivants:
 -rwsr-xr-x 1 root root 15K Jan 29  2020 /usr/lib/x86_64-linux-gnu/enlightenment/modules/cpufreq/linux-gnu-x86_64-0.23.1/freqset (Unknown SUID binary!)
 ```
 On se rend compte que le nom semble similaire à celui de la box (boardlight/enlightenment).
-En fouillant un peu, on se rend compte que ces fichiers sont liés au Enlightenment desktop environment.
+En fouillant un peu, on se rend compte que ces fichiers sont liés au [Enlightenment desktop environment](https://www.enlightenment.org/)
