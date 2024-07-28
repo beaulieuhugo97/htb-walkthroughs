@@ -51,23 +51,15 @@ nikto -h http://10.129.52.52/
 + 8074 requests: 0 error(s) and 4 item(s) reported on remote host
 ```
 
-En désespoir de cause, on tente l'énumération des sous-domaines avec gobuster.
-D'abord, il faut télécharger les listes de sous-domaines:
+En désespoir de cause, on tente l'énumération des sous-domaines avec ffuf:
 ```bash
-wget -c https://github.com/danielmiessler/SecLists/archive/master.zip -O SecList.zip \
-  && unzip SecList.zip \
-  && rm -f SecList.zip
-```
-
-Puis, on lance l'énumération avec ffuf:
-```bash
-ffuf -w ./SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt -u http://board.htb -H "Host: FUZZ.board.htb" -mc 200 -fs 15949 -o ffuf_output.json -of json
+ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://board.htb -H "Host: FUZZ.board.htb" -mc 200 -fs 15949 -o ffuf_output.json -of json
 ```
 On obtient le résultat suivant:
 
 ```json
 {
-  "commandline": "ffuf -w ./SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt -u http://board.htb -H Host: FUZZ.board.htb -mc 200 -fs 15949 -o ffuf_output.txt -of json",
+  "commandline": "ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://board.htb -H Host: FUZZ.board.htb -mc 200 -fs 15949 -o ffuf_output.txt -of json",
   "time": "2024-07-26T17:05:30-05:00",
   "results": [
     {
