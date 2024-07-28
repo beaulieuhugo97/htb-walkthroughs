@@ -1,6 +1,11 @@
 ## Nmap scan:
 ```bash
-nmap -v -sV -O -A --top-ports 5000 -oN output.txt <host>
+nmap -v -sV -O -A --top-ports 5000 -oN nmap_output.txt <host>
+```
+
+## Subdomain scan:
+```bash
+ffuf -w ./SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt -u http://<host> -H "Host: FUZZ.<host>" -mc 200 -fs 15949 -o ffuf_output.json -of json
 ```
 
 ## Send directory with `netcat`
