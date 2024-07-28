@@ -10,7 +10,7 @@ dirb http://<host>/
 
 ## Subdomains enumeration with `ffuf`:
 ```bash
-ffuf -w ./SecLists-master/Discovery/DNS/subdomains-top1million-110000.txt -u http://<host> -H "Host: FUZZ.<host>" -mc 200 -fs 15949 -o ffuf_output.json -of json
+ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://<host> -H "Host: FUZZ.<host>" -mc 200 -fs 15949 -o ffuf_output.json -of json
 ```
 
 ## Send directory with `netcat`
