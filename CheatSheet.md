@@ -1,6 +1,6 @@
 ## Network scan with`nmap`:
 ```bash
-nmap -v -sV -O -A --top-ports 5000 -oN nmap_output.txt example.com
+nmap -v -sV -O -A --top-ports 1000 -oN nmap_output.txt example.com
 ```
 
 ## Directory enumeration with `dirb`:
