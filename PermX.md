@@ -238,6 +238,7 @@ su mtz
 Password: 03F6lY3uXAP2bkW8
 whoami
 mtz
+
 cd /home
 ls
 mtz
