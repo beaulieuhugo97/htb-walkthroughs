@@ -194,3 +194,8 @@ nikto output:
 ![image](https://github.com/user-attachments/assets/319f2b71-0ff4-4367-a714-5e959dd8561b)
 
 CVE: `https://github.com/Rai2en/CVE-2023-4220-Chamilo-LMS`
+
+linpeas output:
+```bash
+
+```
