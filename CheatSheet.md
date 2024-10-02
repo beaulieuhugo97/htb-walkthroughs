@@ -28,13 +28,18 @@ sudo hydra -v -V -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Data
 nikto -h example.com -p 80 -o nikto_output.txt
 ```
 
-## Search metasploit
+## Exploit with metasploit
 ```bash
 msfconsole
 
 show
 
-search <name>
+search <exploit_name>
+
+use exploit/linux/http/exploit_name
+
+set RHOSTS example.com
+set RPORT 80
 ```
 
 ## Send directory with `netcat`
