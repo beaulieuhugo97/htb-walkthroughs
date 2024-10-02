@@ -88,7 +88,47 @@ Nmap done: 1 IP address (1 host up) scanned in 20.48 seconds
 
 dirb output:
 ```
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
 
+OUTPUT_FILE: dirb_output.txt
+START_TIME: Wed Oct  2 01:03:32 2024
+URL_BASE: http://permx.htb/
+WORDLIST_FILES: /usr/share/wordlists/dirb/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612                                                          
+
+---- Scanning URL: http://permx.htb/ ----
+==> DIRECTORY: http://permx.htb/css/                                                                                                                           
+==> DIRECTORY: http://permx.htb/img/                                                                                                                           
++ http://permx.htb/index.html (CODE:200|SIZE:36182)                                                                                                            
+==> DIRECTORY: http://permx.htb/js/                                                                                                                            
+==> DIRECTORY: http://permx.htb/lib/                                                                                                                           
++ http://permx.htb/server-status (CODE:403|SIZE:274)                                                                                                           
+                                                                                                                                                               
+---- Entering directory: http://permx.htb/css/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+                                                                                                                                                               
+---- Entering directory: http://permx.htb/img/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+                                                                                                                                                               
+---- Entering directory: http://permx.htb/js/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+                                                                                                                                                               
+---- Entering directory: http://permx.htb/lib/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+                                                                               
+-----------------
+END_TIME: Wed Oct  2 01:06:15 2024
+DOWNLOADED: 4612 - FOUND: 2
 ```
 
 ffuf output:
@@ -120,7 +160,6 @@ ________________________________________________
 lms                     [Status: 200, Size: 19347, Words: 4910, Lines: 353, Duration: 1303ms]
 www                     [Status: 200, Size: 36182, Words: 12829, Lines: 587, Duration: 4573ms]
 :: Progress: [114441/114441] :: Job [1/1] :: 1226 req/sec :: Duration: [0:01:43] :: Errors: 0 ::
-
 ```
 
 nikto output:
