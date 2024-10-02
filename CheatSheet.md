@@ -41,7 +41,7 @@ tar -czf archive.tar.gz /path/to/directory_or_file
 ```
 ### Extract:
 ```bash
-tar -xzf archive.tar.gz
+tar -xzf archive.tar.gz -C /path/to/extract
 ```
 
 ## PHP reverse shell
