@@ -236,4 +236,15 @@ Using linpeas output, login as user `mtz` with db_password `03F6lY3uXAP2bkW8`
 ```bash
 su mtz
 Password: 03F6lY3uXAP2bkW8
+whoami
+mtz
+cd /home
+ls
+mtz
+cd mtz
+ls
+user.txt
+cat user.txt
+da497a8d53e30f64eff58d1bc84a75b7
+
 ```
