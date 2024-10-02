@@ -190,3 +190,6 @@ nikto output:
 ---------------------------------------------------------------------------
 + 1 host(s) tested
 ```
+
+![image](https://github.com/user-attachments/assets/319f2b71-0ff4-4367-a714-5e959dd8561b)
+
