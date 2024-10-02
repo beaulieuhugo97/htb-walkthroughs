@@ -37,11 +37,11 @@ nc -l -p 1234 > directory.tar.gz
 # Archive
 ### Compress:
 ```bash
-tar -czf archive.tar.gz /path/to/directory_or_file
+tar -czvf archive.tar.gz /path/to/directory_or_file
 ```
 ### Extract:
 ```bash
-tar -xzf archive.tar.gz -C /path/to/extract
+tar -xzvf archive.tar.gz -C /path/to/extract
 ```
 
 ## PHP reverse shell
