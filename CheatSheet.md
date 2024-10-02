@@ -41,6 +41,9 @@ use exploit/linux/http/exploit_name
 set RHOSTS example.com
 set RPORT 80
 
+show payloads
+set payload <payload_name>
+
 exploit
 ```
 
