@@ -18,7 +18,7 @@ ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-11000
 nikto -h example.com -p 80 -o nikto_output.txt
 ```
 
-## Exploit with metasploit
+## Exploit with `metasploit`:
 ```bash
 msfconsole
 
