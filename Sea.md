@@ -275,5 +275,35 @@ Linux sea 5.4.0-190-generic #210-Ubuntu SMP Fri Jul 5 17:03:38 UTC 2024 x86_64 x
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 /bin/sh: 0: can't access tty; job control turned off
-$ 
+$ whoami
+www-data
+$ pwd
+/
+$ ls -la
+total 72
+drwxr-xr-x  19 root root  4096 Feb 21  2024 .
+drwxr-xr-x  19 root root  4096 Feb 21  2024 ..
+lrwxrwxrwx   1 root root     7 Mar 14  2023 bin -> usr/bin
+drwxr-xr-x   4 root root  4096 Aug  1 12:53 boot
+drwxr-xr-x  19 root root  4020 Oct  3 04:54 dev
+drwxr-xr-x 110 root root  4096 Aug 14 15:27 etc
+drwxr-xr-x   4 root root  4096 Jul 30 12:58 home
+lrwxrwxrwx   1 root root     7 Mar 14  2023 lib -> usr/lib
+lrwxrwxrwx   1 root root     9 Mar 14  2023 lib32 -> usr/lib32
+lrwxrwxrwx   1 root root     9 Mar 14  2023 lib64 -> usr/lib64
+lrwxrwxrwx   1 root root    10 Mar 14  2023 libx32 -> usr/libx32
+drwx------   2 root root 16384 Feb 21  2024 lost+found
+drwxr-xr-x   2 root root  4096 Feb 21  2024 media
+drwxr-xr-x   2 root root  4096 Mar 14  2023 mnt
+drwxr-xr-x   3 root root  4096 Feb 21  2024 opt
+dr-xr-xr-x 282 root root     0 Oct  3 04:54 proc
+drwx------   7 root root  4096 Oct  3 04:55 root
+drwxr-xr-x  28 root root   860 Oct  3 14:52 run
+lrwxrwxrwx   1 root root     8 Mar 14  2023 sbin -> usr/sbin
+drwxr-xr-x   5 root root  4096 Feb 21  2024 snap
+drwxr-xr-x   2 root root  4096 Mar 14  2023 srv
+dr-xr-xr-x  13 root root     0 Oct  3 04:54 sys
+drwxrwxrwt   2 root root  4096 Oct  4 00:00 tmp
+drwxr-xr-x  14 root root  4096 Mar 14  2023 usr
+drwxr-xr-x  14 root root  4096 Feb 21  2024 var
 ```
