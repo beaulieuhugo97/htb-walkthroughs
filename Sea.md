@@ -444,3 +444,63 @@ cat var/www/sea/data/database.js
     }
 }
 ```
+
+hashcat output:
+```bash
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 3.1+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: pthread-haswell-DO-Regular, skipped
+
+OpenCL API (OpenCL 2.1 LINUX) - Platform #2 [Intel(R) Corporation]
+==================================================================
+* Device #2: DO-Regular, 3937/7938 MB (992 MB allocatable), 4MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 72
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Optimizers applied:
+* Zero-Byte
+* Single-Hash
+* Single-Salt
+
+Watchdog: Hardware monitoring interface not found on your system.
+Watchdog: Temperature abort trigger disabled.
+
+Host memory required for this attack: 0 MB
+
+Dictionary cache built:
+* Filename..: /usr/share/wordlists/rockyou.txt
+* Passwords.: 14344392
+* Bytes.....: 139921507
+* Keyspace..: 14344385
+* Runtime...: 3 secs
+
+$2y$10$iOrk210RQSAzNCx6Vyq2X.aJ/D.GuE4jRIikYiWrD3TM/PjDnXm4q:mychemicalromance
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 3200 (bcrypt $2*$, Blowfish (Unix))
+Hash.Target......: $2y$10$iOrk210RQSAzNCx6Vyq2X.aJ/D.GuE4jRIikYiWrD3TM...DnXm4q
+Time.Started.....: Fri Oct  4 02:08:03 2024 (1 min, 10 secs)
+Time.Estimated...: Fri Oct  4 02:09:13 2024 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#2.........:       44 H/s (2.65ms) @ Accel:4 Loops:8 Thr:1 Vec:1
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 3072/14344385 (0.02%)
+Rejected.........: 0/3072 (0.00%)
+Restore.Point....: 3056/14344385 (0.02%)
+Restore.Sub.#2...: Salt:0 Amplifier:0-1 Iteration:1016-1024
+Candidate.Engine.: Device Generator
+Candidates.#2....: 753159 -> dangerous
+
+Started: Fri Oct  4 02:07:46 2024
+Stopped: Fri Oct  4 02:09:14 2024
+```
