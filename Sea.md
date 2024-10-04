@@ -318,3 +318,8 @@ drwxr-xr-x 19 root root 4096 Feb 21  2024 ..
 drwxr-xr-x  4 amay amay 4096 Aug  1 12:22 amay
 drwxr-x---  4 geo  geo  4096 Aug  1 12:13 geo
 ```
+
+linpeas output:
+```bash
+
+```
