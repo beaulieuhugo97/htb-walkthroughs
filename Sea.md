@@ -275,10 +275,13 @@ Linux sea 5.4.0-190-generic #210-Ubuntu SMP Fri Jul 5 17:03:38 UTC 2024 x86_64 x
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 /bin/sh: 0: can't access tty; job control turned off
+
 $ whoami
 www-data
+
 $ pwd
 /
+
 $ ls -la
 total 72
 drwxr-xr-x  19 root root  4096 Feb 21  2024 .
@@ -306,4 +309,12 @@ dr-xr-xr-x  13 root root     0 Oct  3 04:54 sys
 drwxrwxrwt   2 root root  4096 Oct  4 00:00 tmp
 drwxr-xr-x  14 root root  4096 Mar 14  2023 usr
 drwxr-xr-x  14 root root  4096 Feb 21  2024 var
+
+$ cd /home
+$ ls -la
+total 16
+drwxr-xr-x  4 root root 4096 Jul 30 12:58 .
+drwxr-xr-x 19 root root 4096 Feb 21  2024 ..
+drwxr-xr-x  4 amay amay 4096 Aug  1 12:22 amay
+drwxr-x---  4 geo  geo  4096 Aug  1 12:13 geo
 ```
