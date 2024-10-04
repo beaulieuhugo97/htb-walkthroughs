@@ -321,5 +321,126 @@ drwxr-x---  4 geo  geo  4096 Aug  1 12:13 geo
 
 linpeas output:
 ```bash
+╔══════════╣ Searching root files in home dirs (limit 30)
+/home/
+/home/amay/.bash_history
+/home/amay/user.txt
+/root/
+/var/www
+/var/www/html
 
+╔══════════╣ Interesting writable files owned by me or writable by everyone (not in Home) (max 200)
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#writable-files
+/dev/mqueue
+/dev/shm
+/run/lock
+/run/lock/apache2
+/run/screen
+/snap/core20/2318/run/lock
+/snap/core20/2318/tmp
+/snap/core20/2318/var/tmp
+/tmp
+/tmp/linpeas.sh
+/tmp/tmux-33
+/var/cache/apache2/mod_cache_disk
+/var/crash
+/var/lib/php/sessions
+/var/tmp
+/var/www/sea
+/var/www/sea/.htaccess
+/var/www/sea/contact.php
+/var/www/sea/data
+/var/www/sea/data/cache.json
+/var/www/sea/data/database.js
+/var/www/sea/data/files
+/var/www/sea/index.php
+/var/www/sea/messages
+/var/www/sea/plugins
+/var/www/sea/themes
+/var/www/sea/themes/bike
+/var/www/sea/themes/bike/LICENSE
+/var/www/sea/themes/bike/README.md
+/var/www/sea/themes/bike/css
+/var/www/sea/themes/bike/css/style.css
+/var/www/sea/themes/bike/img
+/var/www/sea/themes/bike/summary
+/var/www/sea/themes/bike/theme.php
+/var/www/sea/themes/bike/version
+/var/www/sea/themes/bike/wcms-modules.json
+/var/www/sea/themes/revshell-main
+/var/www/sea/themes/revshell-main/rev.php
+```
+
+cat var/www/sea/data/database.js
+```bash
+{
+    "config": {
+        "siteTitle": "Sea",
+        "theme": "bike",
+        "defaultPage": "home",
+        "login": "loginURL",
+        "forceLogout": false,
+        "forceHttps": false,
+        "saveChangesPopup": false,
+        "password": "$2y$10$iOrk210RQSAzNCx6Vyq2X.aJ\/D.GuE4jRIikYiWrD3TM\/PjDnXm4q",
+        "lastLogins": {
+            "2024\/10\/04 06:02:42": "127.0.0.1",
+            "2024\/10\/04 05:32:10": "127.0.0.1",
+            "2024\/10\/04 05:27:40": "127.0.0.1",
+            "2024\/10\/04 05:26:10": "127.0.0.1",
+            "2024\/07\/31 15:17:10": "127.0.0.1"
+        },
+        "lastModulesSync": "2024\/10\/04",
+        "customModules": {
+            "themes": {},
+            "plugins": {}
+        },
+        "menuItems": {
+            "0": {
+                "name": "Home",
+                "slug": "home",
+                "visibility": "show",
+                "subpages": {}
+            },
+            "1": {
+                "name": "How to participate",
+                "slug": "how-to-participate",
+                "visibility": "show",
+                "subpages": {}
+            }
+        },
+        "logoutToLoginScreen": {}
+    },
+    "pages": {
+        "404": {
+            "title": "404",
+            "keywords": "404",
+            "description": "404",
+            "content": "<center><h1>404 - Page not found<\/h1><\/center>",
+            "subpages": {}
+        },
+        "home": {
+            "title": "Home",
+            "keywords": "Enter, page, keywords, for, search, engines",
+            "description": "A page description is also good for search engines.",
+            "content": "<h1>Welcome to Sea<\/h1>\n\n<p>Hello! Join us for an exciting night biking adventure! We are a new company that organizes bike competitions during the night and we offer prizes for the first three places! The most important thing is to have fun, join us now!<\/p>",
+            "subpages": {}
+        },
+        "how-to-participate": {
+            "title": "How to",
+            "keywords": "Enter, keywords, for, this page",
+            "description": "A page description is also good for search engines.",
+            "content": "<h1>How can I participate?<\/h1>\n<p>To participate, you only need to send your data as a participant through <a href=\"http:\/\/sea.htb\/contact.php\">contact<\/a>. Simply enter your name, email, age and country. In addition, you can optionally add your website related to your passion for night racing.<\/p>",
+            "subpages": {}
+        }
+    },
+    "blocks": {
+        "subside": {
+            "content": "<h2>About<\/h2>\n\n<br>\n<p>We are a company dedicated to organizing races on an international level. Our main focus is to ensure that our competitors enjoy an exciting night out on the bike while participating in our events.<\/p>"
+        },
+        "footer": {
+            "content": "©2024 Sea"
+        }
+    }
+}
 ```
