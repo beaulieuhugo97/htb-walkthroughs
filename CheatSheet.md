@@ -271,7 +271,7 @@ less -r ./output.txt
 ### Extract rockyou.txt (ParrotOS):
 ```bash
 cd /usr/share/wordlists
-sudo gunzip rockyou.tzt.gz
+sudo gunzip rockyou.txt.gz
 ```
 ### Crack hash:
 ```bash
