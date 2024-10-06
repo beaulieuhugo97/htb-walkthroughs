@@ -319,7 +319,7 @@ drwxr-xr-x  4 amay amay 4096 Aug  1 12:22 amay
 drwxr-x---  4 geo  geo  4096 Aug  1 12:13 geo
 ```
 
-linpeas output:
+linpeas interesting perms files output:
 ```bash
 ╔══════════╣ Searching root files in home dirs (limit 30)
 /home/
@@ -521,17 +521,15 @@ user.txt
 cat user.txt
 1eb95cb28fe6c89ae9265e72e7367266
 ```
-netstat output:
+
+linpeas network output:
 ```bash
-amay@sea:/tmp$ netstat -tulnp
-Active Internet connections (only servers)
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
-tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
-tcp        0      0 127.0.0.1:39615         0.0.0.0:*               LISTEN      -                   
+╔══════════╣ Active Ports
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#open-ports
+tcp        0      0 127.0.0.1:54763         0.0.0.0:*               LISTEN      -                   
 tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      -                   
 tcp        0      0 127.0.0.1:8080          0.0.0.0:*               LISTEN      -                   
 tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
-tcp6       0      0 :::22                   :::*                    LISTEN      -                   
-udp        0      0 127.0.0.53:53           0.0.0.0:*                           -                   
-udp        0      0 0.0.0.0:68              0.0.0.0:*                           -  
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp6       0      0 :::22                   :::*                    LISTEN      -  
 ```
