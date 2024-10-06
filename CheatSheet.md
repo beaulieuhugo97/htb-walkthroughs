@@ -275,32 +275,47 @@ import socketserver
 import requests
 
 # Configuration
-HOST = "0.0.0.0"  # Listen on all interfaces
-PORT = 4444        # Public-facing port
-TARGET_URL = "http://127.0.0.1:8080"  # Target service URL (local service)
+PUBLIC_HOST = "0.0.0.0"  # Listen on all interfaces
+PUBLIC_PORT = 5000        # Public-facing port (the one you want external users to access)
+TARGET_URL = "http://127.0.0.1:8080"  # Local service URL to be proxied
 
-class ProxyHandler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        # Forward GET request to local service
-        response = requests.get(f"{TARGET_URL}{self.path}")
+class ProxyHandler(http.server.BaseHTTPRequestHandler):
+    def _forward_request(self, method):
+        # Construct the target URL by appending the requested path
+        target_url = f"{TARGET_URL}{self.path}"
+
+        # Read request headers and body
+        headers = {key: self.headers[key] for key in self.headers}
+        content_length = int(self.headers.get('Content-Length', 0))
+        body = self.rfile.read(content_length) if content_length else None
+
+        # Forward the request based on the method type
+        if method == 'GET':
+            response = requests.get(target_url, headers=headers, allow_redirects=False)
+        elif method == 'POST':
+            response = requests.post(target_url, headers=headers, data=body, allow_redirects=False)
+        else:
+            # Add more methods as needed (PUT, DELETE, etc.)
+            response = requests.request(method, target_url, headers=headers, data=body, allow_redirects=False)
+
+        # Send the response back to the client
         self.send_response(response.status_code)
-        self.send_header("Content-type", response.headers.get("Content-type", "text/html"))
+        for key, value in response.headers.items():
+            # Prevent the transfer-encoding header from being set to chunked
+            if key.lower() != 'transfer-encoding':
+                self.send_header(key, value)
         self.end_headers()
         self.wfile.write(response.content)
+
+    def do_GET(self):
+        self._forward_request('GET')
 
     def do_POST(self):
-        # Forward POST request to local service
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
-        response = requests.post(f"{TARGET_URL}{self.path}", data=post_data, headers=self.headers)
-        self.send_response(response.status_code)
-        self.send_header("Content-type", response.headers.get("Content-type", "text/html"))
-        self.end_headers()
-        self.wfile.write(response.content)
+        self._forward_request('POST')
 
 # Create an HTTP server and bind it to a public-facing IP address
-with socketserver.TCPServer((HOST, PORT), ProxyHandler) as httpd:
-    print(f"Serving on {HOST}:{PORT}, proxying to {TARGET_URL}")
+with socketserver.TCPServer((PUBLIC_HOST, PUBLIC_PORT), ProxyHandler) as httpd:
+    print(f"Serving on {PUBLIC_HOST}:{PUBLIC_PORT}, proxying to {TARGET_URL}")
     httpd.serve_forever()
 ```
 
