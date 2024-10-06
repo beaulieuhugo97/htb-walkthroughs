@@ -1,7 +1,8 @@
-## Edit host file:
+## Add host:
 ```bash
-echo "10.129.201.123 sea.htb" >> /etc/hosts
+echo "10.129.201.123 sea.htb" | sudo tee -a /etc/hosts
 ```
+
 # Recon
 ## Network scan with`nmap`:
 ```bash
