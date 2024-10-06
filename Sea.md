@@ -533,3 +533,13 @@ tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      
 tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
 tcp6       0      0 :::22                   :::*                    LISTEN      -  
 ```
+
+wget output:
+```bash
+--2024-10-06 15:58:55--  http://localhost:8080/
+Resolving localhost (localhost)... 127.0.0.1
+Connecting to localhost (localhost)|127.0.0.1|:8080... connected.
+HTTP request sent, awaiting response... 401 Unauthorized
+
+Username/Password Authentication Failed.
+```
