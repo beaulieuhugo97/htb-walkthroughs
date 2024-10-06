@@ -1,6 +1,6 @@
 ## Edit host file:
 ```bash
-sudo nano /etc/hosts
+echo "10.129.201.123 sea.htb" >> /etc/hosts
 ```
 # Recon
 ## Network scan with`nmap`:
