@@ -16,12 +16,12 @@ ssh-copy-id user@box.htb
 # Recon
 ## Network scan with`nmap`:
 ```bash
-nmap -v -sV -O -A --top-ports 1000 -oN nmap_output.txt example.com
+nmap -v -sV -O -A --top-ports 1000 -oN nmap_output.txt box.htb
 ```
 
 ## Directory enumeration with `dirb`:
 ```bash
-dirb http://example.com /usr/share/wordlists/dirb/common.txt -o dirb_output.txt
+dirb http://box.htb /usr/share/wordlists/dirb/common.txt -o dirb_output.txt
 ```
 
 ## Subdomains enumeration with `ffuf`:
