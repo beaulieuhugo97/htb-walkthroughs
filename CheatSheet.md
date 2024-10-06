@@ -3,6 +3,11 @@
 echo "10.129.201.123 sea.htb" | sudo tee -a /etc/hosts
 ```
 
+## Generate ssh key:
+```bash
+ssh-keygen -f /home/$USER/.ssh/id_rsa -y
+```
+
 # Recon
 ## Network scan with`nmap`:
 ```bash
