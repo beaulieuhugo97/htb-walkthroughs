@@ -69,6 +69,42 @@ if ($socket) {
 ?>
 ```
 
+## Python proxy
+```bash
+import http.server
+import socketserver
+import requests
+
+# Configuration
+HOST = "0.0.0.0"  # Listen on all interfaces
+PORT = 4444        # Public-facing port
+TARGET_URL = "http://127.0.0.1:8080"  # Target service URL (local service)
+
+class ProxyHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        # Forward GET request to local service
+        response = requests.get(f"{TARGET_URL}{self.path}")
+        self.send_response(response.status_code)
+        self.send_header("Content-type", response.headers.get("Content-type", "text/html"))
+        self.end_headers()
+        self.wfile.write(response.content)
+
+    def do_POST(self):
+        # Forward POST request to local service
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        response = requests.post(f"{TARGET_URL}{self.path}", data=post_data, headers=self.headers)
+        self.send_response(response.status_code)
+        self.send_header("Content-type", response.headers.get("Content-type", "text/html"))
+        self.end_headers()
+        self.wfile.write(response.content)
+
+# Create an HTTP server and bind it to a public-facing IP address
+with socketserver.TCPServer((HOST, PORT), ProxyHandler) as httpd:
+    print(f"Serving on {HOST}:{PORT}, proxying to {TARGET_URL}")
+    httpd.serve_forever()
+```
+
 ## XSS/CSRF attack
 ### Serve:
 ```bash
