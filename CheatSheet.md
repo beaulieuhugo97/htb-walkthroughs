@@ -5,6 +5,7 @@ echo "10.100.100.100 box.htb" | sudo tee -a /etc/hosts
 
 ## Generate ssh key:
 ```bash
+mkdir /home/$USER/.ssh
 ssh-keygen -f /home/$USER/.ssh/id_rsa -y
 ```
 
