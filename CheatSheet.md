@@ -11,6 +11,7 @@ ssh-keygen -t rsa -b 4096 -f /home/$USER/.ssh/id_rsa -N ""
 
 ## Copy ssh key:
 ```bash
+ssh-keyscan -H box.htb >> ~/.ssh/known_hosts
 ssh-copy-id user@box.htb
 ```
 
