@@ -349,8 +349,186 @@ linpeas output:
 
 cdk output:
 ```bash
+[  Information Gathering - System Info  ]
+2024/11/15 20:38:33 current dir: /tmp
+2024/11/15 20:38:33 current user: root uid: 0 gid: 0 home: /root
+2024/11/15 20:38:33 hostname: c184118df0a6
+2024/11/15 20:38:33 debian debian 10.11 kernel: 5.15.0-119-generic
+2024/11/15 20:38:33 Setuid files found:
+	/usr/bin/chfn
+	/usr/bin/chsh
+	/usr/bin/gpasswd
+	/usr/bin/newgrp
+	/usr/bin/passwd
+	/bin/mount
+	/bin/su
+	/bin/umount
+
+[  Information Gathering - Services  ]
+
+[  Information Gathering - Commands and Capabilities  ]
+2024/11/15 20:38:33 available commands:
+	wget,find,node,npm,apt,dpkg,mount,fdisk,base64,perl
+2024/11/15 20:38:33 Capabilities hex of Caps(CapInh|CapPrm|CapEff|CapBnd|CapAmb):
+	CapInh:	0000000000000000
+	CapPrm:	00000000a00425fb
+	CapEff:	00000000a00425fb
+	CapBnd:	00000000a00425fb
+	CapAmb:	0000000000000000
+	Cap decode: 0x00000000a00425fb = CAP_CHOWN,CAP_DAC_OVERRIDE,CAP_FOWNER,CAP_FSETID,CAP_KILL,CAP_SETGID,CAP_SETUID,CAP_SETPCAP,CAP_NET_BIND_SERVICE,CAP_NET_RAW,CAP_SYS_CHROOT,CAP_AUDIT_WRITE,CAP_SETFCAP
+[*] Maybe you can exploit the Capabilities below:
+
+[  Information Gathering - Mounts  ]
+0:43 / / rw,relatime - overlay overlay rw,lowerdir=/var/lib/docker/overlay2/l/L7ZKMJGDPM66AJUMM7OC6R4AMF:/var/lib/docker/overlay2/l/VKDEY6G5NFPWPTGJ7CR42Y3IXX:/var/lib/docker/overlay2/l/PGKS4DZDXD3SDVXKFEFEVRO3XL:/var/lib/docker/overlay2/l/VASNMPQBW2LWLK5R4SANZMAN3V:/var/lib/docker/overlay2/l/BRMVIB4H7ZWJSKBWSXCZG6NQGH:/var/lib/docker/overlay2/l/TDTAZTZTTMIHP4ELLG5TFCVPGQ:/var/lib/docker/overlay2/l/SY7KKADEXBP67CATU6OKQJFEMH:/var/lib/docker/overlay2/l/24CLUQ3NX3M5V742R264CL7LO4:/var/lib/docker/overlay2/l/POC2FH3R7PG2AYOVS4CRB2C5JW:/var/lib/docker/overlay2/l/KRMAYQOJUIV2NXMWQCXF6IONRG:/var/lib/docker/overlay2/l/SUSVG6PVN2JR5B5SDTRKZZSSKO:/var/lib/docker/overlay2/l/AKVKTM4UQL4647ATG2NAYQCCFT,upperdir=/var/lib/docker/overlay2/9d0ce24f13f948e3582b108d503a1ae6025f910f0309225785c43ff85bbfa404/diff,workdir=/var/lib/docker/overlay2/9d0ce24f13f948e3582b108d503a1ae6025f910f0309225785c43ff85bbfa404/work
+0:47 / /proc rw,nosuid,nodev,noexec,relatime - proc proc rw
+0:48 / /dev rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755,inode64
+0:49 / /dev/pts rw,nosuid,noexec,relatime - devpts devpts rw,gid=5,mode=620,ptmxmode=666
+0:50 / /sys ro,nosuid,nodev,noexec,relatime - sysfs sysfs ro
+0:28 / /sys/fs/cgroup ro,nosuid,nodev,noexec,relatime - cgroup2 cgroup rw,nsdelegate,memory_recursiveprot
+0:46 / /dev/mqueue rw,nosuid,nodev,noexec,relatime - mqueue mqueue rw
+0:51 / /dev/shm rw,nosuid,nodev,noexec,relatime - tmpfs shm rw,size=65536k,inode64
+253:0 /var/lib/docker/containers/c184118df0a6eb770d018766ef8e32c948924b0ba77d85ec04a32e50cbafcb3a/resolv.conf /etc/resolv.conf rw,relatime - ext4 /dev/mapper/ubuntu--vg-ubuntu--lv rw
+253:0 /var/lib/docker/containers/c184118df0a6eb770d018766ef8e32c948924b0ba77d85ec04a32e50cbafcb3a/hostname /etc/hostname rw,relatime - ext4 /dev/mapper/ubuntu--vg-ubuntu--lv rw
+253:0 /var/lib/docker/containers/c184118df0a6eb770d018766ef8e32c948924b0ba77d85ec04a32e50cbafcb3a/hosts /etc/hosts rw,relatime - ext4 /dev/mapper/ubuntu--vg-ubuntu--lv rw
+253:0 /root/docker-volumes/sqlpad-postgres /var/lib/sqlpad rw,relatime - ext4 /dev/mapper/ubuntu--vg-ubuntu--lv rw
+0:47 /bus /proc/bus ro,nosuid,nodev,noexec,relatime - proc proc rw
+0:47 /fs /proc/fs ro,nosuid,nodev,noexec,relatime - proc proc rw
+0:47 /irq /proc/irq ro,nosuid,nodev,noexec,relatime - proc proc rw
+0:47 /sys /proc/sys ro,nosuid,nodev,noexec,relatime - proc proc rw
+0:47 /sysrq-trigger /proc/sysrq-trigger ro,nosuid,nodev,noexec,relatime - proc proc rw
+0:52 / /proc/acpi ro,relatime - tmpfs tmpfs ro,inode64
+0:48 /null /proc/kcore rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755,inode64
+0:48 /null /proc/keys rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755,inode64
+0:48 /null /proc/timer_list rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755,inode64
+0:53 / /proc/scsi ro,relatime - tmpfs tmpfs ro,inode64
+0:54 / /sys/firmware ro,relatime - tmpfs tmpfs ro,inode64
+
+[  Information Gathering - Net Namespace  ]
+	container net namespace isolated.
+
+[  Information Gathering - Sysctl Variables  ]
+2024/11/15 20:38:33 net.ipv4.conf.all.route_localnet = 0
+
+[  Information Gathering - DNS-Based Service Discovery  ]
+error when requesting coreDNS: lookup any.any.svc.cluster.local. on 8.8.8.8:53: read udp 172.17.0.2:37763->8.8.8.8:53: i/o timeout
+error when requesting coreDNS: lookup any.any.any.svc.cluster.local. on 8.8.8.8:53: read udp 172.17.0.2:41804->8.8.8.8:53: i/o timeout
+
+[  Discovery - K8s API Server  ]
+2024/11/15 20:39:13 checking if api-server allows system:anonymous request.
+err found while searching local K8s apiserver addr.:
+err: cannot find kubernetes api host in ENV
+	api-server forbids anonymous request.
+	response:
+
+[  Discovery - K8s Service Account  ]
+load K8s service account token error.:
+open /var/run/secrets/kubernetes.io/serviceaccount/token: no such file or directory
+
+[  Discovery - Cloud Provider Metadata API  ]
+2024/11/15 20:39:14 failed to dial Alibaba Cloud API.
+2024/11/15 20:39:15 failed to dial Azure API.
+2024/11/15 20:39:16 failed to dial Google Cloud API.
+2024/11/15 20:39:17 failed to dial Tencent Cloud API.
+2024/11/15 20:39:18 failed to dial OpenStack API.
+2024/11/15 20:39:19 failed to dial Amazon Web Services (AWS) API.
+2024/11/15 20:39:20 failed to dial ucloud API.
+
+[  Exploit Pre - Kernel Exploits  ]
+2024/11/15 20:39:20 refer: https://github.com/mzet-/linux-exploit-suggester
+[+] [CVE-2022-0847] DirtyPipe
+
+   Details: https://dirtypipe.cm4all.com/
+   Exposure: less probable
+   Tags: ubuntu=(20.04|21.04),debian=11
+   Download URL: https://haxx.in/files/dirtypipez.c
+
+[+] [CVE-2021-22555] Netfilter heap out-of-bounds write
+
+   Details: https://google.github.io/security-research/pocs/linux/cve-2021-22555/writeup.html
+   Exposure: less probable
+   Tags: ubuntu=20.04{kernel:5.8.0-*}
+   Download URL: https://raw.githubusercontent.com/google/security-research/master/pocs/linux/cve-2021-22555/exploit.c
+   ext-url: https://raw.githubusercontent.com/bcoles/kernel-exploits/master/CVE-2021-22555/exploit.c
+   Comments: ip_tables kernel module must be loaded
 ```
 
 deepce output:
 ```bash
+==========================================( Colors )==========================================
+[+] Exploit Test ............ Exploitable - Check this out
+[+] Basic Test .............. Positive Result
+[+] Another Test ............ Error running check
+[+] Negative Test ........... No
+[+] Multi line test ......... Yes
+Command output
+spanning multiple lines
+
+Tips will look like this and often contains links with additional info. You can usually 
+ctrl+click links in modern terminal to open in a browser window
+See https://stealthcopter.github.io/deepce
+
+===================================( Enumerating Platform )===================================
+[+] Inside Container ........ Yes
+[+] Container Platform ...... docker
+[+] Container tools ......... None
+[+] User .................... root
+[+] Groups .................. root
+[+] Sudoers ................. No
+[+] Docker Executable ....... Not Found
+[+] Docker Sock ............. Not Found
+[+] Docker Version .......... Version Unknown
+==================================( Enumerating Container )===================================
+[+] Container ID ............ c184118df0a6
+[+] Container Full ID ....... /
+[+] Container Name .......... Could not get container name through reverse DNS
+[+] Container IP ............ 172.17.0.2 
+[+] DNS Server(s) ........... 1.1.1.1 8.8.8.8 
+[+] Host IP ................. 172.17.0.1
+[+] Operating System ........ GNU/Linux
+[+] Kernel .................. 5.15.0-119-generic
+[+] Arch .................... x86_64
+[+] CPU ..................... AMD EPYC 7763 64-Core Processor
+[+] Useful tools installed .. Yes
+/usr/bin/wget
+/bin/hostname
+[+] Dangerous Capabilities .. capsh not installed, listing raw capabilities
+libcap2-bin is required but not installed
+apt install -y libcap2-bin
+
+Current capabilities are:
+CapInh:	0000000000000000
+CapPrm:	00000000a00425fb
+CapEff:	00000000a00425fb
+CapBnd:	00000000a00425fb
+CapAmb:	0000000000000000
+> This can be decoded with: "capsh --decode=00000000a00425fb"
+[+] SSHD Service ............ Unknown (ps not installed)
+[+] Privileged Mode ......... No
+====================================( Enumerating Mounts )====================================
+[+] Docker sock mounted ....... No
+[+] Other mounts .............. Yes
+/root/docker-volumes/sqlpad-postgres /var/lib/sqlpad rw,relatime - ext4 /dev/mapper/ubuntu--vg-ubuntu--lv rw
+[+] Possible host usernames ...  
+====================================( Interesting Files )=====================================
+[+] Interesting environment variables ... No
+[+] Any common entrypoint files ......... Yes
+-rwxr-xr-x 1 root root  413 Mar 12  2022 /docker-entrypoint
+-rwxr-xr-x 1 root root  39K Nov 15 20:25 /tmp/deepce.sh
+-rwxr-xr-x 1 root root 809K Nov  1 04:29 /tmp/linpeas.sh
+[+] Interesting files in root ........... Yes
+/docker-entrypoint
+[+] Passwords in common files ........... No
+[+] Home directories .................... total 8.0K
+drwxr-xr-x 2 michael michael 4.0K Aug  9 09:42 michael
+drwxr-xr-x 1 node    node    4.0K Aug  9 09:42 node
+[+] Hashes in shadow file ............... Yes
+$6$jn8fwk6LVJ9IYw30$qwtrfWTITUro8fEJbReUc7nXyx2wwJsnYdZYm9nMQDHP8SYm33uisO9gZ20LGaepC3ch6Bb2z/lEpBM90Ra4b.
+$6$mG3Cp2VPGY.FDE8u$KVWVIHzqTzhOSYkzJIpFc2EsgmqvPa.q2Z9bLUU6tlBWaEwuxCDEP9UFHIXNUcF2rBnsaFYuJa6DUh/pL2IJD/
+[+] Searching for app dirs .............. 
+==================================( Enumerating Containers )==================================
+By default containers can communicate with other containers on the same network and the 
+host machine, this can be used to enumerate further
+
+Could not ping sweep, requires nmap or ping to be executable
+==============================================================================================
 ```
