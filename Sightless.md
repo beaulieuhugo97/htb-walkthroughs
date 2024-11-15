@@ -341,5 +341,16 @@ server.js
 test
 typedefs.js
 root@c184118df0a6:/usr/app# 
+```
 
+linpeas output:
+```bash
+```
+
+cdk output:
+```bash
+```
+
+deepce output:
+```bash
 ```
