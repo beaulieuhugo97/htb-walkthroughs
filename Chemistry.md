@@ -450,3 +450,5 @@ Country   : RESERVED, ZZ
 
 Summary   : HTML5, HTTPServer[BaseHTTP/0.6 Python/3.8.10, Python/3.9 aiohttp/3.9.1], JQuery[3.6.0], Matomo, Python[3.9], Script
 ```
+
+aiohttp cve: https://github.com/advisories/GHSA-5h86-8mv2-jq9f
