@@ -410,3 +410,21 @@ drwx------ 2 rosa rosa 4.0K Jun 15 18:24 .ssh
 rosa@chemistry:~$ cat user.txt 
 408f5a80b52155617f9811f34acc605a
 ```
+
+linPEAS output:
+```bash
+..............................
+╔══════════╣ Active Ports
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#open-ports
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:5000            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:8080          0.0.0.0:*               LISTEN      -                   
+tcp6       0      0 :::22                   :::*                    LISTEN      -  
+..............................
+```
+
+ps aux output:
+```bash
+root        1037  0.0  1.4 110192 28600 ?        Ssl  04:15   0:00 /usr/bin/python3.9 /opt/monitoring_site/app.py
+```
