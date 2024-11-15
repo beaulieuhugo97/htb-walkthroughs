@@ -422,11 +422,12 @@ tcp        0      0 0.0.0.0:5000            0.0.0.0:*               LISTEN      
 tcp        0      0 127.0.0.1:8080          0.0.0.0:*               LISTEN      -                   
 tcp6       0      0 :::22                   :::*                    LISTEN      -  
 ..............................
+
+╔══════════╣ Running processes (cleaned)
+╚ Check weird & unexpected proceses run by root: https://book.hacktricks.xyz/linux-hardening/privilege-escalation#processes
+..............................
+root        1037  0.0  1.4 110192 28948 ?        Ssl  04:15   0:04 /usr/bin/python3.9 /opt/monitoring_site/app.py
 ```
 
-ps aux output:
-```bash
-root        1037  0.0  1.4 110192 28600 ?        Ssl  04:15   0:00 /usr/bin/python3.9 /opt/monitoring_site/app.py
-```
 proxy port 8080 website:
 ![image](https://github.com/user-attachments/assets/19bf4724-4ac2-4fcd-a7ac-2a1bb4352090)
