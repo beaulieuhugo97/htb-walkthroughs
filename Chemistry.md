@@ -356,3 +356,27 @@ def register():
     return render_template('register.html')
 ..........
 ```
+
+hashcat output:
+```bash
+Session..........: hashcat                                
+Status...........: Exhausted
+Hash.Mode........: 0 (MD5)
+Hash.Target......: 2861debaf8d99436a10ed6f75a252abf
+Time.Started.....: Thu Nov 14 23:54:43 2024 (2 secs)
+Time.Estimated...: Thu Nov 14 23:54:45 2024 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#2.........:  4938.4 kH/s (0.14ms) @ Accel:512 Loops:1 Thr:1 Vec:8
+Recovered........: 0/1 (0.00%) Digests (total), 0/1 (0.00%) Digests (new)
+Progress.........: 14344385/14344385 (100.00%)
+Rejected.........: 0/14344385 (0.00%)
+Restore.Point....: 14344385/14344385 (100.00%)
+Restore.Sub.#2...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidate.Engine.: Device Generator
+Candidates.#2....: $HEX[206b72697374656e616e6e65] -> $HEX[042a0337c2a156616d6f732103]
+
+Started: Thu Nov 14 23:54:33 2024
+Stopped: Thu Nov 14 23:54:47 2024
+```
