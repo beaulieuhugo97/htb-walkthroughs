@@ -138,3 +138,19 @@ Country   : RESERVED, ZZ
 
 Summary   : Email[sales@sightless.htb], HTML5, HTTPServer[Ubuntu Linux][nginx/1.18.0 (Ubuntu)], Matomo, nginx[1.18.0], X-UA-Compatible[IE=edge]
 ```
+
+cewl output:
+```bash
+CeWL 5.5.2 (Grouping) Robin Wood (robin@digi.ninja) (https://digi.ninja/)
+Starting at http://sightless.htb
+Visiting: http://sightless.htb, got response code 200
+Attribute text found:
+ 
+
+Found sales@sightless.htb on page mailto:sales@sightless.htb
+Offsite link, not following: http://sqlpad.sightless.htb/
+Offsite link, not following: https://www.froxlor.org/
+Found sales@sightless.htb on page mailto:sales@sightless.htb
+Writing words to file
+Dumping email addresses to file
+```
