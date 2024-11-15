@@ -532,3 +532,8 @@ host machine, this can be used to enumerate further
 Could not ping sweep, requires nmap or ping to be executable
 ==============================================================================================
 ```
+
+tcp ports output:
+```bash
+cat /proc/net/tcp | awk 'NR>1 {print $2}' | cut -d':' -f2 | xargs -I{} printf "%d\n" 0x{}
+```
