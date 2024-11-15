@@ -432,12 +432,38 @@ root        1037  0.0  1.4 110192 28948 ?        Ssl  04:15   0:04 /usr/bin/pyth
 proxy port 8080 website:
 ![image](https://github.com/user-attachments/assets/19bf4724-4ac2-4fcd-a7ac-2a1bb4352090)
 
-dirb output (port 8080):
+gobuster output (port 8080):
 ```bash
 /assets               (Status: 403) [Size: 14]
 /.                    (Status: 200) [Size: 5971]
 /..                   (Status: 200) [Size: 5971]
 /?adjust_t=           (Status: 200) [Size: 5971]
+/?fnf=fnf             (Status: 200) [Size: 5971]
+/?Publisher           (Status: 200) [Size: 5971]
+/?wp-cs-dump          (Status: 200) [Size: 5971]
+/?wp-html-rend        (Status: 200) [Size: 5971]
+/?wp-start-ver        (Status: 200) [Size: 5971]
+/?wp-stop-ver         (Status: 200) [Size: 5971]
+/?wp-uncheckout       (Status: 200) [Size: 5971]
+/?wp-usr-prop         (Status: 200) [Size: 5971]
+/?wp-ver-diff         (Status: 200) [Size: 5971]
+/?wp-verify-link      (Status: 200) [Size: 5971]
+/?wp-ver-info         (Status: 200) [Size: 5971]
+/?Open                (Status: 200) [Size: 5971]
+/?OpenServer          (Status: 200) [Size: 5971]
+/?D=A                 (Status: 200) [Size: 5971]
+/?M=A                 (Status: 200) [Size: 5971]
+/?N=D                 (Status: 200) [Size: 5971]
+/?PageServices        (Status: 200) [Size: 5971]
+/?S=A                 (Status: 200) [Size: 5971]
+/?\"><script>alert('Vulnerable');</script> (Status: 200) [Size: 5971]
+/?mod=<script>alert(document.cookie)</script>&op=browse (Status: 200) [Size: 5971]
+/?mod=node&nid=some_thing&op=view (Status: 200) [Size: 5971]
+/?mod=some_thing&op=browse (Status: 200) [Size: 5971]
+/?pattern=/etc/*&sort=name (Status: 200) [Size: 5971]
+/?sql_debug=1         (Status: 200) [Size: 5971]
+/scripts/slxweb.dll/getfile?type=Library&file=[invalid filename] (Status: 400) [Size: 572]
+/?query_term=path%3a/&pre=<1337abcdef>&post=yyyy (Status: 200) [Size: 5971]
 ```
 
 whatweb output (port 8080):
