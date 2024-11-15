@@ -277,4 +277,69 @@ drwxr-xr-x 1 root root 4.0K Mar 12  2022 ..
 drwxr-xr-x 2 root root 4.0K Aug  9 11:17 cache
 drwxr-xr-x 2 root root 4.0K Aug  9 11:17 sessions
 -rw-r--r-- 1 root root 184K Nov 15 18:35 sqlpad.sqlite
+root@c184118df0a6:/home/node# cd /
+cd /
+root@c184118df0a6:/# ls
+ls
+bin
+boot
+dev
+docker-entrypoint
+etc
+home
+lib
+lib64
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+root@c184118df0a6:/# cd docker-entrypoint
+cd docker-entrypoint
+bash: cd: docker-entrypoint: Not a directory
+root@c184118df0a6:/# cat docker-entrypoint
+cat docker-entrypoint
+#!/bin/bash
+set -e
+# This iterates any sh file in the directory and executes them before our server starts
+# Note: we intentionally source the files, allowing scripts to set vars that override default behavior.
+if [ -d "/etc/docker-entrypoint.d" ]; then
+    find /etc/docker-entrypoint.d -name '*.sh' -print0 | 
+    while IFS= read -r -d '' line; do 
+        . "$line"
+    done
+fi
+exec node /usr/app/server.js $@
+root@c184118df0a6:/# cd /usr/app
+cd /usr/app
+root@c184118df0a6:/usr/app# ls
+ls
+app.js
+auth-strategies
+config.dev.env
+docker-compose.yml
+drivers
+generate-test-db-fixture.js
+lib
+middleware
+migrations
+models
+node_modules
+package-lock.json
+package.json
+public
+routes
+sequelize-db
+server.js
+test
+typedefs.js
+root@c184118df0a6:/usr/app# 
+
 ```
