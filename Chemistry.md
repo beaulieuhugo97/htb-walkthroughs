@@ -431,3 +431,22 @@ root        1037  0.0  1.4 110192 28948 ?        Ssl  04:15   0:04 /usr/bin/pyth
 
 proxy port 8080 website:
 ![image](https://github.com/user-attachments/assets/19bf4724-4ac2-4fcd-a7ac-2a1bb4352090)
+
+dirb output (port 8080):
+```bash
+/assets               (Status: 403) [Size: 14]
+/.                    (Status: 200) [Size: 5971]
+/..                   (Status: 200) [Size: 5971]
+/?adjust_t=           (Status: 200) [Size: 5971]
+```
+
+whatweb output (port 8080):
+```bash
+WhatWeb report for http://chemistry.htb:4444
+Status    : 200 OK
+Title     : Site Monitoring
+IP        : 10.129.2.140
+Country   : RESERVED, ZZ
+
+Summary   : HTML5, HTTPServer[BaseHTTP/0.6 Python/3.8.10, Python/3.9 aiohttp/3.9.1], JQuery[3.6.0], Matomo, Python[3.9], Script
+```
