@@ -428,3 +428,5 @@ ps aux output:
 ```bash
 root        1037  0.0  1.4 110192 28600 ?        Ssl  04:15   0:00 /usr/bin/python3.9 /opt/monitoring_site/app.py
 ```
+proxy.py port 8080 website:
+![image](https://github.com/user-attachments/assets/19bf4724-4ac2-4fcd-a7ac-2a1bb4352090)
