@@ -386,3 +386,27 @@ Restore.Sub.#2...: Salt:0 Amplifier:0-1 Iteration:0-1
 Candidate.Engine.: Device Generator
 Candidates.#2....: unicornn -> underwear88
 ```
+
+user flag:
+```bash
+s┌─[us-dedivip-1]─[10.10.14.34]─[bhugo97@htb-dnumvgyfxy]─[~]
+└──╼ [★]$ ssh rosa@chemistry.htb
+rosa@chemistry.htb's password: 
+..............................
+rosa@chemistry:~$ ls -lah
+total 36K
+drwxr-xr-x 5 rosa rosa 4.0K Jun 17 01:51 .
+drwxr-xr-x 4 root root 4.0K Jun 16 23:10 ..
+lrwxrwxrwx 1 root root    9 Jun 17 01:50 .bash_history -> /dev/null
+-rw-r--r-- 1 rosa rosa  220 Feb 25  2020 .bash_logout
+-rw-r--r-- 1 rosa rosa 3.7K Feb 25  2020 .bashrc
+drwx------ 2 rosa rosa 4.0K Jun 15 20:38 .cache
+drwxrwxr-x 4 rosa rosa 4.0K Jun 16 16:04 .local
+-rw-r--r-- 1 rosa rosa  807 Feb 25  2020 .profile
+lrwxrwxrwx 1 root root    9 Jun 17 01:51 .sqlite_history -> /dev/null
+drwx------ 2 rosa rosa 4.0K Jun 15 18:24 .ssh
+-rw-r--r-- 1 rosa rosa    0 Jun 15 20:43 .sudo_as_admin_successful
+-rw-r----- 1 root rosa   33 Nov 15 04:16 user.txt
+rosa@chemistry:~$ cat user.txt 
+408f5a80b52155617f9811f34acc605a
+```
