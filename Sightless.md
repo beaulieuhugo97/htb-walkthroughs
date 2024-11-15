@@ -252,3 +252,6 @@ Email addresses found
 ---------------------
 sales@sightless.htb
 ```
+
+sqlpad:
+![image](https://github.com/user-attachments/assets/cb615dc1-b2d5-423c-980f-ece826eccd8e)
