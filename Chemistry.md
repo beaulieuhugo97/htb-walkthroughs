@@ -464,6 +464,12 @@ gobuster output (port 8080):
 /?sql_debug=1         (Status: 200) [Size: 5971]
 /scripts/slxweb.dll/getfile?type=Library&file=[invalid filename] (Status: 400) [Size: 572]
 /?query_term=path%3a/&pre=<1337abcdef>&post=yyyy (Status: 200) [Size: 5971]
+/assets/              (Status: 403) [Size: 14]
+/?page=admin.auth.inc (Status: 200) [Size: 5971]
+/?page=auth.inc       (Status: 200) [Size: 5971]
+/?page=auth.inc.php   (Status: 200) [Size: 5971]
+/./                   (Status: 200) [Size: 5971]
+/                     (Status: 200) [Size: 5971]
 ```
 
 whatweb output (port 8080):
