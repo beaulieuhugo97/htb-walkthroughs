@@ -360,21 +360,29 @@ def register():
 
 hashcat output:
 ```bash
-Session..........: hashcat                                
-Status...........: Exhausted
+Dictionary cache hit:
+* Filename..: /usr/share/wordlists/rockyou.txt
+* Passwords.: 14344385
+* Bytes.....: 139921507
+* Keyspace..: 14344385
+
+63ed86ee9f624c7b14f1d4f43dc251a5:unicorniosrosados        
+                                                          
+Session..........: hashcat
+Status...........: Cracked
 Hash.Mode........: 0 (MD5)
-Hash.Target......: 2861debaf8d99436a10ed6f75a252abf
-Time.Started.....: Fri Nov 15 00:19:39 2024 (0 secs)
-Time.Estimated...: Fri Nov 15 00:19:39 2024 (0 secs)
+Hash.Target......: 63ed86ee9f624c7b14f1d4f43dc251a5
+Time.Started.....: Fri Nov 15 00:41:52 2024 (0 secs)
+Time.Estimated...: Fri Nov 15 00:41:52 2024 (0 secs)
 Kernel.Feature...: Pure Kernel
-Guess.Base.......: File (wordlist.txt)
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
 Guess.Queue......: 1/1 (100.00%)
-Speed.#2.........:      908 H/s (0.00ms) @ Accel:512 Loops:1 Thr:1 Vec:8
-Recovered........: 0/1 (0.00%) Digests (total), 0/1 (0.00%) Digests (new)
-Progress.........: 1/1 (100.00%)
-Rejected.........: 0/1 (0.00%)
-Restore.Point....: 1/1 (100.00%)
+Speed.#2.........:  4907.2 kH/s (0.14ms) @ Accel:512 Loops:1 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 2983936/14344385 (20.80%)
+Rejected.........: 0/2983936 (0.00%)
+Restore.Point....: 2981888/14344385 (20.79%)
 Restore.Sub.#2...: Salt:0 Amplifier:0-1 Iteration:0-1
 Candidate.Engine.: Device Generator
-Candidates.#2....: MyS3cretCh3mistry4PP -> MyS3cretCh3mistry4PP
+Candidates.#2....: unicornn -> underwear88
 ```
