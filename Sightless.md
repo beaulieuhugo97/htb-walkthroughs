@@ -535,5 +535,9 @@ Could not ping sweep, requires nmap or ping to be executable
 
 tcp ports output:
 ```bash
-cat /proc/net/tcp | awk 'NR>1 {print $2}' | cut -d':' -f2 | xargs -I{} printf "%d\n" 0x{}
+root@c184118df0a6:/proc/sys/kernel# cat /proc/net/tcp | awk 'NR>1 {print $2}' | cut -d':' -f2 | xargs -I{} printf "%d\n" 0x{}
+<2}' | cut -d':' -f2 | xargs -I{} printf "%d\n" 0x{}
+3000
+49048
+34970
 ```
