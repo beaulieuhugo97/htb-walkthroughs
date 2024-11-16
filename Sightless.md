@@ -541,3 +541,30 @@ root@c184118df0a6:/proc/sys/kernel# cat /proc/net/tcp | awk 'NR>1 {print $2}' | 
 49048
 34970
 ```
+
+hashcat output:
+```bash
+$6$mG3Cp2VPGY.FDE8u$KVWVIHzqTzhOSYkzJIpFc2EsgmqvPa.q2Z9bLUU6tlBWaEwuxCDEP9UFHIXNUcF2rBnsaFYuJa6DUh/pL2IJD/:insaneclownposse
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 1800 (sha512crypt $6$, SHA512 (Unix))
+Hash.Target......: $6$mG3Cp2VPGY.FDE8u$KVWVIHzqTzhOSYkzJIpFc2EsgmqvPa....L2IJD/
+Time.Started.....: Fri Nov 15 19:27:22 2024 (17 secs)
+Time.Estimated...: Fri Nov 15 19:27:39 2024 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (./password-wordlist-2.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:     4032 H/s (50.04ms) @ Accel:1024 Loops:1024 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 69632/31305949 (0.22%)
+Rejected.........: 0/69632 (0.00%)
+Restore.Point....: 68608/31305949 (0.22%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:4096-5000
+Candidate.Engine.: Device Generator
+Candidates.#1....: waves -> broughton
+Hardware.Mon.#1..: Temp: 59c Util: 96%
+
+Started: Fri Nov 15 19:27:19 2024
+Stopped: Fri Nov 15 19:27:41 2024
+```
