@@ -826,4 +826,4 @@ https://github.com/mhaskar/CVE-2023-0315
 ```
 
 reverse proxy:
-![image](https://github.com/user-attachments/assets/119bfcc7-1097-4958-9389-4fee50c929a8)
+![image](https://github.com/user-attachments/assets/145529f5-b01e-45c8-99c2-e486f3b0cf02)
