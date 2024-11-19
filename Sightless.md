@@ -568,3 +568,18 @@ Hardware.Mon.#1..: Temp: 59c Util: 96%
 Started: Fri Nov 15 19:27:19 2024
 Stopped: Fri Nov 15 19:27:41 2024
 ```
+
+user flag:
+```bash
+└──╼ [★]$ ssh michael@10.129.245.73
+michael@10.129.245.73's password: 
+Last login: Tue Nov 19 02:31:13 2024 from 10.10.14.29
+michael@sightless:~$ cat user.txt
+a893c2597219f8e1a7de7a150b52fa45
+```
+
+froxolr hash:
+```bash
+michael@sightless:/tmp$ cat /etc/apache2/froxlor-htpasswd/1-666d99c49b2986e75ed93e591b7eb6c8.htpasswd
+web1:$2y$10$X5tjC19boiHf81unjwyFFuELwOVBDyEJMlm/eG9Ks6qpxli/L3Cii
+```
