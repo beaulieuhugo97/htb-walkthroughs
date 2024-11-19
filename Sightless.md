@@ -786,3 +786,8 @@ bcrypt, HC: 3200 JtR: bcrypt
 Blowfish(OpenBSD), HC: 3200 JtR: bcrypt Summary: Can be used in Linux Shadow Files.
 Woltlab Burning Board 4.x,
 ```
+
+forxolr rce:
+```bash
+https://github.com/mhaskar/CVE-2023-0315
+```
