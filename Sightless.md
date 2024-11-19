@@ -580,6 +580,399 @@ a893c2597219f8e1a7de7a150b52fa45
 
 linpeas output:
 ```bash
+╔══════════╣ Cron jobs
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#scheduled-cron-jobs
+/usr/bin/crontab
+incrontab Not Found
+-rw-r--r-- 1 root root    1136 Mar 23  2022 /etc/crontab
+
+/etc/cron.d:
+total 24
+drwxr-xr-x   2 root root 4096 Sep  3 08:19 .
+drwxr-xr-x 114 root root 4096 Sep  3 08:19 ..
+-rw-r--r--   1 root root  201 Jan  8  2022 e2scrub_all
+-rw-r-----   1 root root  898 Sep  3 11:55 froxlor
+-rw-r--r--   1 root root  712 Jan 28  2022 php
+-rw-r--r--   1 root root  102 Mar 23  2022 .placeholder
+
+╔══════════╣ Hostname, hosts and DNS
+sightless
+127.0.0.1 localhost
+127.0.1.1 sightless
+127.0.0.1 sightless.htb sqlpad.sightless.htb admin.sightless.htb
+
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+nameserver 127.0.0.53
+options edns0 trust-ad
+search .
+
+╔══════════╣ Active Ports
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#open-ports
+tcp        0      0 127.0.0.1:8080          0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:37509         0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:3000          0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:53293         0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:36995         0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:33060         0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp6       0      0 :::22                   :::*                    LISTEN      -                   
+tcp6       0      0 :::21                   :::*                    LISTEN      -                   
+
+
+╔══════════╣ Users with console
+john:x:1001:1001:,,,:/home/john:/bin/bash
+michael:x:1000:1000:michael:/home/michael:/bin/bash
+root:x:0:0:root:/root:/bin/bash
+
+══╣ PHP exec extensions
+drwxr-xr-x 2 root root 4096 Sep  3 11:55 /etc/apache2/sites-enabled
+drwxr-xr-x 2 root root 4096 Sep  3 11:55 /etc/apache2/sites-enabled
+-rw-r--r-- 1 root root 770 Sep  3 11:55 /etc/apache2/sites-enabled/10_froxlor_ipandport_192.168.1.118.80.conf
+<VirtualHost 192.168.1.118:80>
+DocumentRoot "/var/www/html/froxlor"
+ ServerName admin.sightless.htb
+  <Directory "/lib/">
+    <Files "userdata.inc.php">
+    Require all denied
+    </Files>
+  </Directory>
+  <DirectoryMatch "^/(bin|cache|logs|tests|vendor)/">
+    Require all denied
+  </DirectoryMatch>
+  <FilesMatch \.(php)$>
+    <If "-f %{SCRIPT_FILENAME}">
+  	SetHandler proxy:unix:/var/lib/apache2/fastcgi/1-froxlor.panel-admin.sightless.htb-php-fpm.socket|fcgi://localhost
+    </If>
+  </FilesMatch>
+  <Directory "/var/www/html/froxlor/">
+      CGIPassAuth On
+  </Directory>
+</VirtualHost>
+-rw-r--r-- 1 root root 917 Sep  3 11:55 /etc/apache2/sites-enabled/34_froxlor_normal_vhost_web1.sightless.htb.conf
+<VirtualHost 192.168.1.118:80>
+  ServerName web1.sightless.htb
+  ServerAlias *.web1.sightless.htb
+  ServerAdmin john@sightless.htb
+  DocumentRoot "/var/customers/webs/web1"
+  <Directory "/var/customers/webs/web1/">
+  <FilesMatch \.(php)$>
+    <If "-f %{SCRIPT_FILENAME}">
+      SetHandler proxy:unix:/var/lib/apache2/fastcgi/1-web1-web1.sightless.htb-php-fpm.socket|fcgi://localhost
+    </If>
+  </FilesMatch>
+    CGIPassAuth On
+    Require all granted
+    AllowOverride All
+  </Directory>
+  Alias /goaccess "/var/customers/webs/web1/goaccess"
+  LogLevel warn
+  ErrorLog "/var/customers/logs/web1-error.log"
+  CustomLog "/var/customers/logs/web1-access.log" combined
+</VirtualHost>
+-rw-r--r-- 1 root root 1480 Aug  2 09:05 /etc/apache2/sites-enabled/002-sqlpad.conf
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+	ServerName sqlpad.sightless.htb
+	ServerAlias sqlpad.sightless.htb
+	ProxyPreserveHost On
+	ProxyPass         / http://127.0.0.1:3000/
+	ProxyPassReverse  / http://127.0.0.1:3000/
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+-rw-r--r-- 1 root root 264 Sep  3 11:55 /etc/apache2/sites-enabled/05_froxlor_dirfix_nofcgid.conf
+  <Directory "/var/customers/webs/">
+    Require all granted
+    AllowOverride All
+  </Directory>
+lrwxrwxrwx 1 root root 35 May 15  2024 /etc/apache2/sites-enabled/000-default.conf -> ../sites-available/000-default.conf
+<VirtualHost 127.0.0.1:8080>
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/html/froxlor
+	ServerName admin.sightless.htb
+	ServerAlias admin.sightless.htb
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+-rw-r--r-- 1 root root 412 Sep  3 11:55 /etc/apache2/sites-enabled/40_froxlor_diroption_666d99c49b2986e75ed93e591b7eb6c8.conf
+<Directory "/var/customers/webs/web1/goaccess/">
+  AuthType Basic
+  AuthName "Restricted Area"
+  AuthUserFile /etc/apache2/froxlor-htpasswd/1-666d99c49b2986e75ed93e591b7eb6c8.htpasswd
+  require valid-user
+</Directory>
+
+drwxr-xr-x 2 root root 4096 Aug  9 11:17 /etc/nginx/sites-enabled
+drwxr-xr-x 2 root root 4096 Aug  9 11:17 /etc/nginx/sites-enabled
+lrwxrwxrwx 1 root root 34 May 21 18:06 /etc/nginx/sites-enabled/default -> /etc/nginx/sites-available/default
+server {
+    listen *:80;
+    server_name sightless.htb;
+    location / {
+        root /var/www/sightless;
+        index index.html;
+    }
+    if ($host != sightless.htb) {
+        rewrite ^ http://sightless.htb/;
+    }
+}
+-rw-r--r-- 1 root root 249 Aug  9 07:18 /etc/nginx/sites-enabled/main
+server {
+	listen 80;
+	server_name sqlpad.sightless.htb;
+	location / {
+		proxy_pass http://localhost:3000;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	}
+}
+
+
+-rw-r--r-- 1 root root 1414 Aug  9 07:04 /etc/apache2/sites-available/000-default.conf
+<VirtualHost 127.0.0.1:8080>
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/html/froxlor
+	ServerName admin.sightless.htb
+	ServerAlias admin.sightless.htb
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+lrwxrwxrwx 1 root root 35 May 15  2024 /etc/apache2/sites-enabled/000-default.conf -> ../sites-available/000-default.conf
+<VirtualHost 127.0.0.1:8080>
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/html/froxlor
+	ServerName admin.sightless.htb
+	ServerAlias admin.sightless.htb
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+╔══════════╣ Analyzing FTP Files (limit 70)
+-rw-r--r-- 1 root root 5922 May 15  2024 /etc/vsftpd.conf
+anonymous_enable=YES
+local_enable
+#write_enable=YES
+#anon_upload_enable=YES
+#anon_mkdir_write_enable=YES
+#chown_uploads=YES
+#chown_username=whoever
+anon_root=/var/ftp/
+
+-rw-r--r-- 1 root root 69 May  1  2024 /etc/php/8.1/mods-available/ftp.ini
+-rw-r--r-- 1 root root 69 Jun 14 15:52 /usr/share/php8.1-common/common/ftp.ini
+
+
+                            ╔═════════════════════════╗
+════════════════════════════╣ Other Interesting Files ╠════════════════════════════
+                            ╚═════════════════════════╝
+╔══════════╣ .sh files in path
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#script-binaries-in-path
+/usr/bin/gettext.sh
+/usr/bin/rescan-scsi-bus.sh
+
+╔══════════╣ Executable files potentially added by user (limit 70)
+2024-07-31+12:04:31.2520227370 /etc/console-setup/cached_setup_terminal.sh
+2024-07-31+12:04:31.2520227370 /etc/console-setup/cached_setup_font.sh
+2024-07-31+12:04:31.2480227370 /etc/console-setup/cached_setup_keyboard.sh
+2024-05-15+03:10:27.7623258550 /etc/cloud/clean.d/99-installer
+
+╔══════════╣ Unexpected in /opt (usually empty)
+total 16
+drwxr-xr-x  4 root root 4096 Aug  2 06:46 .
+drwxr-xr-x 18 root root 4096 Sep  3 08:20 ..
+drwx--x--x  4 root root 4096 May 15  2024 containerd
+drwxr-xr-x  3 root root 4096 May 15  2024 google
+
+╔══════════╣ Unexpected in root
+
+╔══════════╣ Modified interesting files in the last 5mins (limit 100)
+/var/log/journal/58de6fa49b4f4590a31b308f73d3bd9a/system.journal
+/var/log/journal/58de6fa49b4f4590a31b308f73d3bd9a/user-1000.journal
+/var/log/auth.log
+/var/log/syslog
+/var/log/laurel/audit.log
+/var/log/wtmp
+
+
+╔══════════╣ Files inside /home/michael (limit 20)
+total 36
+drwxr-x--- 5 michael michael 4096 Nov 19 02:48 .
+drwxr-xr-x 4 root    root    4096 May 15  2024 ..
+lrwxrwxrwx 1 root    root       9 May 21 18:49 .bash_history -> /dev/null
+-rw-r--r-- 1 michael michael  220 Jan  6  2022 .bash_logout
+-rw-r--r-- 1 michael michael 3771 Jan  6  2022 .bashrc
+drwx------ 4 michael michael 4096 Nov 19 03:16 .gnupg
+drwxrwxr-x 3 michael michael 4096 Nov 19 02:48 .local
+-rw-r--r-- 1 michael michael  807 Jan  6  2022 .profile
+drwx------ 2 michael michael 4096 May 15  2024 .ssh
+-rw-r----- 1 root    michael   33 Nov 19 02:28 user.txt
+
+╔══════════╣ Files inside others home (limit 20)
+/var/www/sightless/index.html
+/var/www/sightless/images/hightech-background.png
+/var/www/sightless/images/logo.png
+/var/www/sightless/style.css
+
+╔══════════╣ Searching installed mail applications
+
+╔══════════╣ Mails (limit 50)
+
+╔══════════╣ Backup folders
+drwxr-xr-x 2 root root 4096 Nov 19 02:37 /var/backups
+total 1060
+-rw-r--r-- 1 root root  61440 May 16  2024 alternatives.tar.0
+-rw-r--r-- 1 root root  46826 Sep  3 08:25 apt.extended_states.0
+-rw-r--r-- 1 root root   5084 Sep  3 08:19 apt.extended_states.1.gz
+-rw-r--r-- 1 root root   5469 Aug  9 10:30 apt.extended_states.2.gz
+-rw-r--r-- 1 root root   5476 Jul 31 13:08 apt.extended_states.3.gz
+-rw-r--r-- 1 root root   5811 Jul 31 13:06 apt.extended_states.4.gz
+-rw-r--r-- 1 root root   5834 May 21 18:00 apt.extended_states.5.gz
+-rw-r--r-- 1 root root   5771 May 15  2024 apt.extended_states.6.gz
+-rw-r--r-- 1 root root      0 May 16  2024 dpkg.arch.0
+-rw-r--r-- 1 root root    268 May 15  2024 dpkg.diversions.0
+-rw-r--r-- 1 root root    172 May 15  2024 dpkg.statoverride.0
+-rw-r--r-- 1 root root 913985 May 15  2024 dpkg.status.0
+
+
+╔══════════╣ Backup files (limited 100)
+-rw-r--r-- 1 root root 0 Feb 17  2023 /var/lib/systemd/deb-systemd-helper-enabled/timers.target.wants/dpkg-db-backup.timer
+-rw-r--r-- 1 root root 61 May 15  2024 /var/lib/systemd/deb-systemd-helper-enabled/dpkg-db-backup.timer.dsh-also
+-rw-r--r-- 1 root root 2403 Feb 17  2023 /etc/apt/sources.list.curtin.old
+-rw-r--r-- 1 root root 2082 May 15  2024 /etc/proftpd/tls.conf.frx.bak
+-rw-r--r-- 1 root root 5819 May 15  2024 /etc/proftpd/proftpd.conf.frx.bak
+-rw-r--r-- 1 root root 3454 May 15  2024 /etc/proftpd/modules.conf.frx.bak
+-rwxr-xr-x 1 root root 1086 Oct 31  2021 /usr/src/linux-headers-5.15.0-119/tools/testing/selftests/net/tcp_fastopen_backup_key.sh
+-rwxr-xr-x 1 root root 2196 Feb 23  2024 /usr/libexec/dpkg/dpkg-db-backup
+-rw-r--r-- 1 root root 1423 May 15  2024 /usr/lib/python3/dist-packages/sos/report/plugins/__pycache__/ovirt_engine_backup.cpython-310.pyc
+-rw-r--r-- 1 root root 1802 Jul 20  2023 /usr/lib/python3/dist-packages/sos/report/plugins/ovirt_engine_backup.py
+-rw-r--r-- 1 root root 39456 Jul 24 11:08 /usr/lib/mysql/plugin/component_mysqlbackup.so
+-rw-r--r-- 1 root root 10849 Aug  2 14:15 /usr/lib/modules/5.15.0-119-generic/kernel/drivers/power/supply/wm831x_backup.ko
+-rw-r--r-- 1 root root 13113 Aug  2 14:15 /usr/lib/modules/5.15.0-119-generic/kernel/drivers/net/team/team_mode_activebackup.ko
+-rw-r--r-- 1 root root 138 Dec  5  2021 /usr/lib/systemd/system/dpkg-db-backup.timer
+-rw-r--r-- 1 root root 147 Dec  5  2021 /usr/lib/systemd/system/dpkg-db-backup.service
+-rw-r--r-- 1 root root 44008 Dec  5  2023 /usr/lib/x86_64-linux-gnu/open-vm-tools/plugins/vmsvc/libvmbackup.so
+-rw-r--r-- 1 root root 7867 Jul 16  1996 /usr/share/doc/telnet/README.old.gz
+-rwxr-xr-x 1 root root 1513 Jan 23  2020 /usr/share/doc/libipc-system-simple-perl/examples/rsync-backup.pl
+-rw-r--r-- 1 root root 416107 Dec 21  2020 /usr/share/doc/manpages/Changes.old.gz
+-rwxr-xr-x 1 root root 226 Feb 17  2020 /usr/share/byobu/desktop/byobu.desktop.old
+-rw-r--r-- 1 root root 2747 Feb 16  2022 /usr/share/man/man8/vgcfgbackup.8.gz
+-rw-r--r-- 1 root root 11849 Aug  9 10:38 /usr/share/info/dir.old
+-rw-r--r-- 1 root root 4096 Nov 19 02:36 /sys/devices/virtual/net/veth26ebe71/brport/backup_port
+
+╔══════════╣ Searching tables inside readable .db/.sql/.sqlite files (limit 100)
+Found /var/lib/command-not-found/commands.db: SQLite 3.x database, last written using SQLite version 3037002, file counter 5, database pages 873, cookie 0x4, schema 4, UTF-8, version-valid-for 5
+Found /var/lib/fwupd/pending.db: SQLite 3.x database, last written using SQLite version 3037002, file counter 4, database pages 9, cookie 0x5, schema 4, UTF-8, version-valid-for 4
+Found /var/lib/PackageKit/transactions.db: SQLite 3.x database, last written using SQLite version 3037002, file counter 5, database pages 8, cookie 0x4, schema 4, UTF-8, version-valid-for 5
+
+ -> Extracting tables from /var/lib/command-not-found/commands.db (limit 20)
+ -> Extracting tables from /var/lib/fwupd/pending.db (limit 20)
+ -> Extracting tables from /var/lib/PackageKit/transactions.db (limit 20)
+
+╔══════════╣ Web files?(output limit)
+/var/www/:
+total 16K
+drwxr-xr-x  4 root     root     4.0K May 21 18:03 .
+drwxr-xr-x 15 root     root     4.0K Aug  9 11:30 ..
+drwxrwx---  3 www-data www-data 4.0K Aug  9 10:56 html
+drwxr-xr-x  4 www-data www-data 4.0K Aug  2 10:01 sightless
+
+/var/www/sightless:
+total 32K
+drwxr-xr-x 4 www-data www-data 4.0K Aug  2 10:01 .
+
+╔══════════╣ All relevant hidden files (not in /sys/ or the ones listed in the previous check) (limit 70)
+-rw-r--r-- 1 root root 0 Nov 19 02:27 /run/ubuntu-fan/.lock
+-rw-r--r-- 1 root root 0 Nov 19 02:27 /run/network/.ifstate.lock
+-rw-r--r-- 1 landscape landscape 0 Feb 17  2023 /var/lib/landscape/.cleanup.user
+-rw-r--r-- 1 root root 220 Jan  6  2022 /etc/skel/.bash_logout
+-rw------- 1 root root 0 Feb 17  2023 /etc/.pwd.lock
+-rw-r--r-- 1 michael michael 220 Jan  6  2022 /home/michael/.bash_logout
+
+╔══════════╣ Readable files inside /tmp, /var/tmp, /private/tmp, /private/var/at/tmp, /private/var/tmp, and backup folders (limit 70)
+-rwxrwxr-x 1 michael michael 827739 Nov  1 04:29 /tmp/linpeas.sh
+-rw-rw-r-- 1 michael michael 2005 Nov 19 02:49 /tmp/proxy.py
+-rw-r--r-- 1 root root 0 May 16  2024 /var/backups/dpkg.arch.0
+-rw-r--r-- 1 root root 61440 May 16  2024 /var/backups/alternatives.tar.0
+
+╔══════════╣ Searching passwords in history files
+
+╔══════════╣ Searching *password* or *credential* files in home (limit 70)
+/etc/pam.d/common-password
+/etc/ssl/froxlor_selfsigned.key
+/usr/bin/systemd-ask-password
+/usr/bin/systemd-tty-ask-password-agent
+/usr/lib/git-core/git-credential
+/usr/lib/git-core/git-credential-cache
+/usr/lib/git-core/git-credential-cache--daemon
+/usr/lib/git-core/git-credential-store
+  #)There are more creds/passwds files in the previous parent folder
+
+/usr/lib/grub/i386-pc/password.mod
+/usr/lib/grub/i386-pc/password_pbkdf2.mod
+/usr/lib/mysql/plugin/component_validate_password.so
+/usr/lib/mysql/plugin/validate_password.so
+/usr/lib/python3/dist-packages/docker/credentials
+/usr/lib/python3/dist-packages/keyring/credentials.py
+/usr/lib/python3/dist-packages/keyring/__pycache__/credentials.cpython-310.pyc
+/usr/lib/python3/dist-packages/launchpadlib/credentials.py
+/usr/lib/python3/dist-packages/launchpadlib/__pycache__/credentials.cpython-310.pyc
+/usr/lib/python3/dist-packages/launchpadlib/tests/__pycache__/test_credential_store.cpython-310.pyc
+/usr/lib/python3/dist-packages/launchpadlib/tests/test_credential_store.py
+/usr/lib/python3/dist-packages/oauthlib/oauth2/rfc6749/grant_types/client_credentials.py
+/usr/lib/python3/dist-packages/oauthlib/oauth2/rfc6749/grant_types/__pycache__/client_credentials.cpython-310.pyc
+/usr/lib/python3/dist-packages/oauthlib/oauth2/rfc6749/grant_types/__pycache__/resource_owner_password_credentials.cpython-310.pyc
+/usr/lib/python3/dist-packages/oauthlib/oauth2/rfc6749/grant_types/resource_owner_password_credentials.py
+/usr/lib/python3/dist-packages/twisted/cred/credentials.py
+/usr/lib/python3/dist-packages/twisted/cred/__pycache__/credentials.cpython-310.pyc
+/usr/lib/systemd/systemd-reply-password
+/usr/lib/systemd/system/multi-user.target.wants/systemd-ask-password-wall.path
+/usr/lib/systemd/system/sysinit.target.wants/systemd-ask-password-console.path
+/usr/lib/systemd/system/systemd-ask-password-console.path
+/usr/lib/systemd/system/systemd-ask-password-console.service
+/usr/lib/systemd/system/systemd-ask-password-plymouth.path
+/usr/lib/systemd/system/systemd-ask-password-plymouth.service
+  #)There are more creds/passwds files in the previous parent folder
+
+/usr/share/doc/git/contrib/credential
+/usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring.c
+/usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret.c
+/usr/share/doc/git/contrib/credential/netrc/git-credential-netrc.perl
+/usr/share/doc/git/contrib/credential/netrc/t-git-credential-netrc.sh
+/usr/share/doc/git/contrib/credential/osxkeychain/git-credential-osxkeychain.c
+/usr/share/doc/git/contrib/credential/wincred/git-credential-wincred.c
+/usr/share/icons/Adwaita/scalable/status/dialog-password-symbolic.svg
+/usr/share/icons/Humanity/apps/24/password.png
+/usr/share/icons/Humanity/apps/48/password.svg
+/usr/share/icons/Humanity/status/16/dialog-password.png
+/usr/share/icons/Humanity/status/24/dialog-password.png
+/usr/share/icons/Humanity/status/48/dialog-password.svg
+/usr/share/man/man1/git-credential.1.gz
+/usr/share/man/man1/git-credential-cache.1.gz
+/usr/share/man/man1/git-credential-cache--daemon.1.gz
+/usr/share/man/man1/git-credential-store.1.gz
+  #)There are more creds/passwds files in the previous parent folder
+
+/usr/share/man/man7/gitcredentials.7.gz
+/usr/share/man/man8/systemd-ask-password-console.path.8.gz
+/usr/share/man/man8/systemd-ask-password-console.service.8.gz
+/usr/share/man/man8/systemd-ask-password-wall.path.8.gz
+/usr/share/man/man8/systemd-ask-password-wall.service.8.gz
+  #)There are more creds/passwds files in the previous parent folder
+
+/usr/share/pam/common-password.md5sums
+/var/cache/debconf/passwords.dat
+/var/lib/cloud/instances/iid-datasource-none/sem/config_set_passwords
+/var/lib/fwupd/pki/secret.key
+/var/lib/pam/password
 ```
 
 froxolr hash:
