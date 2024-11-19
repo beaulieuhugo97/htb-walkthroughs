@@ -578,6 +578,10 @@ michael@sightless:~$ cat user.txt
 a893c2597219f8e1a7de7a150b52fa45
 ```
 
+linpeas output:
+```bash
+```
+
 froxolr hash:
 ```bash
 michael@sightless:/tmp$ cat /etc/apache2/froxlor-htpasswd/1-666d99c49b2986e75ed93e591b7eb6c8.htpasswd
