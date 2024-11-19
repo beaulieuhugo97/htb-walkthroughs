@@ -820,8 +820,9 @@ Blowfish(OpenBSD), HC: 3200 JtR: bcrypt Summary: Can be used in Linux Shadow Fil
 Woltlab Burning Board 4.x,
 ```
 
-forxolr rce:
+froxlor cve:
 ```bash
+https://github.com/advisories/GHSA-x525-54hf-xr53
 https://github.com/mhaskar/CVE-2023-0315
 ```
 
