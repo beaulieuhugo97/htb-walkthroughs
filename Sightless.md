@@ -587,3 +587,11 @@ froxolr hash:
 michael@sightless:/tmp$ cat /etc/apache2/froxlor-htpasswd/1-666d99c49b2986e75ed93e591b7eb6c8.htpasswd
 web1:$2y$10$X5tjC19boiHf81unjwyFFuELwOVBDyEJMlm/eG9Ks6qpxli/L3Cii
 ```
+
+namethathash output:
+```bash
+Most Likely 
+bcrypt, HC: 3200 JtR: bcrypt
+Blowfish(OpenBSD), HC: 3200 JtR: bcrypt Summary: Can be used in Linux Shadow Files.
+Woltlab Burning Board 4.x,
+```
