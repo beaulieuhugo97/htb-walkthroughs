@@ -791,3 +791,6 @@ forxolr rce:
 ```bash
 https://github.com/mhaskar/CVE-2023-0315
 ```
+
+reverse proxy:
+![image](https://github.com/user-attachments/assets/119bfcc7-1097-4958-9389-4fee50c929a8)
