@@ -542,7 +542,40 @@ root@c184118df0a6:/proc/sys/kernel# cat /proc/net/tcp | awk 'NR>1 {print $2}' | 
 34970
 ```
 
-hashcat output:
+hashcat output(root):
+```bash
+Dictionary cache hit:
+* Filename..: /home/hugo/Téléchargements/rockyou.txt
+* Passwords.: 14344384
+* Bytes.....: 139921497
+* Keyspace..: 14344384
+
+$6$jn8fwk6LVJ9IYw30$qwtrfWTITUro8fEJbReUc7nXyx2wwJsnYdZYm9nMQDHP8SYm33uisO9gZ20LGaepC3ch6Bb2z/lEpBM90Ra4b.:blindside
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 1800 (sha512crypt $6$, SHA512 (Unix))
+Hash.Target......: $6$jn8fwk6LVJ9IYw30$qwtrfWTITUro8fEJbReUc7nXyx2wwJs...0Ra4b.
+Time.Started.....: Tue Nov 19 04:26:09 2024 (10 secs)
+Time.Estimated...: Tue Nov 19 04:26:19 2024 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/home/hugo/Téléchargements/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:     3933 H/s (51.80ms) @ Accel:1024 Loops:1024 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 39936/14344384 (0.28%)
+Rejected.........: 0/39936 (0.00%)
+Restore.Point....: 38912/14344384 (0.27%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:4096-5000
+Candidate.Engine.: Host Generator + PCIe
+Candidates.#1....: toutou -> promo2007
+Hardware.Mon.#1..: Temp: 59c Util: 97%
+
+Started: Tue Nov 19 04:26:08 2024
+Stopped: Tue Nov 19 04:26:21 2024
+```
+
+hashcat output (user):
 ```bash
 $6$mG3Cp2VPGY.FDE8u$KVWVIHzqTzhOSYkzJIpFc2EsgmqvPa.q2Z9bLUU6tlBWaEwuxCDEP9UFHIXNUcF2rBnsaFYuJa6DUh/pL2IJD/:insaneclownposse
                                                           
