@@ -828,3 +828,156 @@ https://github.com/mhaskar/CVE-2023-0315
 
 reverse proxy:
 ![image](https://github.com/user-attachments/assets/145529f5-b01e-45c8-99c2-e486f3b0cf02)
+
+chrome debugger port finder:
+```bash
+chrome-debug-port-scanner.py 
+import socket
+import json
+import requests
+from concurrent.futures import ThreadPoolExecutor
+import sys
+
+def check_port(port):
+    """
+    Check if a port is open and if it's a Chrome debug port
+    """
+    try:
+        # First check if port is open
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(1)
+        result = sock.connect_ex(('127.0.0.1', port))
+        sock.close()
+        
+        if result == 0:  # Port is open
+            try:
+                # Check if it's a Chrome debug port
+                response = requests.get(f'http://localhost:{port}/json/version', timeout=2)
+                if response.status_code == 200:
+                    data = response.json()
+                    if 'Browser' in data and 'Chrome' in data['Browser']:
+                        print(f"\n[+] Found Chrome debug port: {port}")
+                        print("\nDebug Interface Info:")
+                        print(json.dumps(data, indent=2))
+                        print("\nPotential WebSocket URL:", data.get('webSocketDebuggerUrl', 'Not found'))
+                        return True
+            except requests.exceptions.RequestException:
+                pass
+    except:
+        pass
+    return False
+
+def scan_ports(start_port=1024, end_port=65535):
+    """
+    Scan ports to find Chrome debug interface
+    """
+    print(f"[*] Scanning ports {start_port}-{end_port} for Chrome debug interface...")
+    
+    # Create chunks of ports for faster scanning
+    CHUNK_SIZE = 1000
+    port_chunks = [(i, min(i + CHUNK_SIZE, end_port)) 
+                   for i in range(start_port, end_port, CHUNK_SIZE)]
+    
+    def scan_chunk(chunk_start, chunk_end):
+        for port in range(chunk_start, chunk_end):
+            sys.stdout.write(f"\r[*] Scanning port {port}")
+            sys.stdout.flush()
+            if check_port(port):
+                return port
+        return None
+    
+    # Use ThreadPoolExecutor for parallel scanning
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        futures = [executor.submit(scan_chunk, chunk[0], chunk[1]) 
+                  for chunk in port_chunks]
+        
+        for future in futures:
+            result = future.result()
+            if result:
+                print("\n\n[+] To connect to the debugger:")
+                print(f"1. Open Chrome/Chromium browser")
+                print(f"2. Navigate to: chrome://inspect")
+                print(f"3. Click 'Configure...' and add localhost:{result}")
+                print(f"4. Look under 'Remote Target' for inspectable pages")
+                return result
+    
+    print("\n[-] No Chrome debug port found")
+    return None
+
+def test_connection(port):
+    """
+    Test connection to debug port and list available targets
+    """
+    try:
+        response = requests.get(f'http://localhost:{port}/json/list')
+        if response.status_code == 200:
+            targets = response.json()
+            print("\n[+] Available debug targets:")
+            for target in targets:
+                print(f"\nTitle: {target.get('title', 'Unknown')}")
+                print(f"Type: {target.get('type', 'Unknown')}")
+                print(f"URL: {target.get('url', 'Unknown')}")
+                print(f"WebSocket Debugger URL: {target.get('webSocketDebuggerUrl', 'Unknown')}")
+            return True
+    except:
+        print("\n[-] Failed to list debug targets")
+        return False
+
+def main():
+    # Try common debug ports first
+    common_ports = [9222, 9223, 9224, 9229, 22222]
+    print("[*] Checking common debug ports first...")
+    
+    for port in common_ports:
+        sys.stdout.write(f"\r[*] Checking port {port}")
+        sys.stdout.flush()
+        if check_port(port):
+            test_connection(port)
+            return
+    
+    # If common ports fail, do a full scan
+    print("\n[*] Common ports not found, starting full scan...")
+    found_port = scan_ports(1024, 65535)
+    
+    if found_port:
+        test_connection(found_port)
+
+if __name__ == "__main__":
+    main()
+```
+
+chrome port finder output:
+```bash
+[*] Checking common debug ports first...
+[*] Checking port 22222
+[*] Common ports not found, starting full scan...
+[*] Scanning ports 1024-65535 for Chrome debug interface...
+[*] Scanning port 41977
+[+] Found Chrome debug port: 36995
+[*] Scanning port 41988
+Debug Interface Info:
+{
+  "Browser": "HeadlessChrome/125.0.6422.60",
+  "Protocol-Version": "1.3",
+  "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/125.0.6422.60 Safari/537.36",
+  "V8-Version": "12.5.227.8",
+  "WebKit-Version": "537.36 (@3ac3319bff9f3e139d632e3d195e3d2d43d86e37)",
+  "webSocketDebuggerUrl": "ws://localhost:36995/devtools/browser/3a800765-c483-4f86-a6b7-0b4be402824c"
+}
+
+Potential WebSocket URL: ws://localhost:36995/devtools/browser/3a800765-c483-4f86-a6b7-0b4be402824c
+[*] Scanning port 44203
+
+[*] Scanning port 39897ebugger:
+1. Open Chrome/Chromium browser
+2. Navigate to: chrome://inspect
+3. Click 'Configure...' and add localhost:36995
+[*] Scanning port 436874. Look under 'Remote Target' for inspectable pages
+[*] Scanning port 64023
+[+] Available debug targets:
+
+Title: Froxlor
+Type: page
+URL: http://admin.sightless.htb:8080/
+WebSocket Debugger URL: ws://localhost:36995/devtools/page/1D789DAC3149D1BC05D208ECE7C21B74
+```
