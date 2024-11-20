@@ -1003,3 +1003,8 @@ Type: page
 URL: http://admin.sightless.htb:8080/
 WebSocket Debugger URL: ws://localhost:36995/devtools/page/1D789DAC3149D1BC05D208ECE7C21B74
 ```
+
+chrome debugger output:
+```bash
+![image](https://github.com/user-attachments/assets/1c9c7a1b-a319-42ea-946e-f3f42da98f16)
+```
