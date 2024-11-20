@@ -613,6 +613,28 @@ a893c2597219f8e1a7de7a150b52fa45
 
 linpeas output:
 ```bash
+                ╔════════════════════════════════════════════════╗
+════════════════╣ Processes, Crons, Timers, Services and Sockets ╠════════════════
+                ╚════════════════════════════════════════════════╝
+╔══════════╣ Running processes (cleaned)
+╚ Check weird & unexpected proceses run by root: https://book.hacktricks.xyz/linux-hardening/privilege-escalation#processes
+root        1144  0.0  0.0   6896  2924 ?        Ss   02:27   0:00 /usr/sbin/cron -f -P
+root        1162  0.0  0.1  10344  4060 ?        S    02:27   0:00  _ /usr/sbin/CRON -f -P
+john        1187  0.0  0.0   2892  1040 ?        Ss   02:27   0:00  |   _ /bin/sh -c sleep 140 && /home/john/automation/healthcheck.sh
+john        1666  0.0  0.0   7372  3568 ?        S    02:29   0:01  |       _ /bin/bash /home/john/automation/healthcheck.sh
+john      110755  0.0  0.0   5772  1008 ?        S    23:50   0:00  |           _ sleep 60
+root        1163  0.0  0.1  10344  4060 ?        S    02:27   0:00  _ /usr/sbin/CRON -f -P
+john        1188  0.0  0.0   2892   980 ?        Ss   02:27   0:00      _ /bin/sh -c sleep 110 && /usr/bin/python3 /home/john/automation/administration.py
+john        1578  0.0  0.6  33660 24520 ?        S    02:29   1:01          _ /usr/bin/python3 /home/john/automation/administration.py
+john        1579  0.4  0.3 33630172 15180 ?      Sl   02:29   6:07              _ /home/john/automation/chromedriver --port=53293
+john        1590  0.8  2.8 34011320 113412 ?     Sl   02:29  10:39              |   _ /opt/google/chrome/chrome --allow-pre-commit-input --disable-background-networking --disable-client-side-phishing-detection --disable-default-apps --disable-dev-shm-usage --disable-hang-monitor --disable-popup-blocking --disable-prompt-on-repost --disable-sync --enable-automation --enable-logging --headless --log-level=0 --no-first-run --no-sandbox --no-service-autorun --password-store=basic --remote-debugging-port=0 --test-type=webdriver --use-mock-keychain --user-data-dir=/tmp/.org.chromium.Chromium.8pSmd1 data:,
+john        1596  0.0  1.4 34112452 56856 ?      S    02:29   0:00              |       _ /opt/google/chrome/chrome --type=zygote --no-zygote-sandbox --no-sandbox --enable-logging --headless --log-level=0 --headless --crashpad-handler-pid=1592 --enable-crash-reporter
+john        1613  0.6  3.0 34362328 122220 ?     Sl   02:29   8:39              |       |   _ /opt/google/chrome/chrome --type=gpu-process --no-sandbox --disable-dev-shm-usage --headless --ozone-platform=headless --use-angle=swiftshader-webgl --headless --crashpad-handler-pid=1592 --gpu-preferences=WAAAAAAAAAAgAAAMAAAAAAAAAAAAAAAAAABgAAEAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAYAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --use-gl=angle --shared-files --fie
+john        1597  0.0  1.4 34112456 56160 ?      S    02:29   0:00              |       _ /opt/google/chrome/chrome --type=zygote --no-sandbox --enable-logging --headless --log-level=0 --headless --crashpad-handler-pid=1592 --enable-crash-reporter
+john        1642  3.7  6.4 1186799472 256988 ?   Sl   02:29  48:00              |       |   _ /opt/google/chrome/chrome --type=renderer --headless --crashpad-handler-pid=1592 --no-sandbox --disable-dev-shm-usage --enable-automation --remote-debugging-port=0 --test-type=webdriver --allow-pre-commit-input --ozone-platform=headless --disable-gpu-compositing --lang=en-US --num-raster-threads=1 --renderer-client-id=5 --time-ticks-at-unix-epoch=-1731983236551341 --launc
+john        1614  0.1  2.1 33900068 87076 ?      Sl   02:29   2:24              |       _ /opt/google/chrome/chrome --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader-webgl --use-gl=angle --headless --crashpad-handler-pid=1592 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,11361495564796128130,13613911764667587528,262144 --disable-features=PaintHolding --variations-seed-version --enable-logging --log-level=0 --enable-crash-reporter
+
+
 ╔══════════╣ Cron jobs
 ╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#scheduled-cron-jobs
 /usr/bin/crontab
