@@ -1007,4 +1007,5 @@ WebSocket Debugger URL: ws://localhost:36995/devtools/page/1D789DAC3149D1BC05D20
 chrome debugger output:
 ```bash
 ![image](https://github.com/user-attachments/assets/1c9c7a1b-a319-42ea-946e-f3f42da98f16)
+![image](https://github.com/user-attachments/assets/d40acd08-224d-401b-a72e-68a03ac1deae)
 ```
