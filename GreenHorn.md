@@ -485,5 +485,20 @@ python3 depix.py \
 -o ./password-output.png
 ```
 
+On essaye le mot de passe pour se connecter en root et afficher le flag:
+```bash
+su     
+Password: sidefromsidetheothersidesidefromsidetheotherside
+whoami
+root
+cd /root
+ls
+cleanup.sh
+restart.sh
+root.txt
+cat root.txt
+b390f94571b11bf6e7cb7c9061fcb113
+```
+
 ![image](https://github.com/user-attachments/assets/81a2386c-4f0a-43de-998d-58196faab226)
 
