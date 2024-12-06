@@ -144,3 +144,169 @@ crackmapexec output:
 ```bash
 SMB         10.129.202.143  445    CICADA-DC        [*] Windows Server 2022 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
 ```
+
+enum4linux output:
+```bash
+ENUM4LINUX - next generation (v1.3.4)
+
+ ==========================
+|    Target Information    |
+ ==========================
+[*] Target ........... cicada.htb
+[*] Username ......... ''
+[*] Random Username .. 'lfoygijf'
+[*] Password ......... ''
+[*] Timeout .......... 5 second(s)
+
+ ===================================
+|    Listener Scan on cicada.htb    |
+ ===================================
+[*] Checking LDAP
+[+] LDAP is accessible on 389/tcp
+[*] Checking LDAPS
+[+] LDAPS is accessible on 636/tcp
+[*] Checking SMB
+[+] SMB is accessible on 445/tcp
+[*] Checking SMB over NetBIOS
+[+] SMB over NetBIOS is accessible on 139/tcp
+
+ ==================================================
+|    Domain Information via LDAP for cicada.htb    |
+ ==================================================
+[*] Trying LDAP
+[+] Appears to be root/parent DC
+[+] Long domain name is: cicada.htb
+
+ =========================================================
+|    NetBIOS Names and Workgroup/Domain for cicada.htb    |
+ =========================================================
+[-] Could not get NetBIOS names information via 'nmblookup': timed out
+
+ =======================================
+|    SMB Dialect Check on cicada.htb    |
+ =======================================
+[*] Trying on 445/tcp
+[+] Supported dialects and settings:
+Supported dialects:
+  SMB 1.0: false
+  SMB 2.02: true
+  SMB 2.1: true
+  SMB 3.0: true
+  SMB 3.1.1: true
+Preferred dialect: SMB 3.0
+SMB1 only: false
+SMB signing required: true
+
+ =========================================================
+|    Domain Information via SMB session for cicada.htb    |
+ =========================================================
+[*] Enumerating via unauthenticated SMB session on 445/tcp
+[+] Found domain information via SMB
+NetBIOS computer name: CICADA-DC
+NetBIOS domain name: CICADA
+DNS domain: cicada.htb
+FQDN: CICADA-DC.cicada.htb
+Derived membership: domain member
+Derived domain: CICADA
+
+ =======================================
+|    RPC Session Check on cicada.htb    |
+ =======================================
+[*] Check for null session
+[+] Server allows session using username '', password ''
+[*] Check for random user
+[+] Server allows session using username 'lfoygijf', password ''
+[H] Rerunning enumeration with user 'lfoygijf' might give more results
+
+ =================================================
+|    Domain Information via RPC for cicada.htb    |
+ =================================================
+[+] Domain: CICADA
+[+] Domain SID: S-1-5-21-917908876-1423158569-3159038727
+[+] Membership: domain member
+
+ =============================================
+|    OS Information via RPC for cicada.htb    |
+ =============================================
+[*] Enumerating via unauthenticated SMB session on 445/tcp
+[+] Found OS information via SMB
+[*] Enumerating via 'srvinfo'
+[-] Could not get OS info via 'srvinfo': STATUS_ACCESS_DENIED
+[+] After merging OS information we have the following result:
+OS: Windows 10, Windows Server 2019, Windows Server 2016
+OS version: '10.0'
+OS release: ''
+OS build: '20348'
+Native OS: not supported
+Native LAN manager: not supported
+Platform id: null
+Server type: null
+Server type string: null
+
+ ===================================
+|    Users via RPC on cicada.htb    |
+ ===================================
+[*] Enumerating users via 'querydispinfo'
+[-] Could not find users via 'querydispinfo': STATUS_ACCESS_DENIED
+[*] Enumerating users via 'enumdomusers'
+[-] Could not find users via 'enumdomusers': STATUS_ACCESS_DENIED
+
+ ====================================
+|    Groups via RPC on cicada.htb    |
+ ====================================
+[*] Enumerating local groups
+[-] Could not get groups via 'enumalsgroups domain': STATUS_ACCESS_DENIED
+[*] Enumerating builtin groups
+[-] Could not get groups via 'enumalsgroups builtin': STATUS_ACCESS_DENIED
+[*] Enumerating domain groups
+[-] Could not get groups via 'enumdomgroups': STATUS_ACCESS_DENIED
+
+ ====================================
+|    Shares via RPC on cicada.htb    |
+ ====================================
+[*] Enumerating shares
+[+] Found 0 share(s) for user '' with password '', try a different user
+
+ =======================================
+|    Policies via RPC for cicada.htb    |
+ =======================================
+[*] Trying port 445/tcp
+[-] SMB connection error on port 445/tcp: STATUS_ACCESS_DENIED
+[*] Trying port 139/tcp
+[-] SMB connection error on port 139/tcp: session failed
+
+ =======================================
+|    Printers via RPC for cicada.htb    |
+ =======================================
+[-] Could not get printer info via 'enumprinters': STATUS_ACCESS_DENIED
+
+Completed after 11.14 seconds
+```
+
+smbclient output:
+```bash
+	Sharename       Type      Comment
+	---------       ----      -------
+	ADMIN$          Disk      Remote Admin
+	C$              Disk      Default share
+	DEV             Disk      
+	HR              Disk      
+	IPC$            IPC       Remote IPC
+	NETLOGON        Disk      Logon server share 
+	SYSVOL          Disk      Logon server share 
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to cicada.htb failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+```
+
+rpcclient output:
+```bash
+rpcclient -U "" -N cicada.htb -c "enumdomusers"
+rpcclient -U "" -N cicada.htb -c "enumdomgroups"
+rpcclient -U "" -N cicada.htb -c "querydispinfo"
+rpcclient -U "" -N cicada.htb -c "getdompwinfo"
+result was NT_STATUS_ACCESS_DENIED
+result was NT_STATUS_ACCESS_DENIED
+result was NT_STATUS_ACCESS_DENIED
+result was NT_STATUS_ACCESS_DENIED
+```
