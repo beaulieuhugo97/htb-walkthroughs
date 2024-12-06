@@ -293,6 +293,37 @@ result was NT_STATUS_ACCESS_DENIED
 result was NT_STATUS_ACCESS_DENIED
 result was NT_STATUS_ACCESS_DENIED
 ```
+
+dig output:
+```bash
+; <<>> DiG 9.18.28-1~deb12u2-Debian <<>> @10.129.202.143 cicada.htb ANY
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 36924
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 3
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;cicada.htb.			IN	ANY
+
+;; ANSWER SECTION:
+cicada.htb.		600	IN	A	10.129.202.143
+cicada.htb.		3600	IN	NS	cicada-dc.cicada.htb.
+cicada.htb.		3600	IN	SOA	cicada-dc.cicada.htb. hostmaster.cicada.htb. 185 900 600 86400 3600
+cicada.htb.		600	IN	AAAA	dead:beef::e39f:a57f:39f6:2967
+
+;; ADDITIONAL SECTION:
+cicada-dc.cicada.htb.	3600	IN	A	10.129.202.143
+cicada-dc.cicada.htb.	3600	IN	AAAA	dead:beef::e39f:a57f:39f6:2967
+
+;; Query time: 36 msec
+;; SERVER: 10.129.202.143#53(10.129.202.143) (TCP)
+;; WHEN: Thu Dec 05 21:45:38 CST 2024
+;; MSG SIZE  rcvd: 198
+```
+
 smbclient output:
 ```bash
 	Sharename       Type      Comment
