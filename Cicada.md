@@ -543,7 +543,8 @@ smb: \> ls
 smb: \> get Backup_script.ps1
 getting file \Backup_script.ps1 of size 601 as Backup_script.ps1 (3.6 KiloBytes/sec) (average 3.6 KiloBytes/sec)
 ```
-Backup_Script.ps1:
+
+Backup_Script.ps1 (found password for user emily.oscars):
 ```powershell
 $sourceDirectory = "C:\smb"
 $destinationDirectory = "D:\Backup"
