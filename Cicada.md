@@ -139,3 +139,8 @@ Nmap done: 1 IP address (1 host up) scanned in 96.60 seconds
            Raw packets sent: 2077 (95.072KB) | Rcvd: 51 (3.296KB)
 
 ```
+
+crackmapexec output:
+```bash
+SMB         10.129.202.143  445    CICADA-DC        [*] Windows Server 2022 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+```
