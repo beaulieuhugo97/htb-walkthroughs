@@ -140,7 +140,7 @@ Nmap done: 1 IP address (1 host up) scanned in 96.60 seconds
 
 ```
 
-crackmapexec output:
+nxc output:
 ```bash
 SMB         10.129.202.143  445    CICADA-DC        [*] Windows Server 2022 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
 ```
@@ -386,7 +386,7 @@ Best regards,
 Cicada Corp
 ```
 
-kerbrute output:
+kerbrute user enumeration output:
 ```bash
     __             __               __     
    / /_____  _____/ /_  _______  __/ /____ 
@@ -403,4 +403,57 @@ Version: v1.0.3 (9dad6e1) - 12/05/24 - Ronnie Flathers @ropnop
 2024/12/05 21:21:40 >  [+] VALID USERNAME:	 administrator@cicada.htb
 2024/12/05 21:22:26 >  [+] VALID USERNAME:	 Guest@cicada.htb
 2024/12/05 21:22:27 >  [+] VALID USERNAME:	 Administrator@cicada.htb
+```
+
+nxc rid bruteforce output:
+```bash
+SMB         10.129.202.143  445    CICADA-DC        [*] Windows Server 2022 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+SMB         10.129.202.143  445    CICADA-DC        [+] cicada.htb\guest: 
+SMB         10.129.202.143  445    CICADA-DC        498: CICADA\Enterprise Read-only Domain Controllers (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        500: CICADA\Administrator (SidTypeUser)
+SMB         10.129.202.143  445    CICADA-DC        501: CICADA\Guest (SidTypeUser)
+SMB         10.129.202.143  445    CICADA-DC        502: CICADA\krbtgt (SidTypeUser)
+SMB         10.129.202.143  445    CICADA-DC        512: CICADA\Domain Admins (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        513: CICADA\Domain Users (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        514: CICADA\Domain Guests (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        515: CICADA\Domain Computers (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        516: CICADA\Domain Controllers (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        517: CICADA\Cert Publishers (SidTypeAlias)
+SMB         10.129.202.143  445    CICADA-DC        518: CICADA\Schema Admins (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        519: CICADA\Enterprise Admins (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        520: CICADA\Group Policy Creator Owners (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        521: CICADA\Read-only Domain Controllers (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        522: CICADA\Cloneable Domain Controllers (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        525: CICADA\Protected Users (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        526: CICADA\Key Admins (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        527: CICADA\Enterprise Key Admins (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        553: CICADA\RAS and IAS Servers (SidTypeAlias)
+SMB         10.129.202.143  445    CICADA-DC        571: CICADA\Allowed RODC Password Replication Group (SidTypeAlias)
+SMB         10.129.202.143  445    CICADA-DC        572: CICADA\Denied RODC Password Replication Group (SidTypeAlias)
+SMB         10.129.202.143  445    CICADA-DC        1000: CICADA\CICADA-DC$ (SidTypeUser)
+SMB         10.129.202.143  445    CICADA-DC        1101: CICADA\DnsAdmins (SidTypeAlias)
+SMB         10.129.202.143  445    CICADA-DC        1102: CICADA\DnsUpdateProxy (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        1103: CICADA\Groups (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        1104: CICADA\john.smoulder (SidTypeUser)
+SMB         10.129.202.143  445    CICADA-DC        1105: CICADA\sarah.dantelia (SidTypeUser)
+SMB         10.129.202.143  445    CICADA-DC        1106: CICADA\michael.wrightson (SidTypeUser)
+SMB         10.129.202.143  445    CICADA-DC        1108: CICADA\david.orelious (SidTypeUser)
+SMB         10.129.202.143  445    CICADA-DC        1109: CICADA\Dev Support (SidTypeGroup)
+SMB         10.129.202.143  445    CICADA-DC        1601: CICADA\emily.oscars (SidTypeUser)
+```
+
+kerbrute password spraying output:
+```bash
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ \/ ___/ __ \/ ___/ / / / __/ _ \
+ / ,< /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/|_|\___/_/  /_.___/_/   \__,_/\__/\___/                                        
+
+Version: v1.0.3 (9dad6e1) - 12/05/24 - Ronnie Flathers @ropnop
+
+2024/12/05 22:52:51 >  Using KDC(s):
+2024/12/05 22:52:51 >  	10.129.202.143:88
+
+2024/12/05 22:52:51 >  Done! Tested 14 logins (0 successes) in 0.251 seconds
 ```
