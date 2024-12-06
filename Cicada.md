@@ -282,7 +282,17 @@ Server type string: null
 
 Completed after 11.14 seconds
 ```
-
+rpcclient output:
+```bash
+rpcclient -U "" -N cicada.htb -c "enumdomusers"
+rpcclient -U "" -N cicada.htb -c "enumdomgroups"
+rpcclient -U "" -N cicada.htb -c "querydispinfo"
+rpcclient -U "" -N cicada.htb -c "getdompwinfo"
+result was NT_STATUS_ACCESS_DENIED
+result was NT_STATUS_ACCESS_DENIED
+result was NT_STATUS_ACCESS_DENIED
+result was NT_STATUS_ACCESS_DENIED
+```
 smbclient output:
 ```bash
 	Sharename       Type      Comment
@@ -299,14 +309,22 @@ do_connect: Connection to cicada.htb failed (Error NT_STATUS_RESOURCE_NAME_NOT_F
 Unable to connect with SMB1 -- no workgroup available
 ```
 
-rpcclient output:
+smbclient share output:
 ```bash
-rpcclient -U "" -N cicada.htb -c "enumdomusers"
-rpcclient -U "" -N cicada.htb -c "enumdomgroups"
-rpcclient -U "" -N cicada.htb -c "querydispinfo"
-rpcclient -U "" -N cicada.htb -c "getdompwinfo"
-result was NT_STATUS_ACCESS_DENIED
-result was NT_STATUS_ACCESS_DENIED
-result was NT_STATUS_ACCESS_DENIED
-result was NT_STATUS_ACCESS_DENIED
+└──╼ [★]$ smbclient //cicada.htb/HR -N
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Thu Mar 14 07:29:09 2024
+  ..                                  D        0  Thu Mar 14 07:21:29 2024
+  Notice from HR.txt                  A     1266  Wed Aug 28 12:31:48 2024
+
+		4168447 blocks of size 4096. 438686 blocks available
+smb: \> get "Notice from HR.txt"
+getting file \Notice from HR.txt of size 1266 as Notice from HR.txt (8.5 KiloBytes/sec) (average 8.5 KiloBytes/sec)
+
+
+└──╼ [★]$ smbclient //cicada.htb/DEV -N
+Try "help" to get a list of possible commands.
+smb: \> ls
+NT_STATUS_ACCESS_DENIED listing \*
 ```
