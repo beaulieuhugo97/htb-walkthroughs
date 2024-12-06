@@ -471,6 +471,19 @@ Feel free to reach out if you have any questions or need further assistance.
 Have a great week,
 Mr. Green
 ```
-On essaye de dépixeliser l'image avec unredacter:
-https://github.com/BishopFox/unredacter/issues/9
-https://github.com/spipm/Depix
+
+On extrait l'image du pdf avec pdfimages:
+```bash
+pdfimages -all 'Using OpenVAS.pdf' password
+```
+
+On essaye de dépixeliser l'image avec `depix`:
+```bash
+python3 depix.py \
+-p ./password.png \
+-s images/searchimages/debruinseq_notepad_Windows10_closeAndSpaced.png \
+-o ./password-output.png
+```
+
+![image](https://github.com/user-attachments/assets/81a2386c-4f0a-43de-998d-58196faab226)
+
