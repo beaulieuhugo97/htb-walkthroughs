@@ -354,3 +354,22 @@ Thank you for your attention to this matter, and once again, welcome to the Cica
 Best regards,
 Cicada Corp
 ```
+
+kerbrute output:
+```bash
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ \/ ___/ __ \/ ___/ / / / __/ _ \
+ / ,< /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/|_|\___/_/  /_.___/_/   \__,_/\__/\___/                                        
+
+Version: v1.0.3 (9dad6e1) - 12/05/24 - Ronnie Flathers @ropnop
+
+2024/12/05 21:21:33 >  Using KDC(s):
+2024/12/05 21:21:33 >  	10.129.202.143:88
+
+2024/12/05 21:21:35 >  [+] VALID USERNAME:	 guest@cicada.htb
+2024/12/05 21:21:40 >  [+] VALID USERNAME:	 administrator@cicada.htb
+2024/12/05 21:22:26 >  [+] VALID USERNAME:	 Guest@cicada.htb
+2024/12/05 21:22:27 >  [+] VALID USERNAME:	 Administrator@cicada.htb
+```
