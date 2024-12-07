@@ -98,3 +98,16 @@ Platform id: null
 Server type: null
 Server type string: null
 ```
+
+kerbrute user enumeration output:
+```bash
+2024/12/07 17:29:40 >  [+] VALID USERNAME:	 michael@administrator.htb
+2024/12/07 17:29:40 >  [+] VALID USERNAME:	 Michael@administrator.htb
+2024/12/07 17:29:41 >  [+] VALID USERNAME:	 benjamin@administrator.htb
+2024/12/07 17:29:47 >  [+] VALID USERNAME:	 administrator@administrator.htb
+2024/12/07 17:29:47 >  [+] VALID USERNAME:	 emily@administrator.htb
+2024/12/07 17:29:47 >  [+] VALID USERNAME:	 MICHAEL@administrator.htb
+2024/12/07 17:29:49 >  [+] VALID USERNAME:	 olivia@administrator.htb
+2024/12/07 17:29:51 >  [+] VALID USERNAME:	 Benjamin@administrator.htb
+2024/12/07 17:29:55 >  [+] VALID USERNAME:	 ethan@administrator.htb
+```
