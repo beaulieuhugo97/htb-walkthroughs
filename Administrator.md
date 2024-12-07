@@ -361,14 +361,3 @@ Domain lockout information:
 Domain logoff information:
   Force logoff time: not set
 ```
-
-smbclient list shares as olivia output:
-```bash
-	Sharename       Type      Comment
-	---------       ----      -------
-	ADMIN$          Disk      Remote Admin
-	C$              Disk      Default share
-	IPC$            IPC       Remote IPC
-	NETLOGON        Disk      Logon server share 
-	SYSVOL          Disk      Logon server share 
-```
