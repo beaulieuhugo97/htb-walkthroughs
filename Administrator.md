@@ -713,3 +713,9 @@ Candidate.Engine.: Device Generator
 Candidates.#2....: terminator -> daryl
 
 ```
+
+psafe3 file output:
+![image](https://github.com/user-attachments/assets/4d0de26c-1878-462d-ae34-f1ee0d9d9cd6)
+alexander: UrkIbagoxMyUGw0aPlj9B0AXSea4Sw
+emily: UXLCI5iETUsIBoFVTj8yQFKoHjXmb
+emma: WwANQWnmJnGV07WQN8bMS7FMAbjNur
