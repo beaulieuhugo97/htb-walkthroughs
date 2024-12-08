@@ -572,6 +572,6 @@ C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\desktop.ini BUILTIN
 Access is denied.
 ```
 
-bloodhound generic write on user ethan:
+bloodhound outbound generic write on user ethan:
 ![image](https://github.com/user-attachments/assets/3faf5b4e-2804-48b1-a039-f2cb91685eff)
 
