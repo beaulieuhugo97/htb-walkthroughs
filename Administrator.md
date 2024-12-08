@@ -689,3 +689,27 @@ File may not have transferred correctly.
 ftp> exit
 221 Goodbye.
 ```
+
+hashcat psafe3 file output:
+```bash
+Backup.psafe3:tekieromucho                                
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 5200 (Password Safe v3)
+Hash.Target......: Backup.psafe3
+Time.Started.....: Sun Dec  8 06:02:17 2024 (1 sec)
+Time.Estimated...: Sun Dec  8 06:02:18 2024 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#2.........:     7940 H/s (9.44ms) @ Accel:64 Loops:1024 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 4864/14344384 (0.03%)
+Rejected.........: 0/4864 (0.00%)
+Restore.Point....: 4608/14344384 (0.03%)
+Restore.Sub.#2...: Salt:0 Amplifier:0-1 Iteration:2048-2049
+Candidate.Engine.: Device Generator
+Candidates.#2....: terminator -> daryl
+
+```
