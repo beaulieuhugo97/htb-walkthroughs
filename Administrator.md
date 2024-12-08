@@ -690,7 +690,7 @@ ftp> exit
 221 Goodbye.
 ```
 
-hashcat psafe3 file output:
+hashcat psafe3 file output (tekieromucho):
 ```bash
 Backup.psafe3:tekieromucho                                
                                                           
