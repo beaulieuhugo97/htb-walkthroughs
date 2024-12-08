@@ -364,5 +364,31 @@ Domain logoff information:
 
 evil-winrm as olivia output:
 ```bash
+*Evil-WinRM* PS C:\Users\olivia> ls
 
+    Directory: C:\Users\olivia
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-r---          5/8/2021   1:20 AM                Desktop
+d-r---         12/7/2024  10:46 PM                Documents
+d-r---          5/8/2021   1:20 AM                Downloads
+d-r---          5/8/2021   1:20 AM                Favorites
+d-r---          5/8/2021   1:20 AM                Links
+d-r---          5/8/2021   1:20 AM                Music
+d-r---          5/8/2021   1:20 AM                Pictures
+d-----          5/8/2021   1:20 AM                Saved Games
+d-r---          5/8/2021   1:20 AM                Videos
+
+*Evil-WinRM* PS C:\Users\olivia> cd ..
+*Evil-WinRM* PS C:\Users> ls
+
+    Directory: C:\Users
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        10/22/2024  11:46 AM                Administrator
+d-----        10/30/2024   2:25 PM                emily
+d-----         12/7/2024  11:00 PM                olivia
+d-r---         10/4/2024  10:08 AM                Public
 ```
