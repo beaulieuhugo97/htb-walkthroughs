@@ -361,3 +361,8 @@ Domain lockout information:
 Domain logoff information:
   Force logoff time: not set
 ```
+
+evil-winrm as olivia output:
+```bash
+
+```
