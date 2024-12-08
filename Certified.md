@@ -397,3 +397,6 @@ Domain lockout information:
 Domain logoff information:
   Force logoff time: not set
 ```
+
+bloodhound:
+![image](https://github.com/user-attachments/assets/f5aa26b0-3bf6-43be-aa56-8ff29d77c6df)
