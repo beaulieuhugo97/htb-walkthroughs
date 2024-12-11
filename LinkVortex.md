@@ -55,8 +55,8 @@ Disallow: /email/
 Disallow: /r/
 ```
 
-ghost admin page:
-![image](https://github.com/user-attachments/assets/60fcaf79-ef80-43c9-8910-ef3cd6e7b33f)
+ghost admin page - too many attempts:
+![image](https://github.com/user-attachments/assets/bd535fca-c310-448f-987a-face135d11b3)
 
 cve - arbitrary file read: https://github.com/0xyassine/CVE-2023-40028/tree/master
 cve - XSS Leading to Owner Takeover: https://github.com/RhinoSecurityLabs/CVEs/tree/master/CVE-2024-23724
