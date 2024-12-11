@@ -28,11 +28,6 @@ Country   : RESERVED, ZZ
 Summary   : Apache, HTML5, HTTPServer[Apache], JQuery[3.5.1], MetaGenerator[Ghost 5.58], Open-Graph-Protocol[website], PoweredBy[Ghost,a], Script[application/ld+json], X-Powered-By[Express], X-UA-Compatible[IE=edge]
 ```
 
-gobuster output:
-```bash
-
-```
-
 nikto output:
 ```bash
 ---------------------------------------------------------------------------
@@ -48,11 +43,6 @@ nikto output:
 + 7968 requests: 0 error(s) and 7 item(s) reported on remote host
 + End Time:           2024-12-11 05:18:48 (GMT-6) (328 seconds)
 ---------------------------------------------------------------------------
-```
-
-ffuf output:
-```bash
-
 ```
 
 robots.txt
