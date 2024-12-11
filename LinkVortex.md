@@ -54,3 +54,6 @@ Disallow: /p/
 Disallow: /email/
 Disallow: /r/
 ```
+
+ghost admin page:
+![image](https://github.com/user-attachments/assets/60fcaf79-ef80-43c9-8910-ef3cd6e7b33f)
