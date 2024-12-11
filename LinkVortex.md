@@ -35,7 +35,19 @@ gobuster output:
 
 nikto output:
 ```bash
-
+---------------------------------------------------------------------------
++ Server: Apache
++ /: Retrieved x-powered-by header: Express.
++ /: The anti-clickjacking X-Frame-Options header is not present. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
++ /: The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type. See: https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/missing-content-type-header/
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ /robots.txt: Entry '/ghost/' is returned a non-forbidden or redirect HTTP code (200). See: https://portswigger.net/kb/issues/00600600_robots-txt-file
++ /robots.txt: contains 4 entries which should be manually viewed. See: https://developer.mozilla.org/en-US/docs/Glossary/Robots.txt
++ OPTIONS: Allowed HTTP Methods: POST, GET, HEAD .
++ /members/: Retrieved access-control-allow-origin header: *.
++ 7968 requests: 0 error(s) and 7 item(s) reported on remote host
++ End Time:           2024-12-11 05:18:48 (GMT-6) (328 seconds)
+---------------------------------------------------------------------------
 ```
 
 ffuf output:
