@@ -86,12 +86,12 @@ decoded jwt header:
 }
 ```
 
-static/requirements.txt content
+static/requirements.txt content:
 ```
 tensorflow-cpu==2.13.1
 ```
 
-static/Dockerfile
+static/Dockerfile content:
 ```
 FROM python:3.8-slim
 
