@@ -76,6 +76,12 @@ Referer: http://artificial.htb/login
 Accept-Encoding: gzip, deflate, br
 Cookie: session=eyJ1c2VyX2lkIjo3LCJ1c2VybmFtZSI6InJhbmRvbTQzMjEifQ.aJZgPw.oEFDyLs3mb8ucwx9O6sCQaq7uY4
 Connection: keep-alive
+```
 
-
+decoded jwt header:
+```
+{
+  "user_id": 7,
+  "username": "random4321"
+}
 ```
