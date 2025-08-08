@@ -172,8 +172,6 @@ model.save('profits_model.h5')
 
 h5 file payload:
 ```
-example h5 code found on home page:
-```
 import numpy as np
 import pandas as pd
 import tensorflow as tf
