@@ -106,3 +106,27 @@ RUN pip install ./tensorflow_cpu-2.13.1-cp38-cp38-manylinux_2_17_x86_64.manylinu
 
 ENTRYPOINT ["/bin/bash"]
 ```
+
+dashboard page html:
+```
+<main>
+    <section class="dashboard-section">
+        <h2>Your Models</h2>
+        <p style="color: black;">Upload, manage, and run your AI models here.</p>
+        
+        <!-- Warning message for TensorFlow version -->
+        <p class="version-warning">Please ensure these <a href="/static/requirements.txt">requirements</a> are installed when building your model, or use our <a href="/static/Dockerfile">Dockerfile</a> to build the needed environment with ease.  </p>
+
+        <!-- Upload form -->
+        <form id="upload-form" enctype="multipart/form-data" action="/upload_model" method="POST">
+            <input type="file" name="model_file" accept=".h5" class="file-input" required="">
+            <button type="submit" class="btn" style="color: white;">Upload Model</button>
+        </form>
+
+        <!-- List models -->
+        <ul class="model-list">
+            
+        </ul>
+    </section>
+</main>
+```
