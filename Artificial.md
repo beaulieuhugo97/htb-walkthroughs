@@ -19,3 +19,8 @@ nikto output:
 ```
 + HEAD nginx/1.18.0 appears to be outdated (current is at least 1.20.1).
 ```
+
+whatweb output:
+```
+Summary   : HTML5, HTTPServer[Ubuntu Linux][nginx/1.18.0 (Ubuntu)], Matomo, nginx[1.18.0], Script
+```
