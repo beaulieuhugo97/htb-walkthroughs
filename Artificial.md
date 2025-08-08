@@ -170,7 +170,7 @@ model.fit(X, y, epochs=100, verbose=1)
 model.save('profits_model.h5')
 ```
 
-h5 file payload:
+payload.py (run to create .h5 payload):
 ```
 import numpy as np
 import pandas as pd
