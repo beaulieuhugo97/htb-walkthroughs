@@ -319,4 +319,5 @@ Saving to: ‘linpeas.sh’
 2025-08-15 18:54:06 (7.29 MB/s) - ‘linpeas.sh’ saved [956174/956174]
 
 $ chmod +x linpeas.sh
+$ ./linpeas.sh -q -o system_information,container,cloud,procs_crons_timers_srvcs_sockets,network_information,users_information,software_information,interesting_perms_files,interesting_files,api_keys_regex -e > linpeas_output.txt
 ```
