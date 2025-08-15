@@ -173,3 +173,4 @@ model.save('profits_model.h5')
 
 tensorflow 2.13.1 rce: `https://github.com/Splinter0/tensorflow-rce`
 
+we use the Dockerfile with exploit.py to generate a malicious model payload
