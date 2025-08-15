@@ -429,7 +429,7 @@ WORDLIST_URL="https://raw.githubusercontent.com/beaulieuhugo97/pentest-cheatshee
 mkdir ~/hash && cd ~/hash
 
 # Download wordlist
-curl -O $WORDLIST_URL | tar -xvzf
+curl -O $WORDLIST_URL && tar -xvzf $(basename $WORDLIST_URL)
 
 # Output the hash to a temporary file
 echo $HASH > hash.txt
