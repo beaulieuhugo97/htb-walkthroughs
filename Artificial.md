@@ -131,7 +131,7 @@ RUN pip install ./tensorflow_cpu-2.13.1-cp38-cp38-manylinux_2_17_x86_64.manylinu
 ENTRYPOINT ["/bin/bash"]
 ```
 
-example h5 code found on home page:
+example python code to generate h5 model (found on home page):
 ```
 import numpy as np
 import pandas as pd
