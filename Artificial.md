@@ -421,17 +421,19 @@ curl -O https://raw.githubusercontent.com/beaulieuhugo97/pentest-cheatsheets/ref
 I crack the hash:
 ```
 #!/bin/bash
-
-# Edit mode according to the hash type
 MODE=0
 HASH="c99175974b6e192936d97224638a34f8"
+WORDLIST_URL="https://raw.githubusercontent.com/beaulieuhugo97/pentest-cheatsheets/refs/heads/main/wordlists/rockyou.txt.tar.gz"
 
 # Create new directory to work in
-mkdir hash && cd hash
+mkdir ~/hash && cd ~/hash
 
-# Output the cash to a file
+# Download wordlist
+curl -O $WORDLIST_URL | tar -xvzf
+
+# Output the hash to a temporary file
 echo $HASH > hash.txt
 
 # Crack the hash
-hashcat -m $MODE -a 0 hash.txt ./wordlist.txt -w 4
+hashcat -m $MODE -a 0 hash.txt ./*.txt -w 4
 ```
