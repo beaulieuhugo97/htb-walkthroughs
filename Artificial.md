@@ -412,6 +412,7 @@ Domain Cached Credentials, HC: 1100 JtR: mscach
 ```
 
 I crack the hash using `hashcat` and `rockyou.txt`:
+#### crack-hash.sh
 ```
 #!/bin/bash
 MODE=0
