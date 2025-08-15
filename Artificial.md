@@ -1,4 +1,4 @@
-I found a webserver with nmap:
+I find a webserver with nmap:
 ```
 80/tcp open  http    nginx 1.18.0 (Ubuntu)
 | http-methods: 
@@ -7,7 +7,7 @@ I found a webserver with nmap:
 |_http-server-header: nginx/1.18.0 (Ubuntu)
 ```
 
-I also found a few paths with gobuster:
+I also find a few paths with gobuster:
 ```
 /dashboard            (Status: 302) [Size: 199] [--> /login]
 /logout               (Status: 302) [Size: 189] [--> /]
@@ -20,12 +20,12 @@ I get more informations with nikto:
 + HEAD nginx/1.18.0 appears to be outdated (current is at least 1.20.1).
 ```
 
-And with whatweb:
+And even more informations with whatweb:
 ```
 Summary   : HTML5, HTTPServer[Ubuntu Linux][nginx/1.18.0 (Ubuntu)], Matomo, nginx[1.18.0], Script
 ```
 
-I decide create a new account:
+I decide to create a new account:
 ```
 POST /register HTTP/1.1
 Host: artificial.htb
@@ -43,7 +43,7 @@ Connection: keep-alive
 
 username=random4321&email=random4321%40mail.net&password=random4321
 ```
-Then, I log in:
+Then, I log in using the previously created account:
 ```
 POST /login HTTP/1.1
 Host: artificial.htb
@@ -77,7 +77,7 @@ Cookie: session=eyJ1c2VyX2lkIjo3LCJ1c2VybmFtZSI6InJhbmRvbTQzMjEifQ.aJZgPw.oEFDyL
 Connection: keep-alive
 ```
 
-Once logged in, I got a JWT token:
+Once logged in, I also get a JWT token:
 ```
 {
   "user_id": 7,
@@ -110,7 +110,7 @@ I decide to look at the dashboard source code:
 ```
 
 
-I found 2 files, requirements.txt (python dependencies file):
+I find 2 files, requirements.txt (python dependencies file):
 ```
 tensorflow-cpu==2.13.1
 ```
