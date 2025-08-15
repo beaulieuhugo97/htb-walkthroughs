@@ -397,3 +397,35 @@ sqlite> SELECT * FROM user;
 7|solo|solo@mail.com|827ccb0eea8a706c4c34a16891f84e7b
 8|hacker@htb.com|hacker@htb.com|000747de68d6f043504bbb3c01c42033
 ```
+
+I identify the hash type using `namethathash`:
+```
+# Install name-that-hash
+pip3 install name-that-hash
+
+# Identify the hash
+nth -t "c99175974b6e192936d97224638a34f8"
+
+Most Likely 
+MD5, HC: 0 JtR: raw-md5 Summary: Used for Linux Shadow files.
+MD4, HC: 900 JtR: raw-md4
+NTLM, HC: 1000 JtR: nt Summary: Often used in Windows Active Directory.
+Domain Cached Credentials, HC: 1100 JtR: mscach
+```
+
+I crack the hash:
+```
+#!/bin/bash
+
+# Edit mode according to the hash type
+MODE=0
+
+# Create new directory to work in
+mkdir hash && cd hash
+
+# Output the cash to a file
+echo 'hash' > hash.txt
+
+# Crack the hash
+hashcat -m $MODE -a 0 hash.txt ./wordlist.txt -w 4
+```
