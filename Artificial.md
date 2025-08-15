@@ -424,12 +424,13 @@ I crack the hash:
 
 # Edit mode according to the hash type
 MODE=0
+HASH="c99175974b6e192936d97224638a34f8"
 
 # Create new directory to work in
 mkdir hash && cd hash
 
 # Output the cash to a file
-echo 'hash' > hash.txt
+echo $HASH > hash.txt
 
 # Crack the hash
 hashcat -m $MODE -a 0 hash.txt ./wordlist.txt -w 4
