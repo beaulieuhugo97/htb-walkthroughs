@@ -430,3 +430,26 @@ echo $HASH > hash.txt
 # Crack the hash
 hashcat -m $MODE -a 0 hash.txt ./*.txt -w 4
 ```
+
+The password is `mattp005numbertwo`:
+```
+c99175974b6e192936d97224638a34f8:mattp005numbertwo        
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 0 (MD5)
+Hash.Target......: c99175974b6e192936d97224638a34f8
+Time.Started.....: Fri Aug 15 15:55:46 2025 (2 secs)
+Time.Estimated...: Fri Aug 15 15:55:48 2025 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (./rockyou.txt)
+Guess.Queue......: 2/2 (100.00%)
+Speed.#2.........:  3188.4 kH/s (0.17ms) @ Accel:512 Loops:1 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 5722112/14344384 (39.89%)
+Rejected.........: 0/5722112 (0.00%)
+Restore.Point....: 5720064/14344384 (39.88%)
+Restore.Sub.#2...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidate.Engine.: Device Generator
+Candidates.#2....: matuat -> mattj32
+```
