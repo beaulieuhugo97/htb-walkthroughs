@@ -413,12 +413,7 @@ NTLM, HC: 1000 JtR: nt Summary: Often used in Windows Active Directory.
 Domain Cached Credentials, HC: 1100 JtR: mscach
 ```
 
-We download a wordlist:
-```
-curl -O https://raw.githubusercontent.com/beaulieuhugo97/pentest-cheatsheets/refs/heads/main/wordlists/rockyou.txt.tar.gz && tar -xvzf rockyou.txt.tar.gz
-```
-
-I crack the hash:
+I crack the hash using `hashcat` and `rockyou.txt`:
 ```
 #!/bin/bash
 MODE=0
