@@ -272,6 +272,7 @@ drwxrwxr-x 2 app app 4096 Jun 18 13:21 templates
 Once inside the box, I need to run `linpeas`.
 
 To do this, I first need to serve `linpeas`:
+#### serve-linpeas.sh
 ```
 #!/bin/bash
 
